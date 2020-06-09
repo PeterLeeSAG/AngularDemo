@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  title = "Home";
   products = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 

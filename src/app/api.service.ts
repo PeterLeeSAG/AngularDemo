@@ -47,16 +47,16 @@ export class ApiService {
       links[name] = url;
     });
 
-    this.first  = links["first"];
-    this.last   = links["last"];
-    this.prev   = links["prev"];
-    this.next   = links["next"]; 
+    this.first = links["first"];
+    this.last  = links["last"];
+    this.prev  = links["prev"];
+    this.next  = links["next"]; 
   }
 
   public sendGetRequest(){
     // return this.httpClient.get(this.SERVER_URL).pipe(catchError(this.handleError));
     // Add safe, URL encoded _page and _limit parameters 
-    return this.httpClient.get(this.SERVER_URL, {  params: new HttpParams({fromString: "_page=1&_limit=20"}), observe: "response"}).pipe(retry(3), catchError(this.handleError), tap(res => {
+    return this.httpClient.get(this.SERVER_URL, { params: new HttpParams({fromString: "_page=1&_limit=20"}), observe: "response"}).pipe(retry(3), catchError(this.handleError), tap(res => {
       console.log(res.headers.get('Link'));
       this.parseLinkHeader(res.headers.get('Link'));
     }));
