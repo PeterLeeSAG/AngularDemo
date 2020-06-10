@@ -2,7 +2,7 @@
   <mat-sidenav 
       #drawer 
       class="sidenav" 
-      fixedInViewport=false
+      fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
@@ -10,6 +10,7 @@
     <mat-nav-list>
       <a mat-list-item href="home">HOME</a>
       <a mat-list-item href="about">ABOUT</a>
+      <a mat-list-item href="yarnOrder">YARN ORDER</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

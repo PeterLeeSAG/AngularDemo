@@ -1,0 +1,7 @@
+<!--Combo Header-->
+Combo
+<mat-form-field *ngIf="combo != null">
+<button (click)="onClickComboAdd()">+</button>
+{{ combo.code }} 
+<button (click)="onClickComboRemove()">-</button>
+</mat-form-field>

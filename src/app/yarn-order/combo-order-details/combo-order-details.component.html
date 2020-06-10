@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <td>
+            <mat-form-field>
+                <mat-label>毛料</mat-label>
+                <mat-select [value]="orderCombo.materialID">
+                  <mat-option *ngFor="let material of materials" [value]="material.id">
+                     material.name
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--ColorNo-->
+            <mat-label>Color No</mat-label>
+            <input matInput [value]="orderCombo.colorNo">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--ChineseColorName-->
+            <mat-label>Chinese ColorName</mat-label>
+            <input matInput [value]="orderCombo.chineseColorName">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--ColorEnglishName-->
+            <mat-label>English ColorName</mat-label>
+            <input matInput [value]="orderCombo.englishColorName">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--ColorRemark-->
+            <mat-label>Remark</mat-label>
+            <input matInput [value]="orderCombo.remark">
+        </td>
+    </tr>
+</table>
