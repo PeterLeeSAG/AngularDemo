@@ -5,7 +5,7 @@
                 <mat-label>毛料</mat-label>
                 <mat-select [value]="orderCombo.materialID">
                   <mat-option *ngFor="let material of materials" [value]="material.id">
-                     material.name
+                     {{material.name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
