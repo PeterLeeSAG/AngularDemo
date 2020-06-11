@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +31,7 @@ import { OrderHeadComponent } from './yarn-order/order-head/order-head.component
 import { OrderTableComponent } from './yarn-order/order-table/order-table.component';
 import { WeightControlComponent } from './yarn-order/weight-control/weight-control.component';
 import { WeightInfoComponent } from './yarn-order/weight-info/weight-info.component';
+import { ComboTopComponent } from './yarn-order/combo-top/combo-top.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { WeightInfoComponent } from './yarn-order/weight-info/weight-info.compon
     OrderHeadComponent,
     OrderTableComponent,
     WeightControlComponent,
-    WeightInfoComponent
+    WeightInfoComponent,
+    ComboTopComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { WeightInfoComponent } from './yarn-order/weight-info/weight-info.compon
     MatFormFieldModule,
     MatRadioModule,
     LayoutModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

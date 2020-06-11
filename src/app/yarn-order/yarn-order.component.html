@@ -1,7 +1,53 @@
-<p>Yarn Order</p>
+<h1>Yarn Order</h1>
+
+<b>Loop for array:</b>
+<ul>
+    <li *ngFor="let i of info">
+        {{ i }}
+    </li>
+</ul>
+
+<b>Loop for objects with child components:</b>
+<app-combo-top *ngFor="let combo of combos" 
+    [combo]="combo" 
+    [id]="combo.id"
+    (comboRemoved)="onRemoveCombo($event)">
+</app-combo-top>
+
+<br><br>
+<div>
+<b>Yarn Color Order Combo Table: </b>
+<app-combo-head *ngFor="let combo of combos"
+    [combo]="combo"
+    (addCombo)="onAddCombo($event)"
+    (removeCombo)="onRemoveCombo($event)">
+</app-combo-head>
+</div>
 
 <table>
 <tr>
-<app-combo-head *ngFor="let combo of combos"></app-combo-head>
+    <th>
+        COMBO
+    </th>
+    <th *ngFor="let combo of combos; index as i">
+        {{i}}
+    </th>
+    <th *ngFor="let combo of combos; index as i">
+        <app-combo-head 
+            [combo]="combo"
+            (addCombo)="onAddCombo($event)"
+            (removeCombo)="onRemoveCombo($event)"></app-combo-head>
+    </th>
 </tr>
 </table>
+
+<b>Combo Information:</b>
+<ul>
+    <li *ngFor="let combo of combos; index as i">
+        Combo index: {{ i }}
+        id: {{combo.id}}
+        code: {{combo.code}}
+        chinese name: {{combo.chineseName}}
+        english name: {{combo.englishName}}
+    </li>
+</ul>
