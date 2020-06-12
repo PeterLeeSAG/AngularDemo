@@ -1,4 +1,4 @@
 <!--Order Header-->
-<button (click)="onClickOrderAdd()">+</button>
+<button (click)="onClickOrderAdd(order.id)" mat-button>+</button>
 Order: {{ order.code }} 
-<button (click)="onClickOrderRemove()">-</button>
+<button (click)="onClickOrderRemove(order.id)" mat-button>-</button>

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Combo } from '../combo';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Combo } from "../combo";
+
 
 @Component({
   selector: 'app-combo-table',
@@ -8,10 +9,15 @@ import { Combo } from '../combo';
 })
 export class ComboTableComponent implements OnInit {
   @Input() combo: Combo;   //combo view model
-  
+  @Output() comboUpdate = new EventEmitter<Combo>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onComboUpdate()
+  {
+    this.comboUpdate.emit(this.combo);
+  }
 }

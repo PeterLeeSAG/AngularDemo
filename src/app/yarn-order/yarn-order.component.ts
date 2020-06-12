@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Combo } from "./combo";
+import { Order } from "./order";
 
 @Component({
   selector: 'app-yarn-order',
@@ -17,10 +18,10 @@ combos = [
 ];
 
 orders = [
-  {"id":1,"name":"身衫1色","description":"Incidunt et magni","price":"170.00","quantity":56840},
-  {"id":2,"name":"身衫2色","description":"Sint libero mollitia","price":"302.00","quantity":9358},
-  {"id":3,"name":"身衫3色","description":"In consequuntur cupiditat","price":"279.00","quantity":90316},
-  {"id":4,"name":"身衫4色","description":"Saepe nemo praesentium","price":"760.00","quantity":5899}
+    {"id":1,"code":"1","name":"身衫1色","matType":0,"isFtyMixed":false},
+    {"id":2,"code":"2","name":"身衫2色","matType":0,"isFtyMixed":false},
+    {"id":3,"code":"3","name":"身衫3色","matType":0,"isFtyMixed":false},
+    {"id":4,"code":"4","name":"身衫4色","matType":0,"isFtyMixed":false}
 ];
 
   constructor() { }
@@ -36,5 +37,31 @@ orders = [
   onRemoveCombo(comboID: number)
   {
     this.combos.splice(comboID-1, 1);
+  }
+
+  onComboUpdate(combo: Combo)
+  {
+    console.log(combo.id);
+  }
+
+  onAddOrder(orderID: number)
+  {
+    this.orders.splice(orderID, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
+  }
+
+  onRemoveOrder(orderID: number)
+  {
+    this.orders.splice(orderID-1, 1);
+  }
+
+  onOrderUpdate(order: Order)
+  {
+    console.log(order.id);
+  }
+
+  onToggleMixedMat(orderID: number)
+  {
+    this.orders[orderID-1].isFtyMixed = !(this.orders[orderID-1].isFtyMixed);
+    console.log("toggle mix mat type in yarn order parent @ order #" + orderID);
   }
 }

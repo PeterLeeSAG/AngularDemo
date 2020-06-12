@@ -30,24 +30,76 @@
         COMBO
     </th>
     <th *ngFor="let combo of combos; index as i">
-        {{i}}
+        <table>
+            <tr>
+                <th>
+                <app-combo-head 
+                    [combo]="combo"
+                    (addCombo)="onAddCombo($event)"
+                    (removeCombo)="onRemoveCombo($event)"></app-combo-head>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                <app-combo-table 
+                    [combo]="combo"
+                    (comboUpdate)="onComboUpdate($event)">
+                </app-combo-table>
+                </th>
+            </tr>
+        </table>
     </th>
-    <th *ngFor="let combo of combos; index as i">
-        <app-combo-head 
-            [combo]="combo"
-            (addCombo)="onAddCombo($event)"
-            (removeCombo)="onRemoveCombo($event)"></app-combo-head>
+</tr>
+<tr *ngFor="let order of orders; index as i">
+<!--Order Row-->
+    <th>
+        <table>
+            <tr>
+                <td>
+                    <app-order-head
+                        [order]="order"
+                        (addOrder)="onAddOrder($event)"
+                        (removeOrder)="onRemoveOrder($event)"></app-order-head>
+                </td>
+                <td>
+                    <app-order-table
+                        [order]="order"
+                        (changeFtyMixedMat)="onToggleMixedMat($event)"></app-order-table>
+                </td>
+            </tr>
+        </table>
     </th>
+    <td *ngFor="let combo of combos; index as j">
+        <!--For Combo Order Mat objects-->
+        <div>placeholder: order #{{i}} : combo #{{j}}</div>
+    </td>
 </tr>
 </table>
 
-<b>Combo Information:</b>
-<ul>
-    <li *ngFor="let combo of combos; index as i">
-        Combo index: {{ i }}
-        id: {{combo.id}}
-        code: {{combo.code}}
-        chinese name: {{combo.chineseName}}
-        english name: {{combo.englishName}}
-    </li>
-</ul>
+<br>
+<div>
+    <b>Combo Information:</b>
+    <ul>
+        <li *ngFor="let combo of combos; index as i">
+            Combo index: {{ i }}
+            id: {{combo.id}}
+            code: {{combo.code}}
+            chinese name: {{combo.chineseName}}
+            english name: {{combo.englishName}}
+        </li>
+    </ul>
+</div>
+<br>
+<div>
+    <b>Order Information:</b>
+    <ul>
+        <li *ngFor="let order of orders; index as i">
+            Order index: {{ i }}
+            id: {{order.id}}
+            code: {{order.code}}
+            name: {{order.name}}
+            matType: {{order.matType}}
+            isFtyMixed: {{order.isFtyMixed}}
+        </li>
+    </ul>
+</div>
