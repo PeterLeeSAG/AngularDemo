@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Combo } from "./combo";
 import { Order } from "./order";
 import { ComboOrderDetail } from "./comboOrderDetail";
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-yarn-order',
@@ -48,7 +49,7 @@ pComboID = 0;
 
   onAddCombo(comboID: number)
   {
-    this.combos.splice(comboID, 0, {"id":comboID,"code":"NEW","chineseName":"","englishName":""});
+    this.combos.splice(comboID-1, 0, {"id":comboID,"code":"NEW","chineseName":"","englishName":""});
     this.updateComboCodes();
     this.updateComboOrderDetail("add","combo",comboID);
   }
@@ -67,7 +68,7 @@ pComboID = 0;
 
   onAddOrder(orderID: number)
   {
-    this.orders.splice(orderID, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
+    this.orders.splice(orderID-1, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
     this.updateOrderCodes();
     this.updateComboOrderDetail("add","order",orderID);
   }
@@ -82,6 +83,8 @@ pComboID = 0;
   onAddMatFtyOrder(orderID: number)
   {
     this.orders.splice(orderID, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
+    this.updateOrderCodes();
+    this.updateComboOrderDetail("add","order",orderID);
   }
 
   onOrderUpdate(order: Order)
@@ -106,14 +109,33 @@ pComboID = 0;
   updateComboCodes()
   {
     this.combos.forEach(function(value, index){
+      value.id = index + 1;
       value.code = String.fromCharCode(65 + index);
     })
   }
 
   updateOrderCodes()
   {
-    this.orders.forEach(function(value, index){
-      value.code = (index + 1).toString();
+    var currIndex = 1;
+    var subCount = 0;
+    this.orders.forEach(function(value, index)
+    {
+      value.id = index + 1;
+      value.code = currIndex.toString();
+      if (value.isFtyMixed)
+      {
+        value.code = value.code + String.fromCharCode(65 + subCount);
+        subCount++;
+      }
+      else
+      {
+        subCount=0;
+      }
+
+      if (!value.isFtyMixed)
+      {
+        currIndex++;
+      }
     })
   }
 
@@ -143,8 +165,20 @@ pComboID = 0;
     {
       if (mode == 'add')
       {
+        // Update the row's combo id + 1
+        this.comboOrderDetails.forEach(detail => 
+        {
+          //shift down 1 position
+          if(detail.orderID >= id)
+          {
+            console.log(detail.orderID + ";" + detail.comboID);
+            detail.orderID+=1;
+          }
+        });
+
+        //add the new details
         this.combos.forEach(combo => { 
-          var detail = new ComboOrderDetail(combo.id, id+1);
+          var detail = new ComboOrderDetail(combo.id, id);
           this.comboOrderDetails.push(detail);
         });
       }
@@ -157,6 +191,17 @@ pComboID = 0;
             this.comboOrderDetails.splice(index, 1); 
           }
         }
+
+      // Update the row's combo id - 1
+      this.comboOrderDetails.forEach(detail => 
+        {
+          //shift up 1 position
+          if(detail.orderID >= id)
+          {
+            console.log(detail.orderID + ";" + detail.comboID);
+            detail.orderID-=1;
+          }
+        });
       }
     }
   }
