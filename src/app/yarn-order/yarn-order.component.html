@@ -1,29 +1,5 @@
 <h1>Yarn Order</h1>
 
-<b>Loop for array:</b>
-<ul>
-    <li *ngFor="let i of info">
-        {{ i }}
-    </li>
-</ul>
-
-<b>Loop for objects with child components:</b>
-<app-combo-top *ngFor="let combo of combos" 
-    [combo]="combo" 
-    [id]="combo.id"
-    (comboRemoved)="onRemoveCombo($event)">
-</app-combo-top>
-
-<br><br>
-<div>
-<b>Yarn Color Order Combo Table: </b>
-<app-combo-head *ngFor="let combo of combos"
-    [combo]="combo"
-    (addCombo)="onAddCombo($event)"
-    (removeCombo)="onRemoveCombo($event)">
-</app-combo-head>
-</div>
-
 <table>
 <tr>
     <th>
@@ -64,20 +40,23 @@
                 <td>
                     <app-order-table
                         [order]="order"
-                        (changeFtyMixedMat)="onToggleMixedMat($event)"></app-order-table>
+                        (changeFtyMixedMat)="onToggleMixedMat($event)"
+                        (addFtyMixedMat)="onAddMatFtyOrder($event)"></app-order-table>
                 </td>
             </tr>
         </table>
     </th>
     <td *ngFor="let combo of combos; index as j">
         <!--For Combo Order Mat objects-->
-        <div>placeholder: order #{{i}} : combo #{{j}}</div>
+        <div>
+            <app-combo-order-details [comboOrderDetail]="getComboOrderDetail(j+1,i+1)"></app-combo-order-details>
+        </div>
     </td>
 </tr>
 </table>
 
 <br>
-<div>
+<div class="container">
     <b>Combo Information:</b>
     <ul>
         <li *ngFor="let combo of combos; index as i">
@@ -90,7 +69,7 @@
     </ul>
 </div>
 <br>
-<div>
+<div class="container">
     <b>Order Information:</b>
     <ul>
         <li *ngFor="let order of orders; index as i">
@@ -100,6 +79,18 @@
             name: {{order.name}}
             matType: {{order.matType}}
             isFtyMixed: {{order.isFtyMixed}}
+        </li>
+    </ul>
+</div>
+<br>
+<div class="container">
+    <b>ComboOrderDetail Information:</b>
+    <ul>
+        <li *ngFor="let details of comboOrderDetails; index as i">
+            ComboOrderDetail index: {{ i }}
+            comboId: {{details.comboID}}
+            orderId: {{details.orderID}}
+            materialID: {{details.materialID}}
         </li>
     </ul>
 </div>

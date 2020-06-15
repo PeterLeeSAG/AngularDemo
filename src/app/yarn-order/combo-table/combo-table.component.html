@@ -1,9 +1,21 @@
 <!--Combo Table-->
 <ul>
     <li>
-        中文名稱:<input type="text" [(ngModel)]="combo.chineseName">
+        中文名稱:
+        <input type="text" 
+        [ngClass]="{ 
+                     'textColorName-warning' : combo.chineseName.length == 0,
+                     'textColorName-normal' : combo.chineseName.length != 0
+                    }"
+        [(ngModel)]="combo.chineseName">
     </li>
     <li>
-        英文名稱:<input type="text" [(ngModel)]="combo.englishName">
+        英文名稱:
+        <input type="text" 
+        [ngClass]="{ 
+            'textColorName-warning' : combo.englishName.length == 0,
+            'textColorName-normal' : combo.englishName.length != 0
+           }"
+        [(ngModel)]="combo.englishName">
     </li>
 </ul>

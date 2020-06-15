@@ -1,8 +1,15 @@
     <mat-label></mat-label>
-    <input matInput placeholder="e.g. 衫身1色" [(ngModel)]="order.name" mat-text>
+    <input  [ngStyle] = "{'width': '100px'}"
+            [ngClass] = "{'text-order-name':true}"
+            [(ngModel)] = "order.name">
+    <br/>
     <mat-radio-group [(ngModel)]="order.matType" aria-label="Select an option">
         <mat-radio-button value="1">主毛</mat-radio-button>
+        <br/>
         <mat-radio-button value="2">仚全身拉架</mat-radio-button>
+        <br/>
     </mat-radio-group>
     <button mat-button *ngIf="!order.isFtyMixed" (click)="toggleMixedMat(order.id)">改為本廠混毛</button>
-    <button mat-button *ngIf="order.isFtyMixed" (click)="toggleMixedMat(order.id)">Change Back As Normal</button>
+    <button mat-button *ngIf="order.isFtyMixed" (click)="AddMixedMat(order.id)">新增本廠混毛成份</button>
+    <br *ngIf="order.isFtyMixed">
+    <button mat-button *ngIf="order.isFtyMixed" (click)="toggleMixedMat(order.id)">變回普通間色</button>

@@ -1,0 +1,10 @@
+.textColorName-normal
+{
+    width: 150px;
+}
+
+.textColorName-warning
+{
+    width: 150px;
+    background-color: yellow;
+}

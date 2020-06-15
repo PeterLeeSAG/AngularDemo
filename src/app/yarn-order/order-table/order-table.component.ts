@@ -9,7 +9,8 @@ import { Order } from '../order';
 export class OrderTableComponent implements OnInit {
   @Input() order : Order;
   @Output() changeFtyMixedMat = new EventEmitter<number>();
-  
+  @Output() addFtyMixedMat = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,5 +20,11 @@ export class OrderTableComponent implements OnInit {
   {
     console.log("Change factory mixed mat @ the order " + id);
     this.changeFtyMixedMat.emit(id);
+  }
+
+  AddMixedMat(id: number)
+  {
+    console.log("Add factory mixed mat @ the order " + id);
+    this.addFtyMixedMat.emit(id);
   }
 }

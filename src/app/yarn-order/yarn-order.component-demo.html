@@ -1,0 +1,25 @@
+<h1>Yarn Order</h1>
+
+<b>Loop for array:</b>
+<ul>
+    <li *ngFor="let i of info">
+        {{ i }}
+    </li>
+</ul>
+
+<b>Loop for objects with child components:</b>
+<app-combo-top *ngFor="let combo of combos" 
+    [combo]="combo" 
+    [id]="combo.id"
+    (comboRemoved)="onRemoveCombo($event)">
+</app-combo-top>
+
+<br><br>
+<div>
+<b>Yarn Color Order Combo Table: </b>
+<app-combo-head *ngFor="let combo of combos"
+    [combo]="combo"
+    (addCombo)="onAddCombo($event)"
+    (removeCombo)="onRemoveCombo($event)">
+</app-combo-head>
+</div>

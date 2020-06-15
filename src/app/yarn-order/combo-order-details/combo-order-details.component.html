@@ -1,42 +1,56 @@
 <table>
     <tr>
-        <td>
+        <td>        
             <mat-form-field>
-                <mat-label>毛料</mat-label>
-                <mat-select [value]="orderCombo.materialID">
+                <mat-label>[毛]</mat-label>
+                <mat-select [(ngModel)]="comboOrderDetail.materialID" name="material">
                   <mat-option *ngFor="let material of materials" [value]="material.id">
-                     {{material.name}}
+                    {{material.name}}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-label>[毛] {{ getSelectedMaterialName() }}</mat-label>
         </td>
     </tr>
     <tr>
         <td>
             <!--ColorNo-->
-            <mat-label>Color No</mat-label>
-            <input matInput [value]="orderCombo.colorNo">
+            <mat-label>[色]</mat-label>
+            <input
+            [ngStyle]="{width:'100px'}" 
+            type="text" [(ngModel)] ="comboOrderDetail.colorNo">
+            <button (click)="onToggleColorNo()">{{ pendingButtonName }}</button>
         </td>
     </tr>
     <tr>
         <td>
             <!--ChineseColorName-->
-            <mat-label>Chinese ColorName</mat-label>
-            <input matInput [value]="orderCombo.chineseColorName">
+            <mat-label>[中]</mat-label>
+            <input
+            [ngClass]="{'text-color-normal':true}"
+            type="text" [(ngModel)] ="comboOrderDetail.chineseColorName">
         </td>
     </tr>
     <tr>
         <td>
             <!--ColorEnglishName-->
-            <mat-label>English ColorName</mat-label>
-            <input matInput [value]="orderCombo.englishColorName">
+            <mat-label>[英]</mat-label>
+            <input 
+            [ngClass]="{'text-color-normal':true}"
+            type="text" [(ngModel)] ="comboOrderDetail.englishColorName">
         </td>
     </tr>
     <tr>
         <td>
             <!--ColorRemark-->
-            <mat-label>Remark</mat-label>
-            <input matInput [value]="orderCombo.remark">
+            <mat-label>備註</mat-label>
+            <input 
+            [ngClass]="{'text-color-normal':true}"
+            type="text" [(ngModel)] ="comboOrderDetail.remark">
         </td>
     </tr>
 </table>
