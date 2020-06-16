@@ -14,8 +14,8 @@ info = ['1','2','3','4'];
 combos = [];
 orders = [];
 comboOrderDetails = [];
-pOrderID = 0;
-pComboID = 0;
+currOrderID = 0;
+currComboID = 0;
 
   constructor() { }
 
@@ -45,18 +45,48 @@ pComboID = 0;
         this.comboOrderDetails.push(detail);
         })
     });
+
+    this.updateMaxIDs();
+  }
+
+  updateMaxIDs()
+  {
+    //get the max id within the combo & order array
+    this.currComboID = Math.max.apply(Math, this.combos.map(function(combo){return combo.id}));
+    this.currOrderID = Math.max.apply(Math, this.orders.map(function(order){return order.id}));
+  }
+
+  getComboPosition(comboID: number)
+  {
+    return this.combos.findIndex(combo => combo.id === comboID);
+  }
+
+  getOrderPostion(orderID: number)
+  {
+    return this.orders.findIndex(order => order.id === orderID);
   }
 
   onAddCombo(comboID: number)
   {
-    this.combos.splice(comboID-1, 0, {"id":comboID,"code":"NEW","chineseName":"","englishName":""});
+    this.currComboID++;
+    var newComboID = this.currComboID;
+    this.combos.splice(this.getComboPosition(comboID), 0, {"id":newComboID,"code":"NEW","chineseName":"","englishName":""});
     this.updateComboCodes();
-    this.updateComboOrderDetail("add","combo",comboID);
+    this.updateComboOrderDetail("add","combo", newComboID); 
+  }
+
+  onPushCombo(comboID: number)
+  {
+    this.currComboID++;
+    var newComboID = this.currComboID;
+    this.combos.push({"id":newComboID,"code":"NEW","chineseName":"","englishName":""});
+    this.updateComboCodes();
+    this.updateComboOrderDetail("add","combo", newComboID); 
   }
 
   onRemoveCombo(comboID: number)
   {
-    this.combos.splice(comboID-1, 1);
+    this.combos.splice(this.getComboPosition(comboID), 1);
     this.updateComboCodes();
     this.updateComboOrderDetail("remove","combo",comboID);
   }
@@ -68,23 +98,38 @@ pComboID = 0;
 
   onAddOrder(orderID: number)
   {
-    this.orders.splice(orderID-1, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
+    this.currOrderID++;
+    var newOrderID = this.currOrderID;
+    this.orders.splice(this.getOrderPostion(orderID), 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
     this.updateOrderCodes();
-    this.updateComboOrderDetail("add","order",orderID);
+    this.updateComboOrderDetail("add","order", newOrderID);
+  }
+
+  onPushOrder()
+  {
+    //Add at last element
+    this.currOrderID++;
+    var newOrderID = this.currOrderID;
+    this.orders.push({"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
+    this.updateOrderCodes();
+    this.updateComboOrderDetail("add","order", newOrderID);
   }
 
   onRemoveOrder(orderID: number)
   {
-    this.orders.splice(orderID-1, 1);
+    this.orders.splice(this.getOrderPostion(orderID), 1);
     this.updateOrderCodes();
     this.updateComboOrderDetail("remove","order",orderID);
   }
 
   onAddMatFtyOrder(orderID: number)
   {
-    this.orders.splice(orderID, 0, {"id":orderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
+    this.currOrderID++;
+    var newOrderID = this.currOrderID;
+    //insert after the mixed mat
+    this.orders.splice(this.getOrderPostion(orderID)+1, 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
     this.updateOrderCodes();
-    this.updateComboOrderDetail("add","order",orderID);
+    this.updateComboOrderDetail("add","order",newOrderID);
   }
 
   onOrderUpdate(order: Order)
@@ -94,7 +139,7 @@ pComboID = 0;
 
   onToggleMixedMat(orderID: number)
   {
-    this.orders[orderID-1].isFtyMixed = !(this.orders[orderID-1].isFtyMixed);
+    this.orders[this.getOrderPostion(orderID)].isFtyMixed = !(this.orders[this.getOrderPostion(orderID)].isFtyMixed);
     //console.log("toggle mix mat type in yarn order parent @ order #" + orderID);
   }
 
@@ -109,7 +154,6 @@ pComboID = 0;
   updateComboCodes()
   {
     this.combos.forEach(function(value, index){
-      value.id = index + 1;
       value.code = String.fromCharCode(65 + index);
     })
   }
@@ -120,7 +164,6 @@ pComboID = 0;
     var subCount = 0;
     this.orders.forEach(function(value, index)
     {
-      value.id = index + 1;
       value.code = currIndex.toString();
       if (value.isFtyMixed)
       {
@@ -165,16 +208,16 @@ pComboID = 0;
     {
       if (mode == 'add')
       {
-        // Update the row's combo id + 1
-        this.comboOrderDetails.forEach(detail => 
-        {
-          //shift down 1 position
-          if(detail.orderID >= id)
-          {
-            console.log(detail.orderID + ";" + detail.comboID);
-            detail.orderID+=1;
-          }
-        });
+        // // Update the row's combo id + 1
+        // this.comboOrderDetails.forEach(detail => 
+        // {
+        //   //shift down 1 position
+        //   if(detail.orderID >= id)
+        //   {
+        //     console.log(detail.orderID + ";" + detail.comboID);
+        //     detail.orderID+=1;
+        //   }
+        // });
 
         //add the new details
         this.combos.forEach(combo => { 
@@ -192,16 +235,16 @@ pComboID = 0;
           }
         }
 
-      // Update the row's combo id - 1
-      this.comboOrderDetails.forEach(detail => 
-        {
-          //shift up 1 position
-          if(detail.orderID >= id)
-          {
-            console.log(detail.orderID + ";" + detail.comboID);
-            detail.orderID-=1;
-          }
-        });
+      // // Update the row's combo id - 1
+      // this.comboOrderDetails.forEach(detail => 
+      //   {
+      //     //shift up 1 position
+      //     if(detail.orderID >= id)
+      //     {
+      //       console.log(detail.orderID + ";" + detail.comboID);
+      //       detail.orderID-=1;
+      //     }
+      //   });
       }
     }
   }

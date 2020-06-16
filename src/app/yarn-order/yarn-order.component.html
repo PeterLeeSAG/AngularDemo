@@ -1,5 +1,6 @@
 <h1>Yarn Order</h1>
 
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
 <table>
 <tr>
     <th>
@@ -24,6 +25,9 @@
                 </th>
             </tr>
         </table>
+    </th>
+    <th>
+        <button (click)="onPushCombo()">Add Combo</button>
     </th>
 </tr>
 <tr *ngFor="let order of orders; index as i">
@@ -53,10 +57,17 @@
         </div>
     </td>
 </tr>
+<tr><button (click)="onPushOrder()" >Add Order</button></tr>
 </table>
-
+</div>
 <br>
-<div class="container">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <b>Max combo & order ID:</b>
+    combo ID: {{this.currComboID}}
+    order ID: {{this.currOrderID}}
+</div>
+<br>
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Combo Information:</b>
     <ul>
         <li *ngFor="let combo of combos; index as i">
@@ -69,7 +80,7 @@
     </ul>
 </div>
 <br>
-<div class="container">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Order Information:</b>
     <ul>
         <li *ngFor="let order of orders; index as i">
@@ -83,7 +94,7 @@
     </ul>
 </div>
 <br>
-<div class="container">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>ComboOrderDetail Information:</b>
     <ul>
         <li *ngFor="let details of comboOrderDetails; index as i">
