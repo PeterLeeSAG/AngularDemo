@@ -53,7 +53,7 @@
     <td *ngFor="let combo of combos; index as j">
         <!--For Combo Order Mat objects-->
         <div>
-            <app-combo-order-details [comboOrderDetail]="getComboOrderDetail(j+1,i+1)"></app-combo-order-details>
+            <app-combo-order-details [comboOrderDetail]="getComboOrderDetail(combo.id,order.id)"></app-combo-order-details>
         </div>
     </td>
 </tr>

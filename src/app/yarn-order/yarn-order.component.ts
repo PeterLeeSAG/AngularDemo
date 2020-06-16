@@ -75,7 +75,7 @@ currComboID = 0;
     this.updateComboOrderDetail("add","combo", newComboID); 
   }
 
-  onPushCombo(comboID: number)
+  onPushCombo()
   {
     this.currComboID++;
     var newComboID = this.currComboID;
