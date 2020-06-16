@@ -22,9 +22,28 @@ export class OrderTableComponent implements OnInit {
     this.changeFtyMixedMat.emit(id);
   }
 
-  AddMixedMat(id: number)
+  addMixedMat(id: number)
   {
     console.log("Add factory mixed mat @ the order " + id);
     this.addFtyMixedMat.emit(id);
+  }
+
+  getMixMatStatus()
+  {
+    if (this.order.isFtyMixed)
+    {
+      if (this.order.refID == null)
+      {
+        return 1; //head
+      }
+      else
+      {
+        return 2; //sub mixed mat
+      }
+    }
+    else
+    {
+      return 0; //not mixed mat
+    }
   }
 }

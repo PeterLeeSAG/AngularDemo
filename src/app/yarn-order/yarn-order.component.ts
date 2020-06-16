@@ -125,8 +125,30 @@ currComboID = 0;
   {
     this.currOrderID++;
     var newOrderID = this.currOrderID;
+    var currPos = this.getOrderPosition(orderID);
+    var targetPos = null; //find the fall records if the isFtyMixed = false & mixRefId != currPos
+
+    // for (let index = currPos; index < this.orders.length; index++) {
+    //   const order = this.orders[index];
+    //   if (order.isFtyMixed == false && order.mixRefId != orderID && targetPos == null)
+    //   {
+    //     targetPos = index;
+    //   }
+    // }
+
+    let index: number = currPos;
+    do {
+        const order = this.orders[index];
+        console.log("loop statement on order ID " + order.id + " execution no." + index );
+        if (order.isFtyMixed == false && order.mixRefId != orderID)
+        {
+          targetPos = index;
+        }
+        index++;
+    } while ( index < this.orders.length && targetPos == null)
+
     //insert after the mixed mat
-    this.orders.splice(this.getOrderPosition(orderID)+1, 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
+    this.orders.splice(targetPos, 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true,"refID":orderID});
     this.updateOrderCodes();
     this.updateComboOrderDetail("add","order",newOrderID);
   }
@@ -145,9 +167,10 @@ currComboID = 0;
 
   getComboOrderDetail(comboID: number, orderID: number)
   {
-    var result = this.comboOrderDetails.find( e => 
-                                        e.comboID === comboID && 
-                                        e.orderID === orderID);
+    var result = this.comboOrderDetails
+    .find( e => 
+      e.comboID === comboID && 
+      e.orderID === orderID);
     return result;
   }
 
@@ -162,6 +185,8 @@ currComboID = 0;
   {
     var currIndex = 1;
     var subCount = 0;
+    const orderCount = this.orders.length;
+    const tempOrders = this.orders;
     this.orders.forEach(function(value, index)
     {
       value.code = currIndex.toString();
@@ -175,11 +200,15 @@ currComboID = 0;
         subCount=0;
       }
 
-      if (!value.isFtyMixed || 
-          !this.orders[index+1].isFtyMixed )
-      {
-        currIndex++;
+      if (index < orderCount - 1 )
+      {      
+        if (!value.isFtyMixed || 
+            !tempOrders[index+1].isFtyMixed)
+        {
+          currIndex++;
+        }
       }
+
     })
   }
 
