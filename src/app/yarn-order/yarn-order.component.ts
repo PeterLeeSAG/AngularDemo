@@ -140,6 +140,7 @@ currComboID = 0;
   {
     this.orders[this.getOrderPosition(orderID)].isFtyMixed = !(this.orders[this.getOrderPosition(orderID)].isFtyMixed);
     //console.log("toggle mix mat type in yarn order parent @ order #" + orderID);
+    this.updateOrderCodes();
   }
 
   getComboOrderDetail(comboID: number, orderID: number)
@@ -174,7 +175,8 @@ currComboID = 0;
         subCount=0;
       }
 
-      if (!value.isFtyMixed)
+      if (!value.isFtyMixed || 
+          !this.orders[index+1].isFtyMixed )
       {
         currIndex++;
       }
@@ -261,7 +263,7 @@ currComboID = 0;
     }
     else if (direction == "right")
     { 
-      if (targetComboIndex <= this.combos.length-1)
+      if (targetComboIndex < this.combos.length-1)
       {
         var tempCombo = this.combos[targetComboIndex+1];
         this.combos[targetComboIndex+1] = this.combos[targetComboIndex];
@@ -287,12 +289,14 @@ currComboID = 0;
     }
     else if (direction == "down")
     {
-      if (targetOrderIndex <= this.orders.length-1)
+      if (targetOrderIndex < this.orders.length-1)
       {
         var tempOrder = this.orders[targetOrderIndex+1];
         this.orders[targetOrderIndex+1] = this.orders[targetOrderIndex];
         this.orders[targetOrderIndex] = tempOrder;
       }
     }
+
+    this.updateOrderCodes();
   }
 }
