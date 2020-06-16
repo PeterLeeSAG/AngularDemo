@@ -4,7 +4,7 @@
 <table>
 <tr>
     <th>
-        COMBO
+        %nbsp;
     </th>
     <th *ngFor="let combo of combos; index as i">
         <table>
@@ -12,8 +12,12 @@
                 <th>
                 <app-combo-head 
                     [combo]="combo"
+                    [currIndex]=i
+                    [maxIndex]=combos.length-1
                     (addCombo)="onAddCombo($event)"
-                    (removeCombo)="onRemoveCombo($event)"></app-combo-head>
+                    (removeCombo)="onRemoveCombo($event)"
+                    (moveComboLeft)="onComboMoveLeft($event)"
+                    (moveComboRight)="onComboMoveRight($event)"></app-combo-head>
                 </th>
             </tr>
             <tr>
@@ -30,7 +34,7 @@
         <button (click)="onPushCombo()">Add Combo</button>
     </th>
 </tr>
-<tr *ngFor="let order of orders; index as i">
+<tr *ngFor="let order of orders; index as j">
 <!--Order Row-->
     <th>
         <table>
@@ -38,8 +42,12 @@
                 <td>
                     <app-order-head
                         [order]="order"
+                        [currIndex]=j
+                        [maxIndex]=orders.length-1
                         (addOrder)="onAddOrder($event)"
-                        (removeOrder)="onRemoveOrder($event)"></app-order-head>
+                        (removeOrder)="onRemoveOrder($event)"
+                        (moveOrderUp)="onOrderMoveUp($event)"
+                        (moveOrderDown)="onOrderMoveDown($event)"></app-order-head>
                 </td>
                 <td>
                     <app-order-table
@@ -50,16 +58,17 @@
             </tr>
         </table>
     </th>
-    <td *ngFor="let combo of combos; index as j">
+    <td *ngFor="let combo of combos; index as k">
         <!--For Combo Order Mat objects-->
         <div>
             <app-combo-order-details [comboOrderDetail]="getComboOrderDetail(combo.id,order.id)"></app-combo-order-details>
         </div>
     </td>
 </tr>
-<tr><button (click)="onPushOrder()" >Add Order</button></tr>
+<tr><button (click)="onPushOrder()">Add Order</button></tr>
 </table>
 </div>
+<br>
 <br>
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Max combo & order ID:</b>

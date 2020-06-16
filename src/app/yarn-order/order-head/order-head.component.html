@@ -1,4 +1,6 @@
 <!--Order Header-->
 <button (click)="onClickOrderAdd(order.id)" mat-button>+</button>
+<button *ngIf="hideMoveUp!=true" (click)="onClickOrderMoveUp()" mat-button>[^]</button>
 Order: {{ order.code }} 
+<button *ngIf="hideMoveDown!=true" (click)="onClickOrderMoveDown()" mat-button>[v]</button>
 <button (click)="onClickOrderRemove(order.id)" mat-button>-</button>

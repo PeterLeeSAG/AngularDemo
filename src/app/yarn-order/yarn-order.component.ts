@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Combo } from "./combo";
 import { Order } from "./order";
 import { ComboOrderDetail } from "./comboOrderDetail";
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-yarn-order',
@@ -61,7 +60,7 @@ currComboID = 0;
     return this.combos.findIndex(combo => combo.id === comboID);
   }
 
-  getOrderPostion(orderID: number)
+  getOrderPosition(orderID: number)
   {
     return this.orders.findIndex(order => order.id === orderID);
   }
@@ -100,7 +99,7 @@ currComboID = 0;
   {
     this.currOrderID++;
     var newOrderID = this.currOrderID;
-    this.orders.splice(this.getOrderPostion(orderID), 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
+    this.orders.splice(this.getOrderPosition(orderID), 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":false});
     this.updateOrderCodes();
     this.updateComboOrderDetail("add","order", newOrderID);
   }
@@ -117,7 +116,7 @@ currComboID = 0;
 
   onRemoveOrder(orderID: number)
   {
-    this.orders.splice(this.getOrderPostion(orderID), 1);
+    this.orders.splice(this.getOrderPosition(orderID), 1);
     this.updateOrderCodes();
     this.updateComboOrderDetail("remove","order",orderID);
   }
@@ -127,7 +126,7 @@ currComboID = 0;
     this.currOrderID++;
     var newOrderID = this.currOrderID;
     //insert after the mixed mat
-    this.orders.splice(this.getOrderPostion(orderID)+1, 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
+    this.orders.splice(this.getOrderPosition(orderID)+1, 0, {"id":newOrderID,"code":"A","name":"NEW","matType":0,"isFtyMixed":true});
     this.updateOrderCodes();
     this.updateComboOrderDetail("add","order",newOrderID);
   }
@@ -139,7 +138,7 @@ currComboID = 0;
 
   onToggleMixedMat(orderID: number)
   {
-    this.orders[this.getOrderPostion(orderID)].isFtyMixed = !(this.orders[this.getOrderPostion(orderID)].isFtyMixed);
+    this.orders[this.getOrderPosition(orderID)].isFtyMixed = !(this.orders[this.getOrderPosition(orderID)].isFtyMixed);
     //console.log("toggle mix mat type in yarn order parent @ order #" + orderID);
   }
 
@@ -208,17 +207,6 @@ currComboID = 0;
     {
       if (mode == 'add')
       {
-        // // Update the row's combo id + 1
-        // this.comboOrderDetails.forEach(detail => 
-        // {
-        //   //shift down 1 position
-        //   if(detail.orderID >= id)
-        //   {
-        //     console.log(detail.orderID + ";" + detail.comboID);
-        //     detail.orderID+=1;
-        //   }
-        // });
-
         //add the new details
         this.combos.forEach(combo => { 
           var detail = new ComboOrderDetail(combo.id, id);
@@ -234,17 +222,76 @@ currComboID = 0;
             this.comboOrderDetails.splice(index, 1); 
           }
         }
+      }
+    }
+  }
 
-      // // Update the row's combo id - 1
-      // this.comboOrderDetails.forEach(detail => 
-      //   {
-      //     //shift up 1 position
-      //     if(detail.orderID >= id)
-      //     {
-      //       console.log(detail.orderID + ";" + detail.comboID);
-      //       detail.orderID-=1;
-      //     }
-      //   });
+  onComboMoveLeft(id: number)
+  {
+    this.moveCombo(id, "left");
+  }
+
+  onComboMoveRight(id: number)
+  {
+    this.moveCombo(id, "right");
+  }
+
+  onOrderMoveUp(id: number)
+  {
+    this.moveOrder(id, "up");
+  }
+
+  onOrderMoveDown(id: number)
+  {
+    this.moveOrder(id, "down");
+  }
+
+  moveCombo(comboID : number, direction : string)
+  {
+    var targetComboIndex = this.getComboPosition(comboID);
+
+    if (direction == "left")
+    {
+      if (targetComboIndex > 0)
+      {
+        var tempCombo = this.combos[targetComboIndex-1];
+        this.combos[targetComboIndex-1] = this.combos[targetComboIndex];
+        this.combos[targetComboIndex] = tempCombo;
+      }
+    }
+    else if (direction == "right")
+    { 
+      if (targetComboIndex <= this.combos.length-1)
+      {
+        var tempCombo = this.combos[targetComboIndex+1];
+        this.combos[targetComboIndex+1] = this.combos[targetComboIndex];
+        this.combos[targetComboIndex] = tempCombo;
+      }
+    }
+
+    this.updateComboCodes();
+  }
+
+  moveOrder(orderID: number, direction : string)
+  {
+    var targetOrderIndex = this.getOrderPosition(orderID);
+
+    if (direction == "up")
+    {
+      if (targetOrderIndex > 0)
+      {
+        var tempOrder = this.orders[targetOrderIndex-1];
+        this.orders[targetOrderIndex-1] = this.orders[targetOrderIndex];
+        this.orders[targetOrderIndex] = tempOrder;
+      }
+    }
+    else if (direction == "down")
+    {
+      if (targetOrderIndex <= this.orders.length-1)
+      {
+        var tempOrder = this.orders[targetOrderIndex+1];
+        this.orders[targetOrderIndex+1] = this.orders[targetOrderIndex];
+        this.orders[targetOrderIndex] = tempOrder;
       }
     }
   }
