@@ -26,9 +26,12 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/allineone_browse.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/about/about.js"
+            ]
           },
           "configurations": {
             "production": {

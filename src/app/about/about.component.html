@@ -2,3 +2,27 @@
     <h1>{{title}}</h1>
 </div>
 <p style="padding: 15px;">This is the about page that describes your app</p>
+
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'basicInfo')">Basic Info</button>
+    <button class="tablinks" onclick="openTab(event, 'orderSizeCombo')">Order Size Combo</button>
+    <button class="tablinks" onclick="openTab(event, 'calculationMethod')">Calculation Method</button>
+  </div>
+  
+  <!-- Tab content -->
+  <div id="basicInfo" class="tabcontent">
+    <h3>Basic Info</h3>
+    <p>Fill the basic form here.</p>
+  </div>
+  
+  <div id="orderSizeCombo" class="tabcontent">
+    <h3>Order Size Combo</h3>
+    <p>Edit Order, Size and Combo data with the dynamic matrix here.</p>
+  </div>
+  
+  <div id="calculationMethod" class="tabcontent">
+    <h3>Calculation Method</h3>
+    <p>Edit style name and select the material calculation method.</p>
+  </div>
+  

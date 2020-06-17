@@ -39,6 +39,7 @@ import { WeightListComponent } from './yarn-order/weight-list/weight-list.compon
 import { WeightItemComponent } from './yarn-order/weight-item/weight-item.component';
 import { MaterialItemComponent } from './yarn-order/material-item/material-item.component';
 import { MaterialListComponent } from './yarn-order/material-list/material-list.component';
+import { StyleHeadComponent } from './yarn-order/style-head/style-head.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MaterialListComponent } from './yarn-order/material-list/material-list.
     WeightListComponent,
     WeightItemComponent,
     MaterialItemComponent,
-    MaterialListComponent
+    MaterialListComponent,
+    StyleHeadComponent
   ],
   imports: [
     BrowserModule,

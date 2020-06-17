@@ -1,1 +1,7 @@
-<p>size-item works!</p>
+<button (click)="onAddSize(itemSize.id)">+</button>
+    <select [(ngModel)]="itemSize.sizeID" name="sizeItem">
+        <option *ngFor="let size of sizes" [value]="size.id">
+        {{size.name}}
+        </option>
+    </select>
+<button (click)="onRemoveSize(itemSize.id)">-</button>

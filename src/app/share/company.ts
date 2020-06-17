@@ -3,6 +3,8 @@ export class Company {
     public chineseName: string;
     public englishName: string;
     
+    // javasrcipt key value pair object
+    // {"id":number,"name":string, type: number}
     constructor(id: number, chineseName: string, englishName: string)
     {
         this.id = id;
