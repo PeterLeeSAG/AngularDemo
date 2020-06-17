@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./style-head.component.css']
 })
 export class StyleHeadComponent implements OnInit {
-
+  styleInfo : {"factoryStyleNo":string, "calculationTypeId":number };
   constructor() { }
 
   ngOnInit(): void {

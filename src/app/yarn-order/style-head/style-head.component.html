@@ -1,1 +1,23 @@
-<p>style-head works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="row">
+              <div class="col-xs-2 col-sm-2"> &nbsp; </div>
+              <div class="col-xs-2 col-sm-2"> <img src="#" class="img-responsive"> 廠款號: </div>
+              <div class="col-xs-6 col-sm-6"> &nbsp; <INPUT class=text size=30 [(ngModel)] = "styleInfo.factoryStyleNo"> </div>
+              <div class="col-xs-2 col-sm-2"> &nbsp; </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2 col-sm-2">色碼分類:</div>
+        <div class="col-xs-10 col-sm-10">
+            <mat-radio-group [(ngModel)]="styleInfo.calculationTypeId" aria-label="Select an option">
+                <mat-radio-button value="0">不分色組/碼數計毛</mat-radio-button>&nbsp;
+                <mat-radio-button value="1">分色組用毛比例計毛</mat-radio-button>&nbsp;
+                <mat-radio-button value="2">分碼數計毛</mat-radio-button>&nbsp;
+                <mat-radio-button value="3">分色組用毛比例/碼數計毛</mat-radio-button>&nbsp;
+            </mat-radio-group>
+        </div>
+    </div>
+</div>
