@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Order } from '../order';
+import { Order } from '../../share/order';
 
 @Component({
   selector: 'app-order-head',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Combo } from "./combo";
-import { Order } from "./order";
-import { ComboOrderDetail } from "./comboOrderDetail";
+import { Combo } from "../share/combo";
+import { Order } from "../share/order";
+import { ComboOrderDetail } from "../share/comboOrderDetail";
 
 @Component({
   selector: 'app-yarn-order',

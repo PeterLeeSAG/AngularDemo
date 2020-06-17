@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Combo } from '../combo';
+import { Combo } from '../../share/combo';
 
 @Component({
   selector: 'app-combo-top',

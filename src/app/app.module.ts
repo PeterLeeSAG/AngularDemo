@@ -33,6 +33,12 @@ import { OrderTableComponent } from './yarn-order/order-table/order-table.compon
 import { WeightControlComponent } from './yarn-order/weight-control/weight-control.component';
 import { WeightInfoComponent } from './yarn-order/weight-info/weight-info.component';
 import { ComboTopComponent } from './yarn-order/combo-top/combo-top.component';
+import { SizeListComponent } from './yarn-order/size-list/size-list.component';
+import { SizeItemComponent } from './yarn-order/size-item/size-item.component';
+import { WeightListComponent } from './yarn-order/weight-list/weight-list.component';
+import { WeightItemComponent } from './yarn-order/weight-item/weight-item.component';
+import { MaterialItemComponent } from './yarn-order/material-item/material-item.component';
+import { MaterialListComponent } from './yarn-order/material-list/material-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +55,13 @@ import { ComboTopComponent } from './yarn-order/combo-top/combo-top.component';
     OrderTableComponent,
     WeightControlComponent,
     WeightInfoComponent,
-    ComboTopComponent
+    ComboTopComponent,
+    SizeListComponent,
+    SizeItemComponent,
+    WeightListComponent,
+    WeightItemComponent,
+    MaterialItemComponent,
+    MaterialListComponent
   ],
   imports: [
     BrowserModule,

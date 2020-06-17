@@ -1,11 +1,11 @@
 export class ComboOrderDetail {
-    comboID: number;
-    orderID: number;
-    materialID: number;
-    colorNo: string;
-    chineseColorName: string;
-    englishColorName: string;
-    remark: string;
+    public comboID: number;
+    public orderID: number;
+    public materialID: number;
+    public colorNo: string;
+    public chineseColorName: string;
+    public englishColorName: string;
+    public remark: string;
 
     constructor(comboID: number, orderID: number)
     {

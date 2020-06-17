@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComboOrderDetail } from '../comboOrderDetail';
+import { ComboOrderDetail } from '../../share/comboOrderDetail';
 
 @Component({
   selector: 'app-combo-order-details',
