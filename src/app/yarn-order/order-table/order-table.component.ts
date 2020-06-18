@@ -8,6 +8,7 @@ import { Order } from '../../share/order';
 })
 export class OrderTableComponent implements OnInit {
   @Input() order : Order;
+  @Input() nextRefID : number;
   @Output() changeFtyMixedMat = new EventEmitter<number>();
   @Output() addFtyMixedMat = new EventEmitter<number>();
 
@@ -34,6 +35,11 @@ export class OrderTableComponent implements OnInit {
     {
       if (this.order.refID == null)
       {
+        if (this.nextRefID == this.order.id)
+        {
+          //need to hide the '變回普通間色' button
+          return 3;
+        }
         return 1; //head
       }
       else

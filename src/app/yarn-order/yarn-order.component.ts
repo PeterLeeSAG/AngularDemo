@@ -3,6 +3,7 @@ import { Combo } from "../share/combo";
 import { Order } from "../share/order";
 import { ComboOrderDetail } from "../share/comboOrderDetail";
 import { StyleInfo } from "../share/styleInfo";
+import { retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-yarn-order',
@@ -29,7 +30,7 @@ currComboID = 0;
     //Initial the testing data model
     this.styleInfo = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
     this.styleInfo.factoryStyleNumber = "Test";
-    
+
     this.combos = [
       {"id":1,"code":"A","chineseName":"紅色","englishName":"Red"},
       {"id":2,"code":"B","chineseName":"綠色","englishName":"Green"},
@@ -69,6 +70,19 @@ currComboID = 0;
   getOrderPosition(orderID: number)
   {
     return this.orders.findIndex(order => order.id === orderID);
+  }
+
+  checkNextRefID(orderID: number)
+  {
+    var nextPos = this.getOrderPosition(orderID)+1;
+    if (nextPos < this.orders.length)
+    {
+      return this.orders[nextPos].refID
+    }
+    else
+    {
+      return null;
+    }
   }
 
   onAddCombo(comboID: number)

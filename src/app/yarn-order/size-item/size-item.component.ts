@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { Size } from '../../share/size';
 
 @Component({
@@ -7,22 +7,45 @@ import { Size } from '../../share/size';
   styleUrls: ['./size-item.component.css']
 })
 export class SizeItemComponent implements OnInit {
-  sizes: Size[]; //Load the size array from the size service
-  @Input() itemSize: {"id":number, "sizeID":number};
+  sizes: Size[]; 
+  @Input() itemSize: {"listID":number, "sizeID":number};
   @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID, sizeID and action
+  @Output() sizeSelected = new EventEmitter<{'listID':number, 'sizeID': number}>();
+  @ViewChild('sizeSelection') sizeSelection : ElementRef;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.initSize();
+  }
+
+  initSize(){
+    this.sizes = [{"id":0,"name":""}];
+    //Load the size array from the size service
+    this.sizes.push(new Size(1,"XXS"));
+    this.sizes.push(new Size(2,"XS"));
+    this.sizes.push(new Size(3,"S"));
+    this.sizes.push(new Size(4,"M"));
+    this.sizes.push(new Size(5,"L"));
+    this.sizes.push(new Size(6,"XL"));
+    this.sizes.push(new Size(7,"XXL"));
+  }
+
+  onSelectSize(sizeID: number)
+  {
+    this.sizeSelected.emit({
+      "listID": this.itemSize.listID,
+      "sizeID": this.sizeSelection.nativeElement.value
+    });
   }
 
   onAddSize(id: number)
   {
-    this.result.emit({"posID":id, "action":"add"})
+    this.result.emit({"posID":id-1, "action":"add"})
   }
 
-  onRemoveSize(id:number)
+  onRemoveSize(id: number)
   {
-    this.result.emit({"posID": id, "action":"remove"})
+    this.result.emit({"posID":id-1, "action":"remove"})
   }
 }

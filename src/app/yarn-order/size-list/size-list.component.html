@@ -1,5 +1,9 @@
 <div class="container">
-    <div *ngFor="let size of sizes" class="row">
-        <app-size-item [(itemSize)]="size"></app-size-item>
+    <div *ngFor="let size of sizeItems" class="row">
+        <app-size-item [itemSize]="size" 
+        (sizeSelected)="sizeSelected($event)"
+        (result)="sizeUpdated($event)" 
+        ></app-size-item>
     </div>
+    <button (click)="sizeAdded(this.sizeItems.length)">Add Size</button>
 </div>

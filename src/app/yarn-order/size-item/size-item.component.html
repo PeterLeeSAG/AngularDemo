@@ -1,7 +1,8 @@
-<button (click)="onAddSize(itemSize.id)">+</button>
-    <select [(ngModel)]="itemSize.sizeID" name="sizeItem">
+<button (click)="onAddSize(itemSize.listID)">+</button>
+    <!-- <select [(ngModel)]="itemSize.sizeID" name="sizeItem"> -->
+    <select name="sizeItem" (select)="onSelectSize($event.target.value)" #sizeSelection>
         <option *ngFor="let size of sizes" [value]="size.id">
         {{size.name}}
         </option>
     </select>
-<button (click)="onRemoveSize(itemSize.id)">-</button>
+<button (click)="onRemoveSize(itemSize.listID)">-</button>

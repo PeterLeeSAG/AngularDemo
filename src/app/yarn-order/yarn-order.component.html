@@ -1,7 +1,7 @@
 <h1>Yarn Order</h1>
 <app-style-head [(styleInfo)]="styleInfo"></app-style-head>
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
-<div class="container-scroll">
+<div class="container">
 <div class="row">
     <div class="col-md-2">
     </div>
@@ -65,21 +65,23 @@
     <button (click)="onPushOrder()">Add Order</button>
 </div>
 </div> <!--Table End-->
+<br>
+<b>Sizing List</b>
+<app-size-list></app-size-list>
 </div>
-<br>
-<br>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Style Info:</b> <br>
     style Number: {{this.styleInfo.factoryStyleNumber}} <br>
     Calculation Type No: {{this.styleInfo.calculationTypeId}}
 </div>
-<br>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Max combo & order ID:</b><br>
     combo ID: {{this.currComboID}} <br>
     order ID: {{this.currOrderID}}
 </div>
-<br>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Combo Information:</b>
     <ul>
@@ -92,7 +94,7 @@
         </li>
     </ul>
 </div>
-<br>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Order Information:</b>
     <ul>
@@ -106,7 +108,7 @@
         </li>
     </ul>
 </div>
-<br>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>ComboOrderDetail Information:</b>
     <ul>
