@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Combo } from "../share/combo";
 import { Order } from "../share/order";
 import { ComboOrderDetail } from "../share/comboOrderDetail";
+import { StyleInfo } from "../share/styleInfo";
 
 @Component({
   selector: 'app-yarn-order',
@@ -13,6 +14,7 @@ info = ['1','2','3','4'];
 combos = [];
 orders = [];
 comboOrderDetails = [];
+styleInfo: StyleInfo;
 currOrderID = 0;
 currComboID = 0;
 
@@ -24,6 +26,10 @@ currComboID = 0;
 
   onInitCreateData()
   {
+    //Initial the testing data model
+    this.styleInfo = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
+    this.styleInfo.factoryStyleNumber = "Test";
+    
     this.combos = [
       {"id":1,"code":"A","chineseName":"紅色","englishName":"Red"},
       {"id":2,"code":"B","chineseName":"綠色","englishName":"Green"},
@@ -93,6 +99,11 @@ currComboID = 0;
   onComboUpdate(combo: Combo)
   {
     console.log(combo.id);
+  }
+
+  onStyleInfoUpdate(styleInfo: StyleInfo)
+  {
+    console.log("Update to style name: " + styleInfo.factoryStyleNumber);
   }
 
   onAddOrder(orderID: number)

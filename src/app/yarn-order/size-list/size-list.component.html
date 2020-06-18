@@ -1,1 +1,5 @@
-<p>size-list works!</p>
+<div class="container">
+    <div *ngFor="let size of sizes" class="row">
+        <app-size-item [(itemSize)]="size"></app-size-item>
+    </div>
+</div>

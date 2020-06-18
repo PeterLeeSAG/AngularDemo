@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Size } from 'src/app/share/size';
 
 @Component({
   selector: 'app-size-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./size-list.component.css']
 })
 export class SizeListComponent implements OnInit {
+sizes : Size[];
 
   constructor() { }
 

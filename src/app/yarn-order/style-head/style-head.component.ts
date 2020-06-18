@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StyleInfo } from '../../share/styleInfo';
 
 @Component({
   selector: 'app-style-head',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./style-head.component.css']
 })
 export class StyleHeadComponent implements OnInit {
-  styleInfo : {"factoryStyleNo":string, "calculationTypeId":number };
+  @Input() styleInfo : StyleInfo;
+  @Output() styleInfoUpdate = new EventEmitter<StyleInfo>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onStyleInfoChange(text : string)
+  {
+    this.styleInfo.factoryStyleNumber = text;
+    this.styleInfoUpdate.emit(this.styleInfo);
+  }
 }

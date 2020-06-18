@@ -1,6 +1,6 @@
 <!--Combo Table-->
-<ul>
-    <li>
+<div class="container">
+    <div class="row">
         中文名稱:
         <input type="text" 
         [ngClass]="{ 
@@ -8,8 +8,8 @@
                      'textColorName-normal' : combo.chineseName.length != 0
                     }"
         [(ngModel)]="combo.chineseName">
-    </li>
-    <li>
+    </div>
+    <div class="row">
         英文名稱:
         <input type="text" 
         [ngClass]="{ 
@@ -17,5 +17,5 @@
             'textColorName-normal' : combo.englishName.length != 0
            }"
         [(ngModel)]="combo.englishName">
-    </li>
-</ul>
+    </div>
+</div>
