@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { Size } from '../../share/size';
+import { Size } from '../../models/size';
 
 @Component({
   selector: 'app-size-item',

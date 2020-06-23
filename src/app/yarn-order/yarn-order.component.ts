@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Combo } from "../share/combo";
-import { Order } from "../share/order";
-import { ComboOrderDetail } from "../share/comboOrderDetail";
-import { StyleInfo } from "../share/styleInfo";
+import { Combo } from "../models/combo";
+import { Order } from "../models/order";
+import { ComboOrderDetail } from "../models/comboOrderDetail";
+import { StyleInfo } from "../models/styleInfo";
 import { retry } from 'rxjs/operators';
 
 @Component({
@@ -77,7 +77,7 @@ currComboID = 0;
     var nextPos = this.getOrderPosition(orderID)+1;
     if (nextPos < this.orders.length)
     {
-      return this.orders[nextPos].refID
+      return this.orders[nextPos].refID;
     }
     else
     {

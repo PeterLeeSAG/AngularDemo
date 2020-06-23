@@ -10,4 +10,15 @@ export class Size {
         this.name = name;
     }
   }
+
+export class SizeItem {
+  public listID: number;
+  public sizeID: number;
+
+  constructor(listID: number, sizeID: number)
+  {
+      this.listID = listID;
+      this.sizeID = sizeID;
+  }
+}
   

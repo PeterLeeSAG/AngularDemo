@@ -50,6 +50,7 @@
             <div class="row">
                 <app-order-table
                     [order]="order"
+                    [nextRefID]="checkNextRefID(order.id)"
                     (changeFtyMixedMat)="onToggleMixedMat($event)"
                     (addFtyMixedMat)="onAddMatFtyOrder($event)">
                 </app-order-table>

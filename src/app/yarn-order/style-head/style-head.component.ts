@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StyleInfo } from '../../share/styleInfo';
+import { StyleInfo } from '../../models/styleInfo';
 
 @Component({
   selector: 'app-style-head',

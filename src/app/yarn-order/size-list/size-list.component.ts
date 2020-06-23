@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Size } from 'src/app/share/size';
+import { Size } from 'src/app/models/size';
 
 @Component({
   selector: 'app-size-list',
