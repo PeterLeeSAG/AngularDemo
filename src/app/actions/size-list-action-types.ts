@@ -6,7 +6,7 @@ export enum SizeListActionTypes {
     AddSizeItem = '[Size List] ADD ITEM',
     RemoveSizeItem = '[Size List] REMOVE ITEM',
     UpdateSizeItem = '[Size List] UPDATE ITEM',
-    MoveUpSizeItem = '[Size List] MOVE ITEM UP',
+    MoveSizeItemUp = '[Size List] MOVE ITEM UP',
     MoveDownSizeItem = '[Size List] MOVE ITEM DOWN',
     CompleteSizeList = '[Size List] COMPLETE',
     ResetSizeList = '[Size List] RESET'
@@ -15,8 +15,8 @@ export enum SizeListActionTypes {
 export class SizeListAction implements Action {
     type: string;
     payload: {
-      sizeData: Size,
       index: number,
+      sizeId: number,
       error: string
     };
   }
@@ -41,12 +41,12 @@ export class SizeListAction implements Action {
 
   export class UpdateSizeItem implements Action {
     readonly type = SizeListActionTypes.UpdateSizeItem;  
-    constructor(readonly payload: {sizeData: Size, index: number}) {
+    constructor(readonly payload: {index: number, sizeID: number}) {
     }
   }
 
   export class MoveSizeItemUp implements Action {
-    readonly type = SizeListActionTypes.MoveUpSizeItem;  
+    readonly type = SizeListActionTypes.MoveSizeItemUp;  
     constructor(readonly payload: {index: number}) {
     }
   }

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Size, SizeItem } from 'src/app/models/size';
-import { select, Store } from '@ngrx/store'; 
-import { Observable } from 'rxjs';
-import { LoadSizeList, AddSizeItem, RemoveSizeItem, UpdateSizeItem, MoveSizeItemUp, MoveSizeItemDown } from 'src/app/actions/size-list-action-types'
+import { Size } from 'src/app/models/size';
 
 @Component({
   selector: 'app-size-list',
@@ -10,19 +7,18 @@ import { LoadSizeList, AddSizeItem, RemoveSizeItem, UpdateSizeItem, MoveSizeItem
   styleUrls: ['./size-list.component.css']
 })
 export class SizeListComponent implements OnInit {
-sizeItems : Observable<SizeItem[]>;
+sizes : Size[];
+sizeItems : [{"listID": number, "sizeID": number}];
 
-  constructor(private store: Store<{ sizeItems: SizeItem[] }>) { 
-    this.sizeItems = store.pipe(select('sizeItems')); 
-  }
+  constructor() { }
 
   ngOnInit(): void {
+    this.sizeItems = [{"listID": 1, "sizeID": 0}];
   }
 
   sizeSelected(sizeInfo: {'listID':number, 'sizeID': number})
   {
-    //this.sizeItems[sizeInfo.listID].sizeID = sizeInfo.sizeID
-    this.store.dispatch(new UpdateSizeItem({index: sizeInfo.listID, sizeID: sizeInfo.sizeID}))
+    //this.sizeItems[sizeInfo.listID].sizeID = sizeInfo.sizeID;
     console.log("selected size id " + sizeInfo.sizeID + " @ " + sizeInfo.listID)
   }
 
@@ -41,12 +37,24 @@ sizeItems : Observable<SizeItem[]>;
   sizeRemoved(listID: number)
   {
     //remove a item at the position id
-    this.store.dispatch(new RemoveSizeItem({index: listID}));
+    this.sizeItems.splice(listID, 1);
+    this.reorderListID();
   }
 
   sizeAdded(listID: number)
   {
     //insert a item at the position id
-    this.store.dispatch(new AddSizeItem({index: listID}));
+    this.sizeItems.splice(listID, 0, {'listID':listID, 'sizeID':0});
+    this.reorderListID();
+  }
+
+  reorderListID()
+  {
+    var listID = 1;
+    for (let index = 0; index < this.sizeItems.length; index++) {
+      const element = this.sizeItems[index];
+      element.listID = listID;
+      listID++;
+    }
   }
 }

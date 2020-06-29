@@ -1,59 +1,34 @@
-import { ActionReducerMap, MetaReducer, Action} from '@ngrx/store';
-import { Size, SizeItem } from '../models/size';
+import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
+import { SizeItem } from '../models/size';
 import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action-types';
 
 export interface SizeListState {
     SizeList: SizeItem[]| null;
-    error: string| null;
 }
   
-const initialSizeListState: SizeListState = {
+export const initialSizeListState: SizeListState = {
     SizeList: [new SizeItem(1, 0)],
-    error: null
 };
 
-export function sizeListReducer(state: SizeListState = initialSizeListState, action: SizeListAction): SizeListState {
+export function SizeListReducer(state: SizeListState = initialSizeListState, action: SizeListAction) {
     switch (action.type) {
         case SizeListActionTypes.LoadSizeList:
-        return {
-            SizeList: state.SizeList,
-            error: null
-        };
+        return state
 
         case SizeListActionTypes.AddSizeItem:
-        sizeAdded(state.SizeList, action.payload.index);
-        return {
-            SizeList: state.SizeList,
-            error: action.payload.error
-        };
+        sizeAdded(state, action.payload.index);
 
         case SizeListActionTypes.RemoveSizeItem:
-        sizeRemoved(state.SizeList, action.payload.index);
-        return {
-            SizeList: state.SizeList,
-            error: action.payload.error
-        };
+        sizeRemoved(state, action.payload.index);
 
-        case SizeListActionTypes.MoveUpSizeItem:
-        moveSize(state.SizeList, action.payload.index, "up");
-        return {
-            SizeList: state.SizeList,
-            error: action.payload.error
-        };
+        case SizeListActionTypes.MoveSizeItemUp:
+        moveSize(state, action.payload.index, "up");
 
         case SizeListActionTypes.MoveDownSizeItem:
-        moveSize(state.SizeList, action.payload.index, "down");
-        return {
-            SizeList: state.SizeList,
-            error: action.payload.error
-        };
+        moveSize(state, action.payload.index, "down");
 
         case SizeListActionTypes.UpdateSizeItem:
-        updateSize(state.SizeList, action.payload.index, action.payload.sizeData.id);
-        return {
-            SizeList: state.SizeList,
-            error: action.payload.error
-        };
+        updateSize(state, action.payload.index, action.payload.sizeId);
 
         default:
         return state;
@@ -61,59 +36,69 @@ export function sizeListReducer(state: SizeListState = initialSizeListState, act
 }
 
 //Internal functions for size item list
-function sizeRemoved(sizeList: SizeItem[], listID: number)
+function sizeRemoved(stage : SizeListState, listID: number)
 {
   //remove a item at the position id
-  sizeList.splice(listID, 1);
-  reorderListID(sizeList);
+  stage.SizeList.splice(listID, 1);
+  reorderListID(stage);
 }
 
-function sizeAdded(sizeList: SizeItem[], listID: number)
+function sizeAdded(stage : SizeListState, listID: number)
 {
+  //-1 <- end of the array
+  //0 <- head of the array
   //insert a item at the position id
-  sizeList.splice(listID, 0, new SizeItem(listID, 0));
-  reorderListID(sizeList);
+  if (listID != -1)
+  {
+    stage.SizeList.splice(listID, 0, new SizeItem(listID, 0));
+  }
+  else
+  {
+    stage.SizeList.push(new SizeItem(listID, 0));
+  }
+  
+  reorderListID(stage);
 }
 
-function reorderListID(sizeList: SizeItem[])
+function reorderListID(stage : SizeListState)
 {
   var listID = 1;
-  for (let index = 0; index < sizeList.length; index++) {
-    const element = sizeList[index];
+  for (let index = 0; index < stage.SizeList.length; index++) {
+    const element = stage.SizeList[index];
     element.listID = listID;
     listID++;
   }
 }
 
-function moveSize(sizeList: SizeItem[], listID : number, direction : string)
+function moveSize(stage : SizeListState, listID : number, direction : string)
 {
-  var targetSizeIndex = sizeList.findIndex(item => item.listID === listID);
+  var targetSizeIndex = stage.SizeList.findIndex(item => item.listID === listID);
 
   if (direction.toLowerCase() == "up")
   {
     if (targetSizeIndex > 0)
     {
-      var tempSizeItem = sizeList[targetSizeIndex-1];
-      sizeList[targetSizeIndex-1] = sizeList[targetSizeIndex];
-      sizeList[targetSizeIndex] = tempSizeItem;
+      var tempSizeItem = stage.SizeList[targetSizeIndex-1];
+      stage.SizeList[targetSizeIndex-1] = stage.SizeList[targetSizeIndex];
+      stage.SizeList[targetSizeIndex] = tempSizeItem;
     }
   }
   else if (direction.toLowerCase() == "down")
   { 
-    if (targetSizeIndex < sizeList.length-1)
+    if (targetSizeIndex < stage.SizeList.length-1)
     {
-      var tempSizeItem = sizeList[targetSizeIndex+1];
-      sizeList[targetSizeIndex+1] = sizeList[targetSizeIndex];
-      sizeList[targetSizeIndex] = tempSizeItem;
+      var tempSizeItem = stage.SizeList[targetSizeIndex+1];
+      stage.SizeList[targetSizeIndex+1] = stage.SizeList[targetSizeIndex];
+      stage.SizeList[targetSizeIndex] = tempSizeItem;
     }
   }
 }
 
-function updateSize(sizeList: SizeItem[], listID : number, sizeID : number)
+function updateSize(stage : SizeListState, listID : number, sizeID : number)
 {
-    var targetSizeIndex = sizeList.findIndex(item => item.listID === listID);
+    var targetSizeIndex = stage.SizeList.findIndex(item => item.listID === listID);
     if (targetSizeIndex > 0)
     {
-        sizeList[targetSizeIndex].sizeID = sizeID;
+      stage.SizeList[targetSizeIndex].sizeID = sizeID;
     }
 }

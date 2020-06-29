@@ -20,6 +20,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
+
+import { StoreModule } from '@ngrx/store'; 
+import { SizeListReducer } from './reducers/size-list-reducer'; 
+
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -84,7 +88,8 @@ import { StyleHeadComponent } from './yarn-order/style-head/style-head.component
     MatRadioModule,
     LayoutModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({sizeItems: SizeListReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
