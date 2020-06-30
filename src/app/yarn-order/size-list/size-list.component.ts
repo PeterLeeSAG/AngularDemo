@@ -27,14 +27,29 @@ sizeItems : Observable<SizeItem[]>;
 
   sizeUpdated(sizeAction: {"posID":number, "action":string})
   {
-    if (sizeAction.action == "add")
+    switch (sizeAction.action)
     {
-      this.sizeAdded(sizeAction.posID);
+      case "add":
+        this.sizeAdded(sizeAction.posID);
+        break;
+      case "remove":
+        this.sizeRemoved(sizeAction.posID);
+        break;
+      case "up":
+        this.sizeMoveUp(sizeAction.posID);
+        break;
+      case "down":
+        this.sizeMoveDown(sizeAction.posID);
+        break;
     }
-    else if (sizeAction.action == "remove")
-    {
-      this.sizeRemoved(sizeAction.posID);
-    }
+    // if (sizeAction.action == "add")
+    // {
+    //   this.sizeAdded(sizeAction.posID);
+    // }
+    // else if (sizeAction.action == "remove")
+    // {
+    //   this.sizeRemoved(sizeAction.posID);
+    // }
   }
 
   sizeRemoved(listID: number)
@@ -47,5 +62,15 @@ sizeItems : Observable<SizeItem[]>;
   {
     //insert a item at the position id
     this.store.dispatch(new AddSizeItem({index: listID}));
+  }
+
+  sizeMoveUp(listID: number)
+  {
+    this.store.dispatch(new MoveSizeItemUp({index: listID}));
+  }
+
+  sizeMoveDown(listID: number)
+  {
+    this.store.dispatch(new MoveSizeItemDown({index: listID}));
   }
 }

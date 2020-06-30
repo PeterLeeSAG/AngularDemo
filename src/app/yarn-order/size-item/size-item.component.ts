@@ -30,10 +30,16 @@ export class SizeItemComponent implements OnInit {
     this.sizes.push(new Size(5,"L"));
     this.sizes.push(new Size(6,"XL"));
     this.sizes.push(new Size(7,"XXL"));
+    
+    if (this.itemSize.sizeID !== 0)
+    {
+      console.log("init item size: " + this.itemSize.sizeID);
+    }
   }
 
   onSelectSize(sizeID: number)
   {
+    console.log("selected size id " + sizeID + "@" + this.index);
     this.sizeSelected.emit({
       "listID": this.index,
       "sizeID": this.sizeSelection.nativeElement.value
@@ -48,5 +54,17 @@ export class SizeItemComponent implements OnInit {
   onRemoveSize(id: number)
   {
     this.result.emit({"posID":this.index, "action":"remove"})
+  }
+
+  onMoveSizeUp(id: number)
+  {
+    console.log("click up @ " + this.index);
+    this.result.emit({"posID":this.index, "action":"up"})
+  }
+
+  onMoveSizeDown(id: number)
+  {
+    console.log("click down @ " + this.index);
+    this.result.emit({"posID":this.index, "action":"down"})
   }
 }

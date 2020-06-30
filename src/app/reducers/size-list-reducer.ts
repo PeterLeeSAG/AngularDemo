@@ -6,6 +6,13 @@ import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action
 export const initialState = [];
 
 export function SizeListReducer(state = initialState, action: SizeListAction) {
+
+    // Array.prototype.swapItems = function(a, b){
+    //   this[a] = this.splice(b, 1, this[a])[0];
+    //   return this;
+    // }   
+    var index: number;
+
     switch (action.type) {
         case SizeListActionTypes.LoadSizeList:
         return state
@@ -34,20 +41,36 @@ export function SizeListReducer(state = initialState, action: SizeListAction) {
           ...state.slice(0, action.payload.index),
           ...state.slice(action.payload.index + 1)
         ];
-        //return sizeRemoved(state, action.payload.index);
-        //return state;
+        break;
 
         case SizeListActionTypes.MoveSizeItemUp:
-        return moveSize(state, action.payload.index, "up");
-        //return state;
+        index = action.payload.index;
+        if (index != 0)
+        {
+          console.log("move up @ index " + index);
+          return immutablySwapItems(state, index-1, index);
+        }
+        else
+        {
+          return state;
+        }
+        break;
 
         case SizeListActionTypes.MoveDownSizeItem:
-        return moveSize(state, action.payload.index, "down");
-        //return state;
+        index = action.payload.index;
+        if (index != state.length-1)
+        {
+          console.log("move down @ index " + index);
+          return immutablySwapItems(state, index+1, index);
+        }
+        else
+        {
+          return state;
+        }
+        break;
 
         case SizeListActionTypes.UpdateSizeItem:
         return updateSize(state, action.payload);
-        //return state;
 
         default:
         return state;
@@ -97,42 +120,28 @@ function reorderListID(state : SizeItem[]) : SizeItem[]
   return state;
 }
 
-function moveSize(state: SizeItem[], listID : number, direction : string) : SizeItem[]
-{
-  const array = [...state];
+function immutablySwapItems(items, firstIndex, secondIndex) {
+  // Constant reference - we can still modify the array itself
+  const results= items.slice();
+  const firstItem = items[firstIndex];
+  results[firstIndex] = items[secondIndex];
+  results[secondIndex] = firstItem;
 
-  var targetSizeIndex = array.findIndex(item => item.listID === listID);
-
-  if (direction.toLowerCase() == "up")
-  {
-    if (targetSizeIndex > 0)
-    {
-      var tempSizeItem = array[targetSizeIndex-1];
-      array[targetSizeIndex-1] = array[targetSizeIndex];
-      array[targetSizeIndex] = tempSizeItem;
-    }
-  }
-  else if (direction.toLowerCase() == "down")
-  { 
-    if (targetSizeIndex < array.length-1)
-    {
-      var tempSizeItem = array[targetSizeIndex+1];
-      array[targetSizeIndex+1] = array[targetSizeIndex];
-      array[targetSizeIndex] = tempSizeItem;
-    }
-  }
-
-  return array;
+  return results;
 }
 
-function updateSize(state, payload) : SizeItem[]
+function updateSize(array, payload)
 {
-    const array = [...state];
-    var targetSizeIndex = array.findIndex(item => item.listID === payload.listID);
-    if (targetSizeIndex > 0)
-    {
-      array[targetSizeIndex].sizeID = payload.sizeID;
+  return array.map((item, index) => {
+    if (index !== payload.index) {
+      // This isn't the item we care about - keep it as-is
+      return item
     }
 
-    return array;
+    // Otherwise, this is the one we want - return an updated value
+    return {
+      ...item,
+      ...new SizeItem(payload.index, payload.sizeID)
+    }
+  })
 }
