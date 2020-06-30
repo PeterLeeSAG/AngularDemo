@@ -21,7 +21,6 @@ sizeItems : Observable<SizeItem[]>;
 
   sizeSelected(sizeInfo: {'listID':number, 'sizeID': number})
   {
-    //this.sizeItems[sizeInfo.listID].sizeID = sizeInfo.sizeID
     this.store.dispatch(new UpdateSizeItem({index: sizeInfo.listID, sizeID: sizeInfo.sizeID}))
     console.log("selected size id " + sizeInfo.sizeID + " @ " + sizeInfo.listID)
   }

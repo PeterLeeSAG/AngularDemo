@@ -8,6 +8,7 @@ import { Size } from '../../models/size';
 })
 export class SizeItemComponent implements OnInit {
   sizes: Size[]; 
+  @Input() index: number;
   @Input() itemSize: {"listID":number, "sizeID":number};
   @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID, sizeID and action
   @Output() sizeSelected = new EventEmitter<{'listID':number, 'sizeID': number}>();
@@ -34,18 +35,18 @@ export class SizeItemComponent implements OnInit {
   onSelectSize(sizeID: number)
   {
     this.sizeSelected.emit({
-      "listID": this.itemSize.listID,
+      "listID": this.index,
       "sizeID": this.sizeSelection.nativeElement.value
     });
   }
 
   onAddSize(id: number)
   {
-    this.result.emit({"posID":id-1, "action":"add"})
+    this.result.emit({"posID":this.index, "action":"add"})
   }
 
   onRemoveSize(id: number)
   {
-    this.result.emit({"posID":id-1, "action":"remove"})
+    this.result.emit({"posID":this.index, "action":"remove"})
   }
 }

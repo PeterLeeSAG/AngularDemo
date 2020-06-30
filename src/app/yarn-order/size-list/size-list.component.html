@@ -1,6 +1,8 @@
 <div class="container">
-    <div *ngFor="let size of sizeItems" class="row">
-        <app-size-item [itemSize]="size" 
+    <div *ngFor="let size of sizeItems | async; let i=index" class="row">
+        <app-size-item 
+        [index]="i"
+        [itemSize]="size" 
         (sizeSelected)="sizeSelected($event)"
         (result)="sizeUpdated($event)" 
         ></app-size-item>
