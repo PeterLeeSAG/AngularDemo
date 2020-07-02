@@ -1,3 +1,4 @@
+    <div id="order-table">
     <mat-label></mat-label>
     <input  [ngStyle] = "{'width': '100px'}"
             [ngClass] = "{'text-order-name':true}"
@@ -13,3 +14,7 @@
     <button mat-button *ngIf="getMixMatStatus()>=1" (click)="addMixedMat(order.id)">新增本廠混毛成份</button>
     <br *ngIf="order.isFtyMixed">
     <button mat-button *ngIf="getMixMatStatus()==1" (click)="toggleMixedMat(order.id)">變回普通間色</button>
+    </div>
+    <div>
+        p.s. MatCalType: {{ matCalType | async }}
+    </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Order } from '../../models/order';
+import { MatCalType } from 'src/app/models/matCalType';
+import { select, Store } from '@ngrx/store'; 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-table',
@@ -12,7 +15,11 @@ export class OrderTableComponent implements OnInit {
   @Output() changeFtyMixedMat = new EventEmitter<number>();
   @Output() addFtyMixedMat = new EventEmitter<number>();
 
-  constructor() { }
+  matCalType : Observable<MatCalType>;
+
+  constructor(private store: Store<{ matCalType: MatCalType }>) { 
+    this.matCalType = store.pipe(select('matCalType'));
+  }
 
   ngOnInit(): void {
   }

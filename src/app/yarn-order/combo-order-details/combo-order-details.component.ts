@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComboOrderDetail } from '../../models/comboOrderDetail';
+import { MatCalType } from 'src/app/models/matCalType';
+import { select, Store } from '@ngrx/store'; 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-combo-order-details',
@@ -14,8 +17,11 @@ export class ComboOrderDetailsComponent implements OnInit {
   selectedMaterialName : string;
   pendingButtonName : string;
   //"待覆":"實數"
+  matCalType : Observable<MatCalType>;
 
-  constructor() { }
+  constructor(private store: Store<{ matCalType: MatCalType }>) { 
+    this.matCalType = store.pipe(select('matCalType'));
+  }
 
   ngOnInit(): void {
     this.materials = [
