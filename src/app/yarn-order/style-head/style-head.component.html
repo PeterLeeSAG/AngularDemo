@@ -12,11 +12,12 @@
     <div class="row">
         <div class="col-xs-2 col-sm-2">色碼分類:</div>
         <div class="col-xs-10 col-sm-10">
-            <mat-radio-group [(ngModel)]="styleInfo.calculationTypeId" aria-label="Select an option">
-                <mat-radio-button value="0">不分色組/碼數計毛</mat-radio-button>&nbsp;
-                <mat-radio-button value="1">分色組用毛比例計毛</mat-radio-button>&nbsp;
-                <mat-radio-button value="2">分碼數計毛</mat-radio-button>&nbsp;
-                <mat-radio-button value="3">分色組用毛比例/碼數計毛</mat-radio-button>&nbsp;
+            <mat-radio-group id="MatCalTypeGroup" aria-label="Select an option">
+                <mat-radio-button
+                *ngFor="let matCalItem of matCalItems; let i=index"
+                (change)="onMaterialCalUpdate($event.value)"
+                [value]="matCalItem.typeID"
+                [checked]="(this.matCalType | async)==matCalItem.typeID">{{matCalItem.typeText}}</mat-radio-button>&nbsp;
             </mat-radio-group>
         </div>
     </div>

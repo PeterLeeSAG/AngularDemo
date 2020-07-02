@@ -21,7 +21,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { StoreModule } from '@ngrx/store'; 
-import { SizeListReducer } from './reducers/size-list-reducer'; 
+import { SizeListReducer } from './reducers/size-list-reducer';
+import { MatCalReducer } from './reducers/mat-cal-reducer';
+import { WeightListReducer } from './reducers/weight-list-reducer';
 
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -88,7 +90,7 @@ import { StyleHeadComponent } from './yarn-order/style-head/style-head.component
     LayoutModule,
     NgbModule,
     FormsModule,
-    StoreModule.forRoot({sizeItems: SizeListReducer})
+    StoreModule.forRoot({sizeItems: SizeListReducer, matCalType: MatCalReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]

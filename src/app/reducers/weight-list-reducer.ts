@@ -1,68 +1,48 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
+import { WeightListActionTypes, WeightListAction } from '../actions/weight-list-action-types';
 import { SizeItem } from '../models/size';
-import { SizeListState } from '../models/sizeListState';
-import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action-types';
   
-export const initialState = [];
+export const initialState = []; //object for the Weight List
 
-export function SizeListReducer(state = initialState, action: SizeListAction){
-    var index: number;
+export function WeightListReducer(state = initialState, action: WeightListAction){
+    var matCalTypeId: number;  
+    var comboIndex: number;
+    var orderIndex: number;
+    var sizeId: number;
+    var sizeItemList: SizeItem[]; //For the size item list of the yarn order
+    
+    matCalTypeId = action.payload.matCalTypeId;
+    comboIndex = action.payload.comboIndex;
+    orderIndex = action.payload.orderIndex;
+    sizeId = action.payload.sizeId;
 
     switch (action.type) {
-        case SizeListActionTypes.LoadSizeList:
+        case WeightListActionTypes.Load:
           return state
 
-        case SizeListActionTypes.AddSizeItem:
-          console.log("ADD Size @ " + action.payload.index);
-          //return sizeAdded(state, action.payload.index);
-          if (action.payload.index == -1)
-          {
-            return [...state, new SizeItem(action.payload.index, 0)];
-          }
-          else
-          {
-            return [
-              ...state.slice(0, action.payload.index),
-              new SizeItem(action.payload.index, 0),
-              ...state.slice(action.payload.index)
-            ];
-          }
+        case WeightListActionTypes.UpdateWeightItem:
+          console.log("Update Weight Item @ "
+                      +"combo ID: " + comboIndex
+                      + ", order ID: " + orderIndex
+                      + ", size ID: " + sizeId
+                      + ", mat type ID: " + matCalTypeId);
+          break;
         
-        case SizeListActionTypes.RemoveSizeItem:
-          return [
-            ...state.slice(0, action.payload.index),
-            ...state.slice(action.payload.index + 1)
-          ];
+        case WeightListActionTypes.UpdateWeightMatCal:
+          console.log("Update Weight Material Calculation @ "
+                      +"combo ID: " + comboIndex
+                      + ", order ID: " + orderIndex
+                      + ", size ID: " + sizeId
+                      + ", mat type ID: " + matCalTypeId);
           break;
 
-        case SizeListActionTypes.MoveSizeItemUp:
-          index = action.payload.index;
-          if (index != 0)
-          {
-            console.log("move up @ index " + index);
-            return immutablySwapItems(state, index-1, index);
-          }
-          else
-          {
-            return state;
-          }
+        case WeightListActionTypes.UpdateWeightSize:
+          console.log("Update Weight size @ "
+                      +"combo ID: " + comboIndex
+                      + ", order ID: " + orderIndex
+                      + ", size ID: " + sizeId
+                      + ", mat type ID: " + matCalTypeId);
           break;
-
-        case SizeListActionTypes.MoveDownSizeItem:
-          index = action.payload.index;
-          if (index != state.length-1)
-          {
-            console.log("move down @ index " + index);
-            return immutablySwapItems(state, index+1, index);
-          }
-          else
-          {
-            return state;
-          }
-          break;
-
-        case SizeListActionTypes.UpdateSizeItem:
-          return updateSize(state, action.payload);
 
         default:
           return state;

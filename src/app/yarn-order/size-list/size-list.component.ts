@@ -10,7 +10,7 @@ import { LoadSizeList, AddSizeItem, RemoveSizeItem, UpdateSizeItem, MoveSizeItem
   styleUrls: ['./size-list.component.css']
 })
 export class SizeListComponent implements OnInit {
-sizeItems : Observable<SizeItem[]>;
+  sizeItems : Observable<SizeItem[]>;
 
   constructor(private store: Store<{ sizeItems: SizeItem[] }>) { 
     this.sizeItems = store.pipe(select('sizeItems')); 
@@ -42,14 +42,6 @@ sizeItems : Observable<SizeItem[]>;
         this.sizeMoveDown(sizeAction.posID);
         break;
     }
-    // if (sizeAction.action == "add")
-    // {
-    //   this.sizeAdded(sizeAction.posID);
-    // }
-    // else if (sizeAction.action == "remove")
-    // {
-    //   this.sizeRemoved(sizeAction.posID);
-    // }
   }
 
   sizeRemoved(listID: number)
