@@ -1,5 +1,11 @@
 <h3>Yarn Order</h3>
 <app-style-head [(styleInfo)]="styleInfo"></app-style-head>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <b>Material Yarn Section:</b> <br>
+    <app-material-list></app-material-list>
+</div>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
 <div class="container">
 <div class="row">
@@ -69,12 +75,6 @@
 <br>
 <b>Sizing List</b>
 <app-size-list></app-size-list>
-</div>
-
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
-    <b>Style Info:</b> <br>
-    style Number: {{this.styleInfo.factoryStyleNumber}} <br>
-    Calculation Type No: {{this.styleInfo.calculationTypeId}}
 </div>
 
 <div class="shadow-sm p-3 mb-5 bg-white rounded">

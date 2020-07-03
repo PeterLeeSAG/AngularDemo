@@ -10,14 +10,22 @@ import { retry, catchError, tap } from 'rxjs/operators';
 
 export class ApiService {
 
-  private SERVER_URL = "http://localhost:3000/products";
+  private SERVER_URL = "http://localhost:3000/";
+  private ITEM_NAME = "products"; //default item name
 
   public first: string = "";
   public prev: string = "";
   public next: string = "";
   public last: string = "";
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+    this.SERVER_URL += this.ITEM_NAME;
+  }
+
+  setItemName(itemName: string)
+  {
+    this.ITEM_NAME = itemName;
+  }
 
   handleError(error: HttpErrorResponse)
   {

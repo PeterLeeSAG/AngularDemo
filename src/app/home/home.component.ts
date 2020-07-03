@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../../api.service';
 import { HttpResponse } from '@angular/common/http';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -14,7 +14,9 @@ export class HomeComponent implements OnInit {
   products = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) { 
+    apiService.setItemName("products");
+  }
 
   ngOnInit(){
     this.apiService.sendGetRequest()

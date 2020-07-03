@@ -1,0 +1,41 @@
+.AutoCompleteTextBox{
+    BORDER-TOP: #000000 1px; 
+    HEIGHT: 0px; 
+    BORDER-RIGHT: #000000 1px; 
+    WIDTH: 0px; 
+    OVERFLOW-Y: auto; 
+    BORDER-BOTTOM: #000000 1px; 
+    POSITION: absolute; 
+    LEFT: 0px; 
+    BORDER-LEFT: #000000 1px; 
+    Z-INDEX: 1; 
+    TOP: 0px
+}
+
+.AutoCompleteDropDown{
+    BORDER-TOP: 3px double; 
+    BORDER-RIGHT: 3px double; 
+    BORDER-BOTTOM: 3px double; 
+    TEXT-ALIGN: left; 
+    BORDER-LEFT: 3px double;
+    width:100%;
+}
+
+.sbttn {
+    border-right: #104a7b 1px solid;
+    border-top: #afc4d5 1px solid;
+    font-size: 11px;
+    background: #d6e7ef;
+    border-left: #afc4d5 1px solid;
+    cursor: hand;
+    color: #000066;
+    border-bottom: #104a7b 1px solid;
+    font-family: tahoma,sans-serif;
+    height: 19px;
+    text-decoration: none;
+}
+
+div{
+    padding-right: 5px;
+    padding-left: 5px;
+}
