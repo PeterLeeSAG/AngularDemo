@@ -1,14 +1,14 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
-import { WeightListActionTypes, WeightListAction } from '../actions/weight-list-action-types';
+import { WeightControlActionTypes, WeightControlAction } from '../actions/weight-control-action-types';
 import { SizeItem } from '../models/size';
   
 export const initialState = []; //object for the Weight List
 
-export function WeightListReducer(state = initialState, action: WeightListAction){
-    var matCalTypeId: number;  
+export function WeightListReducer(state = initialState, action: WeightControlAction){
     var comboIndex: number;
     var orderIndex: number;
     var sizeId: number;
+    var matCalTypeId: number;  
     var sizeItemList: SizeItem[]; //For the size item list of the yarn order
     
     matCalTypeId = action.payload.matCalTypeId;
@@ -17,10 +17,10 @@ export function WeightListReducer(state = initialState, action: WeightListAction
     sizeId = action.payload.sizeId;
 
     switch (action.type) {
-        case WeightListActionTypes.Load:
+        case WeightControlActionTypes.Load:
           return state
 
-        case WeightListActionTypes.UpdateWeightItem:
+        case WeightControlActionTypes.UpdateWeightItem:
           console.log("Update Weight Item @ "
                       +"combo ID: " + comboIndex
                       + ", order ID: " + orderIndex
@@ -28,7 +28,7 @@ export function WeightListReducer(state = initialState, action: WeightListAction
                       + ", mat type ID: " + matCalTypeId);
           break;
         
-        case WeightListActionTypes.UpdateWeightMatCal:
+        case WeightControlActionTypes.UpdateWeightMatCal:
           console.log("Update Weight Material Calculation @ "
                       +"combo ID: " + comboIndex
                       + ", order ID: " + orderIndex
@@ -36,7 +36,7 @@ export function WeightListReducer(state = initialState, action: WeightListAction
                       + ", mat type ID: " + matCalTypeId);
           break;
 
-        case WeightListActionTypes.UpdateWeightSize:
+        case WeightControlActionTypes.UpdateWeightSize:
           console.log("Update Weight size @ "
                       +"combo ID: " + comboIndex
                       + ", order ID: " + orderIndex

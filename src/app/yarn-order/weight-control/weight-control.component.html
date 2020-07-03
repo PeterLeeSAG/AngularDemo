@@ -1,1 +1,35 @@
-<p>weight-control works!</p>
+
+<div *ngIf="((((matCalType | async) == MatCalType.None || (matCalType | async) == MatCalType.SizingOnly) && comboIndexId == -1) 
+            || (((matCalType | async) == MatCalType.ColorComboOnly || (matCalType | async) == MatCalType.ColorComboSizing) && comboIndexId != -1))">            
+    <div *ngIf="((matCalType | async) == MatCalType.None 
+                ||(matCalType | async) == MatCalType.ColorComboOnly)">
+        <TABLE>
+            <TBODY>
+                <TR style="display: inline;">
+                <TH width=40>安士/件</TH>
+                <TH width=40>損耗</TH></TR>
+                <TR style="display: inline;">
+                <TD><INPUT size=5></TD>
+                <TD><INPUT size=5>%</TD></TR>
+            </TBODY>
+        </TABLE>
+    </div>
+
+    <div *ngIf="(((matCalType | async) == MatCalType.SizingOnly 
+                ||(matCalType | async) == MatCalType.ColorComboSizing)
+                && (sizeItems | async).length != 0)">
+        <TABLE>
+            <TBODY>
+                <TR style="display: inline;">
+                <TD width=5>&nbsp;</TD>
+                <TH width=40>安士/件</TH>
+                <TH width=40>損耗</TH></TR>
+                <tr *ngFor="let sizeItem of (sizeItems|async)" style="display: inline;">
+                <TD>{{(sizeItem.sizeID==0)?"NEW":sizeItem.sizeID}}</TD>
+                <TD><INPUT size=5></TD>
+                <TD><INPUT size=5>%</TD>
+                </tr>
+            </TBODY>
+        </TABLE>
+    </div>
+</div>

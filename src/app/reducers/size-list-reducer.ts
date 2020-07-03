@@ -48,7 +48,7 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
           }
           break;
 
-        case SizeListActionTypes.MoveDownSizeItem:
+        case SizeListActionTypes.MoveSizeItemDown:
           index = action.payload.index;
           if (index != state.length-1)
           {

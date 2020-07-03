@@ -53,5 +53,9 @@
             type="text" [(ngModel)] ="comboOrderDetail.remark">
         </td>
     </tr>
+    <app-weight-control 
+        [orderIndexId]="comboOrderDetail.orderID"
+        [comboIndexId]="comboOrderDetail.comboID">
+    </app-weight-control >
     <!-- p.s. MatCalType:{{matCalType | async}} -->
 </table>

@@ -24,6 +24,7 @@ export class ComboOrderDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //TODO: select materials by MaterialService via WebApi
     this.materials = [
       {"id":1,"name":"2/10 100% cotton"},
       {"id":2,"name":"2/10 90% cotton 10% Lycra"},

@@ -22,7 +22,7 @@ export class SizeItemComponent implements OnInit {
 
   initSize(){
     this.sizes = [{"id":0,"name":""}];
-    //Load the size array from the size service
+    //TODO: select sizes by SizeService via WebApi
     this.sizes.push(new Size(1,"XXS"));
     this.sizes.push(new Size(2,"XS"));
     this.sizes.push(new Size(3,"S"));
