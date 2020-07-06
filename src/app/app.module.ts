@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { StoreModule } from '@ngrx/store'; 
 import { SizeListReducer } from './reducers/size-list-reducer';
@@ -45,6 +46,7 @@ import { WeightItemComponent } from './yarn-order/weight-item/weight-item.compon
 import { MaterialItemComponent } from './yarn-order/material-item/material-item.component';
 import { MaterialListComponent } from './yarn-order/material-list/material-list.component';
 import { StyleHeadComponent } from './yarn-order/style-head/style-head.component';
+import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete-material-dropdown/autocomplete-material-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { StyleHeadComponent } from './yarn-order/style-head/style-head.component
     WeightItemComponent,
     MaterialItemComponent,
     MaterialListComponent,
-    StyleHeadComponent
+    StyleHeadComponent,
+    AutocompleteMaterialDropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,13 +90,15 @@ import { StyleHeadComponent } from './yarn-order/style-head/style-head.component
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
+    MatAutocompleteModule,
     LayoutModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({
       sizeItems: SizeListReducer, 
-      matCalType: MatCalReducer})
-  ],
+      matCalType: MatCalReducer}),
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

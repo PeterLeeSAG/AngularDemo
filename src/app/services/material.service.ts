@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
+import { Material } from '../models/material';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ApiService {
+export class MaterialService {
 
   private SERVER_URL = "http://localhost:3000/";
-  private ITEM_NAME = "products"; //default item name
-
-  public first: string = "";
-  public prev: string = "";
-  public next: string = "";
-  public last: string = "";
-  
+  private ITEM_NAME = "materials"; //default item name
+  public materials: Material[] = [];
+ 
   constructor(private httpClient: HttpClient) { 
-    //this.SERVER_URL += this.ITEM_NAME;
   }
 
   setItemName(itemName: string)
@@ -54,11 +49,6 @@ export class ApiService {
       var name = section[1].replace(/rel="(.*)"/, '$1').trim();
       links[name] = url;
     });
-
-    this.first = links["first"];
-    this.last  = links["last"];
-    this.prev  = links["prev"];
-    this.next  = links["next"]; 
   }
 
   public sendGetRequest(){
@@ -80,5 +70,14 @@ export class ApiService {
 
   public get(){
     return this.httpClient.get(this.SERVER_URL + this.ITEM_NAME);
+  }
+
+  public getAll(){
+    return this.httpClient
+    .get<Material[]>(this.SERVER_URL + this.ITEM_NAME, {observe: "response"})
+    .subscribe(res => {
+      let response: HttpResponse<Material[]> = res;
+      return response;
+    });
   }
 }

@@ -19,25 +19,4 @@
     TEXT-ALIGN: left; 
     BORDER-LEFT: 3px double;
     width:100%;
-    size:65;
-    max-width:101;
-}
-
-.sbttn {
-    border-right: #104a7b 1px solid;
-    border-top: #afc4d5 1px solid;
-    font-size: 11px;
-    background: #d6e7ef;
-    border-left: #afc4d5 1px solid;
-    cursor: hand;
-    color: #000066;
-    border-bottom: #104a7b 1px solid;
-    font-family: tahoma,sans-serif;
-    height: 19px;
-    text-decoration: none;
-}
-
-div{
-    padding-right: 5px;
-    padding-left: 5px;
 }
