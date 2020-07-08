@@ -1,0 +1,7 @@
+.mat-icon-button
+{
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    line-height: 25px;
+}

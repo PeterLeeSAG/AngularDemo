@@ -5,11 +5,11 @@ import { Combo } from "../../models/combo";
   selector: 'app-combo-head',
   template: `
   <!--Combo Header-->
-  <button (click)="onClickComboAdd(combo.id)" mat-button>+</button>
-  <button (click)="onClickComboMoveLeft()" mat-button>[<]</button>
+  <button mat-icon-button (click)="onClickComboAdd(combo.id)">+</button>
+  <button mat-icon-button (click)="onClickComboMoveLeft()"><mat-icon>arrow_back</mat-icon></button>
   Combo: {{ combo.code }}
-  <button (click)="onClickComboMoveRight()" mat-button>[>]</button>
-  <button (click)="onClickComboRemove(combo.id)" mat-button>-</button>
+  <button mat-icon-button (click)="onClickComboMoveRight()"><mat-icon>arrow_forward</mat-icon></button>
+  <button mat-icon-button (click)="onClickComboRemove(combo.id)">-</button>
   `, //'./combo-head.component.html',
   styleUrls: ['./combo-head.component.css']
 })

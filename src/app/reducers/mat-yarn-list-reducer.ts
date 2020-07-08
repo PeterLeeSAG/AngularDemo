@@ -6,33 +6,34 @@ export const initialState = []; //list of generic type
 
 export function MatYarnListReducer(state = initialState, action: MatYarnListAction){
     var index: number;
+    index = action.payload.index;
+    console.log(action.type + " @ " + index);
 
     switch (action.type) {
         case MatYarnListActionTypes.LoadList:
           return state
 
         case MatYarnListActionTypes.AddMatYarn:
-          console.log("ADD Size @ " + action.payload.index);
-          if (action.payload.index == -1)
+          if (index == -1)
           {
-            return [...state, new MaterialYarn(action.payload.index, 0)];
+            return [...state, new MaterialYarn(index, 0)];
           }
           else
           {
             return [
-              ...state.slice(0, action.payload.index),
-              new MaterialYarn(action.payload.index, 0),
-              ...state.slice(action.payload.index)
+              ...state.slice(0, index),
+              new MaterialYarn(index, 0),
+              ...state.slice(index)
             ];
           }
 
         case MatYarnListActionTypes.CopyMatYarn:
-          console.log(action.type + ": " + action.payload.index);
-        
+          break;
+
         case MatYarnListActionTypes.RemoveMatYarn:
           return [
-            ...state.slice(0, action.payload.index),
-            ...state.slice(action.payload.index + 1)
+            ...state.slice(0, index),
+            ...state.slice(index + 1)
           ];
           break;
 

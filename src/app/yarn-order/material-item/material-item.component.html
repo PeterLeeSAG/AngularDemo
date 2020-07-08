@@ -20,44 +20,36 @@
     <div class="col-sm-3 col-lg-2">
        <TABLE>
           <TBODY>
-             <TR>
-                <TD>
-                   <SELECT size=1 name=Wool_currency_1>
-                      <OPTION value=BD36D847-6162-4EE8-89D4-A7849A1347F9>USD</OPTION>
-                      <OPTION selected value=FC407F27-0B76-11D4-893D-009027E77BD5>HKD</OPTION>
-                      <OPTION value=157D6881-74DE-455B-8F37-25E52FD2D7EE>RMB</OPTION>
-                   </SELECT>
-                   $<INPUT size=4 value=15.19 name=Wool_unitprice_1>
-                </TD>
-                <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_unit_1>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_unit_1></TD>
-             </TR>
-             <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_1> Final Price</TD></TR>
+            <TR>
+               <TD>
+                  <SELECT>
+                     <option *ngFor="let currency of currencyList" [value]="currency.id" name="ShipmentCurrency">
+                        {{ currency.name }}
+                     </option>
+                  </SELECT>
+                  $<INPUT size=4 value=15.19 name=Wool_unitprice_1>
+               </TD>
+               <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_unit_1>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_unit_1></TD>
+            </TR>
+            <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_1> Final Price</TD></TR>
           </TBODY>
        </TABLE>
-       <!--
        <TABLE>
           <TBODY>
-             <TR>
-                <TH>R<BR>M<BR>B
-                <TH>
-                <TD><INPUT type=radio value=2 name=Wool_shipmode_1>包增值稅發票，包運費。<BR><INPUT type=radio value=5 name=Wool_shipmode_1>包增值稅發票，不包運費。<BR><INPUT type=radio value=6 name=Wool_shipmode_1>不包增值稅發票，包運費。<BR>
-                <TD>
-             <TR>
-             <TR>
-                <TH>H<BR>K<BR>D<BR>/<BR>U<BR>S<BR>D
-                <TH>
-                <TD><INPUT type=radio value=4 name=Wool_shipmode_1>經保稅區到廠，包進出口報關操作費及運費<BR><INPUT type=radio value=7 name=Wool_shipmode_1>經保稅區到廠，包進出口報關操作費,不包運費<BR><INPUT CHECKED type=radio value=8 name=Wool_shipmode_1>直送香港<BR><INPUT type=radio value=1 name=Wool_shipmode_1>直送香港 (空運)<BR>
-                <TD>
-             <TR>
-             <TR>
-                <TH>
-                <TH>
-                <TD><INPUT type=radio value=11 name=Wool_shipmode_1>CIF Cambodia by Sea<BR><INPUT type=radio value=12 name=Wool_shipmode_1>CIF Cambodia by Air<BR><INPUT type=radio value=13 name=Wool_shipmode_1>FOB China<BR><INPUT type=radio value=14 name=Wool_shipmode_1>FOB HK<BR><INPUT type=radio value=15 name=Wool_shipmode_1>直送柬埔寨廠, 包運費<BR><INPUT type=radio value=16 name=Wool_shipmode_1>直送柬埔寨廠, 不含運費<BR>
-                <TD>
-             <TR></TR>
+            <tr>
+               <td>
+                 <mat-form-field>
+                    <mat-label>運輸方法</mat-label>
+                    <mat-select name="ShipmentMethod">
+                    <mat-option *ngFor="let shipmentMethod of shipmentMethods" [value]="shipmentMethod.id">
+                       {{ shipmentMethod.name }}
+                    </mat-option>
+                    </mat-select>
+                 </mat-form-field>
+              </td>
+           </tr>
           </TBODY>
        </TABLE>
-       -->
        <TABLE>
           <TBODY>
              <TR>
@@ -72,11 +64,11 @@
           <TBODY>
              <TR>
                 <TD>
-                   <SELECT size=1 name=Wool_buyer_currency_1>
-                      <OPTION selected value=BD36D847-6162-4EE8-89D4-A7849A1347F9>USD</OPTION>
-                      <OPTION value=FC407F27-0B76-11D4-893D-009027E77BD5>HKD</OPTION>
-                      <OPTION value=157D6881-74DE-455B-8F37-25E52FD2D7EE>RMB</OPTION>
-                   </SELECT>
+                  <SELECT>
+                     <option *ngFor="let currency of currencyList" [value]="currency.id" name="ShipmentCurrency">
+                        {{ currency.name }}
+                     </option>
+                  </SELECT>
                    $<INPUT size=4 value=0 name=Wool_buyer_unitprice_1>
                 </TD>
                 <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_buyer_unit_1>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_buyer_unit_1></TD>

@@ -9,39 +9,33 @@ export function WeightListReducer(state = initialState, action: WeightControlAct
     var orderIndex: number;
     var sizeId: number;
     var matCalTypeId: number;  
-    var sizeItemList: SizeItem[]; //For the size item list of the yarn order
-    
+
     matCalTypeId = action.payload.matCalTypeId;
     comboIndex = action.payload.comboIndex;
     orderIndex = action.payload.orderIndex;
     sizeId = action.payload.sizeId;
+
+    if (action.payload != undefined)
+    {
+      console.log(action.type
+      + " @ "
+      + "combo ID: " + comboIndex
+      + ", order ID: " + orderIndex
+      + ", size ID: " + sizeId
+      + ", mat type ID: " + matCalTypeId);
+    }
 
     switch (action.type) {
         case WeightControlActionTypes.Load:
           return state
 
         case WeightControlActionTypes.UpdateWeightItem:
-          console.log("Update Weight Item @ "
-                      +"combo ID: " + comboIndex
-                      + ", order ID: " + orderIndex
-                      + ", size ID: " + sizeId
-                      + ", mat type ID: " + matCalTypeId);
           break;
         
         case WeightControlActionTypes.UpdateWeightMatCal:
-          console.log("Update Weight Material Calculation @ "
-                      +"combo ID: " + comboIndex
-                      + ", order ID: " + orderIndex
-                      + ", size ID: " + sizeId
-                      + ", mat type ID: " + matCalTypeId);
           break;
 
         case WeightControlActionTypes.UpdateWeightSize:
-          console.log("Update Weight size @ "
-                      +"combo ID: " + comboIndex
-                      + ", order ID: " + orderIndex
-                      + ", size ID: " + sizeId
-                      + ", mat type ID: " + matCalTypeId);
           break;
 
         default:

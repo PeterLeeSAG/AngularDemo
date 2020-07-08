@@ -7,35 +7,38 @@ export const initialState = [];
 export function SizeListReducer(state = initialState, action: SizeListAction){
     var index: number;
 
+    if (action.payload !== undefined)
+    {
+      index = action.payload.index;
+      console.log(action.type + " @ " + index);
+    }
+    
     switch (action.type) {
         case SizeListActionTypes.LoadSizeList:
           return state
 
         case SizeListActionTypes.AddSizeItem:
-          console.log("ADD Size @ " + action.payload.index);
-          //return sizeAdded(state, action.payload.index);
-          if (action.payload.index == -1)
+          if (index == -1)
           {
-            return [...state, new SizeItem(action.payload.index, 0)];
+            return [...state, new SizeItem(index, 0)];
           }
           else
           {
             return [
-              ...state.slice(0, action.payload.index),
-              new SizeItem(action.payload.index, 0),
-              ...state.slice(action.payload.index)
+              ...state.slice(0, index),
+              new SizeItem(index, 0),
+              ...state.slice(index)
             ];
           }
         
         case SizeListActionTypes.RemoveSizeItem:
           return [
-            ...state.slice(0, action.payload.index),
-            ...state.slice(action.payload.index + 1)
+            ...state.slice(0, index),
+            ...state.slice(index + 1)
           ];
           break;
 
         case SizeListActionTypes.MoveSizeItemUp:
-          index = action.payload.index;
           if (index != 0)
           {
             console.log("move up @ index " + index);
@@ -48,7 +51,6 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
           break;
 
         case SizeListActionTypes.MoveSizeItemDown:
-          index = action.payload.index;
           if (index != state.length-1)
           {
             console.log("move down @ index " + index);

@@ -1,6 +1,6 @@
 <!--Order Header-->
-<button (click)="onClickOrderAdd(order.id)" mat-button>+</button>
-<button (click)="onClickOrderMoveUp()" mat-button>[^]</button>
+<button mat-icon-button (click)="onClickOrderAdd(order.id)" mat-button>+</button>
+<button mat-icon-button (click)="onClickOrderMoveUp()" mat-button><mat-icon>arrow_upward</mat-icon></button>
 Order: {{ order.code }} 
-<button (click)="onClickOrderMoveDown()" mat-button>[v]</button>
-<button (click)="onClickOrderRemove(order.id)" mat-button>-</button>
+<button mat-icon-button (click)="onClickOrderMoveDown()" mat-button><mat-icon>arrow_downward</mat-icon></button>
+<button mat-icon-button (click)="onClickOrderRemove(order.id)" mat-button>-</button>
