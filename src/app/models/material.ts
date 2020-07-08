@@ -1,14 +1,14 @@
 export class Material {
     public id: number; //Could be GUID in production server
-    public matName: string;
+    public name: string;
     //public matType: number; 
 
     // javasrcipt key value pair object
     // {"id":number,"name":string, type: number}
-    constructor(id: number, matName: string, matType: number)
+    constructor(id: number, name: string)
     {
         this.id = id;
-        this.matName = matName;
+        this.name = name;
         //this.matType = matType;
     }
   }

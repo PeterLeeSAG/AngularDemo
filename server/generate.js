@@ -1,7 +1,7 @@
 var faker = require('faker');
 const materials = require("./materials.json");
 
-var database = { products: [], materials: materials};
+var database = { products: [], materials: []};
 
 for (var i = 1; i<= 300; i++) {
   database.products.push({

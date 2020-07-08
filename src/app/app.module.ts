@@ -48,6 +48,9 @@ import { MaterialListComponent } from './yarn-order/material-list/material-list.
 import { StyleHeadComponent } from './yarn-order/style-head/style-head.component';
 import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete-material-dropdown/autocomplete-material-dropdown.component';
 
+//Service
+import { MaterialService } from './services/material.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +102,9 @@ import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete
       sizeItems: SizeListReducer, 
       matCalType: MatCalReducer}),
     ],
-  providers: [],
+  providers: [
+    MaterialService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

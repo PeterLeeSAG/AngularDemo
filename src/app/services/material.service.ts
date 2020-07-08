@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { retry, catchError, tap } from 'rxjs/operators';
+import { throwError, Observable } from 'rxjs';
+import { retry, catchError, tap, map } from 'rxjs/operators';
 import { Material } from '../models/material';
 
 @Injectable({
@@ -12,7 +12,8 @@ export class MaterialService {
 
   private SERVER_URL = "http://localhost:3000/";
   private ITEM_NAME = "materials"; //default item name
-  public materials: Material[] = [];
+  private materials: Material[] = [];
+  private _limit: number = 100;
  
   constructor(private httpClient: HttpClient) { 
   }
@@ -68,8 +69,21 @@ export class MaterialService {
     }));  
   }
 
-  public get(){
-    return this.httpClient.get(this.SERVER_URL + this.ITEM_NAME);
+  public get(name: string, limit: number){
+    //http://localhost:3000/Materials?name_like=wool&_limit=100&_sort=name&_order=asc
+    //Load the WebApi
+    this.httpClient
+    .get<Material[]>(this.SERVER_URL + this.ITEM_NAME, {
+      params: new HttpParams({
+        fromString: (name==null? "" :("name_like=" + name)) 
+        + "&_limit="+limit 
+        + "&_sort=name&_order=asc"}), 
+        observe: "body"})
+    .subscribe((materials) => {
+      this.materials = materials;
+    });
+
+    return this.materials;
   }
 
   public getAll(){
@@ -79,5 +93,26 @@ export class MaterialService {
       let response: HttpResponse<Material[]> = res;
       return response;
     });
+  }
+
+  public search(query: string): Observable<Material[]> {
+    //add the parameters to the url
+    var params = new HttpParams();
+    params = params.append("name_like", encodeURI(query));
+    params = params.append("_limit", '50');
+    params = params.append("_sort", 'name');
+    params = params.append("_order", 'asc');
+
+    const url = this.SERVER_URL + this.ITEM_NAME;
+    return this.httpClient
+      .get<Material[]>(url, {
+        observe: 'body',
+        params: params        
+      })
+      .pipe(
+        map((materials) => {
+          return materials;
+        })
+      );
   }
 }
