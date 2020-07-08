@@ -9,6 +9,7 @@
             </div>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-xs-2 col-sm-2">色碼分類:</div>
         <div class="col-xs-10 col-sm-10">
@@ -17,7 +18,7 @@
                 *ngFor="let matCalItem of matCalItems; let i=index"
                 (change)="onMaterialCalUpdate($event.value)"
                 [value]="matCalItem.typeID"
-                [checked]="(this.matCalType | async)==matCalItem.typeID">{{matCalItem.typeText}}</mat-radio-button>&nbsp;
+                [checked]="(this.matCalType | async)==matCalItem.typeID">{{matCalItem.typeText}}&nbsp;&nbsp;</mat-radio-button>
             </mat-radio-group>
         </div>
     </div>

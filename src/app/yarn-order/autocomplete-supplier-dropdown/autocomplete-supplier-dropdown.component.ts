@@ -2,29 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map, switchMap, debounceTime, catchError } from 'rxjs/operators';
-import { Material } from '../../models/material'; //data model of material
-import { MaterialService } from '../../services/material.service';
+import { Company } from '../../models/company'; //data model of company
+import { SupplierService } from '../../services/supplier.service';
 
 @Component({
-  selector: 'app-autocomplete-material-dropdown',
-  templateUrl: './autocomplete-material-dropdown.component.html',
-  styleUrls: ['./autocomplete-material-dropdown.component.css']
+  selector: 'app-autocomplete-supplier-dropdown',
+  templateUrl: './autocomplete-supplier-dropdown.component.html',
+  styleUrls: ['./autocomplete-supplier-dropdown.component.css']
 })
-export class AutocompleteMaterialDropdownComponent implements OnInit {
+export class AutocompleteSupplierDropdownComponent implements OnInit {
   control = new FormControl();
   //TODO: load the data from API
-  filteredMaterials$: Observable<Material[]> = null;
+  filteredSuppliers$: Observable<Company[]> = null;
 
-  constructor(private matService: MaterialService){
+  constructor(private supplierService: SupplierService){
   };
 
   ngOnInit() {
-    this.filteredMaterials$ = this.control.valueChanges.pipe(
+    this.filteredSuppliers$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
       switchMap(value => {
         if (value !== '') {
-          console.log("user typed material:" + value);
+          console.log("user typed supplier:" + value);
           // lookup from github
           return this._filter(value);
         } else {
@@ -35,11 +35,10 @@ export class AutocompleteMaterialDropdownComponent implements OnInit {
     );
   }
 
-  private _filter(value: string): Observable<Material[]> {
+  private _filter(value: string): Observable<Company[]> {
     const filterValue = this._normalizeValue(value);
-    //return this.materials.filter(material => this._normalizeValue(material.name).includes(filterValue));
 
-    return this.matService.search(filterValue).pipe(
+    return this.supplierService.search(filterValue).pipe(
       // map the item property of the github results as our return object
       map(results => results),
       // catch errors
@@ -52,9 +51,5 @@ export class AutocompleteMaterialDropdownComponent implements OnInit {
 
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
-  }
-
-  displayFn(material: Material): string {
-    return material.name;
   }
 }

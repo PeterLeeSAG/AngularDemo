@@ -21,10 +21,6 @@
     width:100%;
 }
 
-::ng-deep .cdk-overlay-pane {
-    min-width:500px;
-}
-
 .mat-option {
     font-size: 12px;
     line-height: 24px;

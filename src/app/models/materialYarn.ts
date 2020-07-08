@@ -1,19 +1,20 @@
 import { Material } from './material';
+import { Company } from './company';
 
 export class MaterialYarn {
     public id: number; //Could be GUID in production server
     public material: Material;
     public matType: number; 
-    public supplierID: number;
-    public articalID: number;
+    public supplier: Company;
+    public article: string;
     public remark: string;
     public supplierCurrID: number;
-    public supplierUnitPx: number;
+    public supplierUnitPrice: number;
     public supplierWeightTypeId: number;
     public supplierTransportTypeId: number;
-    public isFinalPx: boolean;
+    public isFinalPrice: boolean;
     public buyerCurrID: number;
-    public buyerUnitPx: number;
+    public buyerUnitPrice: number;
     public buyerWeightType: number;
 
     // javasrcipt key value pair object

@@ -4,7 +4,7 @@ var materialArray = require("./materials.json");
 
 var database = { products: [], 
                  suppliers: [],
-                 articals: [],
+                 articles: [],
                  colors: [],
                  materials: []};
 
@@ -25,9 +25,9 @@ for (var i = 1; i<= 300; i++) {
   });
 };
 
-//acticals
+//acticles
 for(var i = 1; i<= 50; i++){
-  database.articals.push({
+  database.articles.push({
     id: i,
     text: faker.lorem.sentence(3)
   });

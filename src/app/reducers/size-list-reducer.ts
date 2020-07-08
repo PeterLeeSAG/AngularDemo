@@ -1,6 +1,5 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
 import { SizeItem } from '../models/size';
-import { SizeListState } from '../models/sizeListState';
 import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action-types';
   
 export const initialState = [];

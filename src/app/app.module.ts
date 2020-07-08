@@ -24,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { StoreModule } from '@ngrx/store'; 
 import { SizeListReducer } from './reducers/size-list-reducer';
 import { MatCalReducer } from './reducers/mat-cal-reducer';
+import { MatYarnListReducer } from './reducers/mat-yarn-list-reducer';
 import { WeightListReducer } from './reducers/weight-control-reducer';
 
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -48,8 +49,12 @@ import { MaterialListComponent } from './yarn-order/material-list/material-list.
 import { StyleHeadComponent } from './yarn-order/style-head/style-head.component';
 import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete-material-dropdown/autocomplete-material-dropdown.component';
 
-//Service
+//Services
 import { MaterialService } from './services/material.service';
+import { SupplierService } from './services/supplier.service';
+import { ArticleService } from './services/article.service';
+import { AutocompleteSupplierDropdownComponent } from './yarn-order/autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
+import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-article-dropdown/autocomplete-article-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +80,8 @@ import { MaterialService } from './services/material.service';
     MaterialListComponent,
     StyleHeadComponent,
     AutocompleteMaterialDropdownComponent,
+    AutocompleteSupplierDropdownComponent,
+    AutocompleteArticleDropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +111,8 @@ import { MaterialService } from './services/material.service';
     ],
   providers: [
     MaterialService,
+    SupplierService,
+    ArticleService
   ],
   bootstrap: [AppComponent]
 })
