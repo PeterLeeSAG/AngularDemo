@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { MaterialYarn } from 'src/app/models/materialYarn';
 import { UpdateMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
+import { Material } from 'src/app/models/material';
+import { Company } from 'src/app/models/company';
 
 @Component({
   selector: 'app-material-yarn-item',
@@ -11,9 +13,7 @@ export class MaterialItemComponent implements OnInit {
   @Input() index: number;
   @Input() itemMaterialYarn: {"listID":number, "matYarn": MaterialYarn};
   @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID and action
-  @ViewChild('materialSelection') materialSelection : ElementRef;
-  @ViewChild('supplierSelection') supplierSelection : ElementRef;
-  @ViewChild('articleInput') articleInput : ElementRef;
+  @Output() matYarnItemUpdated = new EventEmitter<{"listID":number, "matYarn": MaterialYarn}>(); //Send the updated MatYarn Item
 
   public shipmentMethods: [{id:number, name:string}];
   public currencyList: [{id:number, name:string}];
@@ -53,11 +53,92 @@ export class MaterialItemComponent implements OnInit {
 
   private updateMatYarnInfo()
   {
-    
+    //TODO: validate the matYarn first
+    this.matYarnItemUpdated.emit(this.itemMaterialYarn);
   }
 
+  //Actions in the material yarn item
   onDeleteMatYarn(index: number)
   {
     this.result.emit({"posID":index,"action":"remove"});
+    this.updateMatYarnInfo();
+  }
+
+  onMaterialSelected(material: Material)
+  {
+    if (material != undefined)
+    {
+      this.itemMaterialYarn.matYarn.material = material;
+      this.updateMatYarnInfo();
+    }
+  }
+
+  onSupplierSelected(supplier: Company)
+  {
+    if (supplier != undefined)
+    {
+      this.itemMaterialYarn.matYarn.supplier = supplier;
+      this.updateMatYarnInfo();
+    }
+  }
+
+  onArticleInputted(text: string)
+  {
+    this.itemMaterialYarn.matYarn.article = text;
+    this.updateMatYarnInfo();
+  }
+
+  onRemarkInputted(text: string)
+  {
+    this.itemMaterialYarn.matYarn.remark = text;
+    this.updateMatYarnInfo();
+  }
+
+  onSupplierCurrIDUpdate(id: number)
+  {
+    this.itemMaterialYarn.matYarn.supplierCurrID = id;
+    this.updateMatYarnInfo();
+  }
+
+  onSupplierPriceUpdate(price: number)
+  {
+    this.itemMaterialYarn.matYarn.supplierUnitPrice = price;
+    this.updateMatYarnInfo();
+  }
+
+  onSupplierWeightTypeUpdate(id: number)
+  {
+    this.itemMaterialYarn.matYarn.supplierWeightTypeId = id;
+    this.updateMatYarnInfo();
+  }
+
+  onFinalPriceCheckBoxUpdate(isChecked: boolean)
+  {
+    this.itemMaterialYarn.matYarn.isFinalPrice = isChecked;
+    this.updateMatYarnInfo();
+  }
+
+  onTransportMethodUpdate(id: number)
+  {
+    this.itemMaterialYarn.matYarn.supplierTransportTypeId = id;
+    this.updateMatYarnInfo();
+  }
+  
+  onBuyerCurrIDUpdate(id: number)
+  {
+    this.itemMaterialYarn.matYarn.buyerCurrID = id;
+    this.updateMatYarnInfo();
+  }
+
+  onBuyerPriceUpdate(price: number)
+  {
+    this.itemMaterialYarn.matYarn.buyerUnitPrice = price;
+    this.updateMatYarnInfo();
+  }
+
+  onBuyerWeightTypeUpdate(id: number)
+  {
+    this.itemMaterialYarn.matYarn.buyerWeightType = id;
+    this.updateMatYarnInfo();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map, switchMap, debounceTime, catchError } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { SupplierService } from '../../services/supplier.service';
 })
 export class AutocompleteSupplierDropdownComponent implements OnInit {
   control = new FormControl();
+  @Input() supplier: Company;
+  @Output() supplierSelected = new EventEmitter<Company>();
+
   //TODO: load the data from API
   filteredSuppliers$: Observable<Company[]> = null;
 
@@ -51,5 +54,10 @@ export class AutocompleteSupplierDropdownComponent implements OnInit {
 
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  public onSelectSupplier(supplierID : number)
+  {
+    console.log("Selected supplier ID: " + supplierID );
   }
 }

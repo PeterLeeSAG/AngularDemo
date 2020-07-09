@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialYarn } from 'src/app/models/materialYarn';
 import { select, Store } from '@ngrx/store'; 
 import { Observable } from 'rxjs';
-import { LoadMatYarnList, AddMatYarn, RemoveMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
+import { LoadMatYarnList, AddMatYarn, RemoveMatYarn, UpdateMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
 
 @Component({
-  selector: 'app-material-list',
+  selector: 'app-material-yarn-list',
   templateUrl: './material-yarn-list.component.html',
   styleUrls: ['./material-yarn-list.component.css']
 })
@@ -50,5 +50,10 @@ export class MaterialListComponent implements OnInit {
   onPushMateralYarn()
   {
     this.store.dispatch(new AddMatYarn({index: 0}));
+  }
+
+  onMatYarnInfoUpdated(matYarnItem: {"listID":number, "matYarn": MaterialYarn})
+  {
+    this.store.dispatch(new UpdateMatYarn({"index": matYarnItem.listID, "matYarn": matYarnItem.matYarn}));
   }
 }

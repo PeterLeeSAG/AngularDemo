@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map, switchMap, debounceTime, catchError } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { MaterialService } from '../../services/material.service';
 })
 export class AutocompleteMaterialDropdownComponent implements OnInit {
   control = new FormControl();
+  @Input() material: Material;
+  @Output() materialSelected = new EventEmitter<Material>();
+
   //TODO: load the data from API
   filteredMaterials$: Observable<Material[]> = null;
 
@@ -56,5 +59,10 @@ export class AutocompleteMaterialDropdownComponent implements OnInit {
 
   displayFn(material: Material): string {
     return material.name;
+  }
+
+  onSelectMaterial(id: number)
+  {
+    console.log("Selected material ID: " + id);
   }
 }

@@ -11,7 +11,7 @@ import { ArticleService } from '../../services/article.service';
 })
 export class AutocompleteArticleDropdownComponent implements OnInit {
   @Input() article : string;
-  @Output() result = new EventEmitter<string>();
+  @Output() articleInputted = new EventEmitter<string>();
 
   control = new FormControl();
   filteredArticles$: Observable<String[]> = null;
@@ -36,8 +36,7 @@ export class AutocompleteArticleDropdownComponent implements OnInit {
 
   private _filter(value: string): Observable<String[]> {
     const filterValue = value;
-    //return this.materials.filter(material => this._normalizeValue(material.name).includes(filterValue));
-
+    
     return this.articleService.search(filterValue).pipe(
       map(results => results),
       // catch errors
