@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { MaterialYarn } from 'src/app/models/materialYarn';
+import { UpdateMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
 
 @Component({
-  selector: 'app-material-item',
-  templateUrl: './material-item.component.html',
-  styleUrls: ['./material-item.component.css']
+  selector: 'app-material-yarn-item',
+  templateUrl: './material-yarn-item.component.html',
+  styleUrls: ['./material-yarn-item.component.css']
 })
 export class MaterialItemComponent implements OnInit {
+  @Input() index: number;
+  @Input() itemMaterialYarn: {"listID":number, "matYarn": MaterialYarn};
+  @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID and action
+  @ViewChild('materialSelection') materialSelection : ElementRef;
+  @ViewChild('supplierSelection') supplierSelection : ElementRef;
+  @ViewChild('articleInput') articleInput : ElementRef;
 
   public shipmentMethods: [{id:number, name:string}];
   public currencyList: [{id:number, name:string}];
@@ -41,5 +49,15 @@ export class MaterialItemComponent implements OnInit {
     this.currencyList = [{"id":0, "name":"USD"}];
     this.currencyList.push({"id":1, "name":"HKD"});
     this.currencyList.push({"id":2, "name":"RMB"});
+  }
+
+  private updateMatYarnInfo()
+  {
+    
+  }
+
+  onDeleteMatYarn(index: number)
+  {
+    this.result.emit({"posID":index,"action":"remove"});
   }
 }

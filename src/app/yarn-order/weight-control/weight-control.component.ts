@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class WeightControlComponent implements OnInit {
   @Input() orderIndexId : number;
   @Input() comboIndexId : number;
-  MatCalType = MatCalType;
+  MatCalType = MatCalType; //Type reference
   matCalType : Observable<MatCalType>;
   sizeItems : Observable<SizeItem[]>;
 

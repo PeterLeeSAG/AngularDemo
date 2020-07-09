@@ -1,20 +1,14 @@
 <div class="row">
-    <div class="col-sm-1 col-lg-1" width=50>1<BUTTON class=sbttn name=DelMat>-</BUTTON>
+    <div class="col-sm-1 col-lg-1" width=50>{{index+1}}<button class=sbttn name=DelMat (click)="onDeleteMatYarn(index)">-</button>
         <INPUT maxLength=2 size=1 value=0 name=MainWoolQty_4></div>
     <div class="col-sm-4 col-lg-3">
       <app-autocomplete-material-dropdown></app-autocomplete-material-dropdown>
-       <!-- <INPUT class="AutoCompleteDropDown" maxLength=101 size=65 value="2/20 100% COMBED COTTON (BCI)" name=MatYarnName autocomplete="off">
-       <DIV id=div_MATyarnname_1 class="AutoCompleteTextBox"></DIV> -->
     </div>
     <div class="col-sm-2 col-lg-2">
        <app-autocomplete-supplier-dropdown></app-autocomplete-supplier-dropdown>
-       <!-- <INPUT class="AutoCompleteDropDown" maxLength=30 size=30 value="NICE DYEING FACTORY LTD(永佳)" name=MatCompanyName autocomplete="off">
-       <DIV id=div_MATCompanyname_1 class="AutoCompleteTextBox"></DIV> -->
        </div>
     <div class="col-sm-2 col-lg-1">
        <app-autocomplete-article-dropdown></app-autocomplete-article-dropdown>
-       <!-- <INPUT class="AutoCompleteDropDown" maxLength=30 size=15 value="RD 50112" name=MATArticle_1 autocomplete="off">
-       <DIV id=div_MATArticle_1 class="AutoCompleteTextBox"></DIV> -->
     </div>
     <div class="col-sm-2 col-lg-1"><INPUT maxLength=25 name=MatRemark style="width:100%;" ><BR><FONT color=red size=1>*只顯示首14個字母</FONT></div>
     <div class="col-sm-3 col-lg-2">
@@ -27,11 +21,11 @@
                         {{ currency.name }}
                      </option>
                   </SELECT>
-                  $<INPUT size=4 value=15.19 name=Wool_unitprice_1>
+                  $<INPUT size=4 value=0 name=Wool_unitprice_{{index+1}}>
                </TD>
-               <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_unit_1>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_unit_1></TD>
+               <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_unit_{{index+1}}>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_unit_{{index+1}}></TD>
             </TR>
-            <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_1> Final Price</TD></TR>
+            <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_{{index+1}}> Final Price</TD></TR>
           </TBODY>
        </TABLE>
        <TABLE>
@@ -71,7 +65,7 @@
                   </SELECT>
                    $<INPUT size=4 value=0 name=Wool_buyer_unitprice_1>
                 </TD>
-                <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_buyer_unit_1>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_buyer_unit_1></TD>
+                <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_buyer_unit_{{index+1}}>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_buyer_unit_{{index+1}}></TD>
                 <TD><INPUT size=3 type=hidden value=3 name=Wool_buyer_condprice_1></TD>
              </TR>
           </TBODY>

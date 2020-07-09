@@ -7,10 +7,14 @@ export const initialState = [];
 export function SizeListReducer(state = initialState, action: SizeListAction){
     var index: number;
 
-    if (action.payload !== undefined)
+    if (action.payload !== undefined && action.payload.index !== undefined)
     {
       index = action.payload.index;
       console.log(action.type + " @ " + index);
+    }
+    else
+    {
+      console.log("Action is not valid for the Sizing List");
     }
     
     switch (action.type) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map, switchMap, debounceTime, catchError } from 'rxjs/operators';
@@ -10,6 +10,9 @@ import { ArticleService } from '../../services/article.service';
   styleUrls: ['./autocomplete-article-dropdown.component.css']
 })
 export class AutocompleteArticleDropdownComponent implements OnInit {
+  @Input() article : string;
+  @Output() result = new EventEmitter<string>();
+
   control = new FormControl();
   filteredArticles$: Observable<String[]> = null;
 

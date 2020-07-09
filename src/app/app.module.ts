@@ -44,17 +44,17 @@ import { SizeListComponent } from './yarn-order/size-list/size-list.component';
 import { SizeItemComponent } from './yarn-order/size-item/size-item.component';
 import { WeightListComponent } from './yarn-order/weight-list/weight-list.component';
 import { WeightItemComponent } from './yarn-order/weight-item/weight-item.component';
-import { MaterialItemComponent } from './yarn-order/material-item/material-item.component';
-import { MaterialListComponent } from './yarn-order/material-list/material-list.component';
+import { MaterialItemComponent } from './yarn-order/material-yarn-item/material-yarn-item.component';
+import { MaterialListComponent } from './yarn-order/material-yarn-list/material-yarn-list.component';
 import { StyleHeadComponent } from './yarn-order/style-head/style-head.component';
 import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete-material-dropdown/autocomplete-material-dropdown.component';
+import { AutocompleteSupplierDropdownComponent } from './yarn-order/autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
+import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-article-dropdown/autocomplete-article-dropdown.component';
 
 //Services
 import { MaterialService } from './services/material.service';
 import { SupplierService } from './services/supplier.service';
 import { ArticleService } from './services/article.service';
-import { AutocompleteSupplierDropdownComponent } from './yarn-order/autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
-import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-article-dropdown/autocomplete-article-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -106,8 +106,10 @@ import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      sizeItems: SizeListReducer, 
-      matCalType: MatCalReducer}),
+      sizeItems: SizeListReducer,
+      matCalType: MatCalReducer, 
+      materialYarns: MatYarnListReducer,
+      }),
     ],
   providers: [
     MaterialService,

@@ -6,8 +6,15 @@ export const initialState = []; //list of generic type
 
 export function MatYarnListReducer(state = initialState, action: MatYarnListAction){
     var index: number;
-    index = action.payload.index;
-    console.log(action.type + " @ " + index);
+    if (action.payload !== undefined && action.payload.index !== undefined)
+    {
+      index = action.payload.index;
+      console.log(action.type + " @ " + index);
+    }
+    else
+    {
+      console.log("Action is not valid for the Material Yarn List");
+    }
 
     switch (action.type) {
         case MatYarnListActionTypes.LoadList:
@@ -43,36 +50,6 @@ export function MatYarnListReducer(state = initialState, action: MatYarnListActi
         default:
           return state;
     }
-}
-
-//Internal functions for size item list
-function sizeRemoved(state: MaterialYarn[], listID: number) : MaterialYarn[]
-{
-  const array = [...state];
-  //remove a item at the position id
-  array.splice(listID, 1);
-
-  return array;
-}
-
-function sizeAdded(state: MaterialYarn[], listID: number) : MaterialYarn[]
-{
-  const array = [...state];
-
-  //-1 <- end of the array
-  //0  <- head of the array
-  //insert a item at the position id
-  if (listID != -1)
-  {
-    array.splice(listID, 0, new MaterialYarn(listID, 0));
-  }
-  else
-  {
-    var newItem = new MaterialYarn(listID, 0);
-    array.push(newItem);
-  }
-
-  return array;
 }
 
 function immutablySwapItems(items, firstIndex, secondIndex) {

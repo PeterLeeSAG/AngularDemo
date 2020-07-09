@@ -8,5 +8,13 @@
         <div class="col-sm-3 col-lg-2">毛商單價</div>
         <div class="col-sm-3 col-lg-1">客人單價<FONT color=yellow>(optional)</FONT></div>
     </div>
-    <app-material-item></app-material-item>
+    <app-material-yarn-item 
+    *ngFor="let matYarn of (materialYarns | async); let i=index"
+        [index]="i"
+        [itemMaterialYarn]="matYarn" 
+        (result)="matYarnUpdated($event)" 
+    ></app-material-yarn-item>    
+    <div class="col-md-2">
+        <button mat-raised-button (click)="matYarnAdded(-1)">新增毛質</button>
+    </div>
 </div>
