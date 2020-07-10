@@ -1,12 +1,13 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
 import { SizeItem } from '../models/size';
+import { ReducerHelper } from '../share/reducer-helper';
 import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action-types';
   
 export const initialState = [];
 
 export function SizeListReducer(state = initialState, action: SizeListAction){
     var index: number;
-
+    var reducerHelper = new ReducerHelper();
     if (action.payload !== undefined && action.payload.index !== undefined)
     {
       index = action.payload.index;
@@ -46,7 +47,7 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
           if (index != 0)
           {
             console.log("move up @ index " + index);
-            return immutablySwapItems(state, index-1, index);
+            return reducerHelper.immutablySwapItems(state, index-1, index);
           }
           else
           {
@@ -58,7 +59,7 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
           if (index != state.length-1)
           {
             console.log("move down @ index " + index);
-            return immutablySwapItems(state, index+1, index);
+            return reducerHelper.immutablySwapItems(state, index+1, index);
           }
           else
           {
@@ -115,16 +116,6 @@ function reorderListID(state : SizeItem[]) : SizeItem[]
   }
 
   return state;
-}
-
-function immutablySwapItems(items, firstIndex, secondIndex) {
-  // Constant reference - we can still modify the array itself
-  const results= items.slice();
-  const firstItem = items[firstIndex];
-  results[firstIndex] = items[secondIndex];
-  results[secondIndex] = firstItem;
-
-  return results;
 }
 
 function updateSize(array, payload)

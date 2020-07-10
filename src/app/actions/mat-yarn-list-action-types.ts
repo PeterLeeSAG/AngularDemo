@@ -32,7 +32,7 @@ export class MatYarnListAction implements Action {
 
   export class CopyMatYarn implements Action {
     readonly type = MatYarnListActionTypes.CopyMatYarn;  
-    constructor(readonly payload: {index: number}) {
+    constructor(readonly payload: {index: number, matYarn: MaterialYarn}) {
     }
   }
 

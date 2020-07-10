@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { ArticleService } from '../../services/article.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-autocomplete-article-dropdown',
@@ -10,15 +11,17 @@ import { ArticleService } from '../../services/article.service';
   styleUrls: ['./autocomplete-article-dropdown.component.css']
 })
 export class AutocompleteArticleDropdownComponent implements OnInit {
-  @Input() article : string;
+  @Input() articleValue : string;
   @Output() articleInputted = new EventEmitter<string>();
 
   control = new FormControl();
   filteredArticles$: Observable<String[]> = null;
 
-  constructor(private articleService: ArticleService){};
+  constructor(private articleService: ArticleService){
+  };
 
   ngOnInit() {
+    this.control.setValue(this.articleValue);
     this.filteredArticles$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
@@ -45,5 +48,11 @@ export class AutocompleteArticleDropdownComponent implements OnInit {
         return of(null);
       })
     );
+  }
+
+  onSelectionChange(event)
+  {
+    console.log(event.option.value);
+    this.articleInputted.emit(event.option.value);
   }
 }

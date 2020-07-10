@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialYarn } from 'src/app/models/materialYarn';
 import { select, Store } from '@ngrx/store'; 
 import { Observable } from 'rxjs';
-import { LoadMatYarnList, AddMatYarn, RemoveMatYarn, UpdateMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
+import { LoadMatYarnList, AddMatYarn, RemoveMatYarn, UpdateMatYarn, CopyMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
 
 @Component({
   selector: 'app-material-yarn-list',
@@ -29,6 +29,9 @@ export class MaterialListComponent implements OnInit {
       case "remove":
         this.matYarnRemoved(matYarnAction.posID);
         break;
+      case "copy":
+        this.matYarnCopy(matYarnAction.posID);
+        break;
       default:
         console.log("Action: " + matYarnAction.action + " is not exist.");
         break;
@@ -45,6 +48,11 @@ export class MaterialListComponent implements OnInit {
   {
     //insert a item at the position id
     this.store.dispatch(new AddMatYarn({index: listID}));
+  }
+
+  matYarnCopy(listID: number)
+  {
+    this.store.dispatch(new CopyMatYarn({index: listID, matYarn: this.materialYarns[listID]}));
   }
 
   onPushMateralYarn()

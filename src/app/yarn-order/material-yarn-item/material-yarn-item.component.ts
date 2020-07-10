@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { MaterialYarn } from 'src/app/models/materialYarn';
-import { UpdateMatYarn } from 'src/app/actions/mat-yarn-list-action-types'
 import { Material } from 'src/app/models/material';
 import { Company } from 'src/app/models/company';
+import { ReducerHelper } from 'src/app/share/reducer-helper'
 
 @Component({
   selector: 'app-material-yarn-item',
@@ -11,12 +11,14 @@ import { Company } from 'src/app/models/company';
 })
 export class MaterialItemComponent implements OnInit {
   @Input() index: number;
-  @Input() itemMaterialYarn: {"listID":number, "matYarn": MaterialYarn};
+  @Input() materialYarn: MaterialYarn; //immuntable matYarn from the list
   @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID and action
   @Output() matYarnItemUpdated = new EventEmitter<{"listID":number, "matYarn": MaterialYarn}>(); //Send the updated MatYarn Item
 
   public shipmentMethods: [{id:number, name:string}];
   public currencyList: [{id:number, name:string}];
+  public itemMaterialYarn: MaterialYarn; //self editable matYarn object
+  public reducerHelper: ReducerHelper;
 
   constructor() { 
     this.prepareShipmentMethods();
@@ -24,6 +26,8 @@ export class MaterialItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.reducerHelper = new ReducerHelper();
+    this.itemMaterialYarn = this.reducerHelper.bestCopyEver(this.materialYarn);
   }
 
   //TODO: add the new services class for the following data
@@ -54,7 +58,7 @@ export class MaterialItemComponent implements OnInit {
   private updateMatYarnInfo()
   {
     //TODO: validate the matYarn first
-    this.matYarnItemUpdated.emit(this.itemMaterialYarn);
+    this.matYarnItemUpdated.emit({ listID: this.index, matYarn: this.itemMaterialYarn});
   }
 
   //Actions in the material yarn item
@@ -64,81 +68,95 @@ export class MaterialItemComponent implements OnInit {
     this.updateMatYarnInfo();
   }
 
+  onCopyMatYarn(index: number)
+  {
+    this.result.emit({"posID":index,"action":"copy"});
+  }
+
   onMaterialSelected(material: Material)
   {
+    console.log(material);
     if (material != undefined)
     {
-      this.itemMaterialYarn.matYarn.material = material;
+      this.itemMaterialYarn.material = material;
       this.updateMatYarnInfo();
     }
   }
 
+  onThreadCountInputted(count: number)
+  {
+    this.itemMaterialYarn.threadCount = count;
+    this.updateMatYarnInfo();
+  }
+
   onSupplierSelected(supplier: Company)
   {
+    console.log(supplier);
     if (supplier != undefined)
     {
-      this.itemMaterialYarn.matYarn.supplier = supplier;
+      this.itemMaterialYarn.supplier = supplier;
       this.updateMatYarnInfo();
     }
   }
 
   onArticleInputted(text: string)
   {
-    this.itemMaterialYarn.matYarn.article = text;
+    this.itemMaterialYarn.article = text;
+    console.log("article input:" + text);
     this.updateMatYarnInfo();
   }
 
   onRemarkInputted(text: string)
   {
-    this.itemMaterialYarn.matYarn.remark = text;
+    this.itemMaterialYarn.remark = text;
     this.updateMatYarnInfo();
   }
 
   onSupplierCurrIDUpdate(id: number)
   {
-    this.itemMaterialYarn.matYarn.supplierCurrID = id;
+    this.itemMaterialYarn.supplierCurrID = id;
     this.updateMatYarnInfo();
   }
 
   onSupplierPriceUpdate(price: number)
   {
-    this.itemMaterialYarn.matYarn.supplierUnitPrice = price;
+    this.itemMaterialYarn.supplierUnitPrice = price;
     this.updateMatYarnInfo();
   }
 
   onSupplierWeightTypeUpdate(id: number)
   {
-    this.itemMaterialYarn.matYarn.supplierWeightTypeId = id;
+    this.itemMaterialYarn.supplierWeightTypeId = id;
     this.updateMatYarnInfo();
   }
 
   onFinalPriceCheckBoxUpdate(isChecked: boolean)
   {
-    this.itemMaterialYarn.matYarn.isFinalPrice = isChecked;
+    this.itemMaterialYarn.isFinalPrice = isChecked;
     this.updateMatYarnInfo();
   }
 
   onTransportMethodUpdate(id: number)
   {
-    this.itemMaterialYarn.matYarn.supplierTransportTypeId = id;
+    this.itemMaterialYarn.supplierTransportTypeId = id;
     this.updateMatYarnInfo();
   }
   
   onBuyerCurrIDUpdate(id: number)
   {
-    this.itemMaterialYarn.matYarn.buyerCurrID = id;
+    this.itemMaterialYarn.buyerCurrID = id;
     this.updateMatYarnInfo();
   }
 
   onBuyerPriceUpdate(price: number)
   {
-    this.itemMaterialYarn.matYarn.buyerUnitPrice = price;
+    this.itemMaterialYarn.buyerUnitPrice = price;
     this.updateMatYarnInfo();
   }
 
   onBuyerWeightTypeUpdate(id: number)
   {
-    this.itemMaterialYarn.matYarn.buyerWeightType = id;
+    this.itemMaterialYarn.buyerWeightType = id;
     this.updateMatYarnInfo();
   }
 }

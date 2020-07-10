@@ -3,6 +3,7 @@ import { Company } from './company';
 
 export class MaterialYarn {
     public id: number; //Could be GUID in production server
+    public threadCount: number;
     public material: Material;
     public matType: number; 
     public supplier: Company;
@@ -22,7 +23,10 @@ export class MaterialYarn {
     constructor(id: number, matType: number)
     {
         this.id = id;
+        this.threadCount = 0;
         this.matType = matType;
+        this.remark = "";
+        this.article = "";
     }
   }
   

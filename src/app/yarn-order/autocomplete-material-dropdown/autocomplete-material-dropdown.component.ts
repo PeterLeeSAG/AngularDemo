@@ -12,7 +12,7 @@ import { MaterialService } from '../../services/material.service';
 })
 export class AutocompleteMaterialDropdownComponent implements OnInit {
   control = new FormControl();
-  @Input() material: Material;
+  @Input() materialValue: Material;
   @Output() materialSelected = new EventEmitter<Material>();
 
   //TODO: load the data from API
@@ -22,6 +22,7 @@ export class AutocompleteMaterialDropdownComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.control.setValue(this.materialValue);
     this.filteredMaterials$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
@@ -61,8 +62,17 @@ export class AutocompleteMaterialDropdownComponent implements OnInit {
     return material.name;
   }
 
-  onSelectMaterial(id: number)
+  onSelectMaterial(event)
   {
-    console.log("Selected material ID: " + id);
+    console.log(event.option.value);
+    this.materialSelected.emit(event.option.value);
+  }
+
+  getOptionMaterialName(option)
+  {
+    if(option !== undefined)
+    {
+      return option.name;
+    }    
   }
 }

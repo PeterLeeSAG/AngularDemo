@@ -11,9 +11,9 @@
     <app-material-yarn-item 
     *ngFor="let matYarn of (materialYarns | async); let i=index"
         [index]="i"
-        [itemMaterialYarn]="matYarn" 
+        [materialYarn]="matYarn" 
         (result)="matYarnUpdated($event)" 
-        (updateMatYarnInfo)="onMatYarnInfoUpdated($event)"
+        (matYarnItemUpdated)="onMatYarnInfoUpdated($event)"
     ></app-material-yarn-item>    
     <div class="col-md-2">
         <button mat-raised-button (click)="matYarnAdded(-1)">新增毛質</button>

@@ -1,23 +1,34 @@
 <div class="row">
    <div class="col-sm-1 col-lg-1" width=50>{{index+1}}<button class=sbttn name=DelMat (click)="onDeleteMatYarn(index)">-</button>
-      <INPUT maxLength=2 size=1 value=0 name=MainWoolQty_4></div>
+      <INPUT maxLength=2 size=1 
+      value={{itemMaterialYarn.threadCount}} 
+      (change)="onThreadCountInputted($event.target.value)" 
+      name=MainWoolQty_{{index+1}}>
+   </div>
    <div class="col-sm-4 col-lg-3">
       <app-autocomplete-material-dropdown
+         [materialValue]="itemMaterialYarn.material"
          (materialSelected)="onMaterialSelected($event)">
       </app-autocomplete-material-dropdown>
    </div>
    <div class="col-sm-2 col-lg-2">
       <app-autocomplete-supplier-dropdown
+         [supplierValue]="itemMaterialYarn.supplier"
          (supplierSelected)="onSupplierSelected($event)">
       </app-autocomplete-supplier-dropdown>
       </div>
    <div class="col-sm-2 col-lg-1">
       <app-autocomplete-article-dropdown
+         [articleValue]="itemMaterialYarn.article"
          (articleInputted)="onArticleInputted($event)">
       </app-autocomplete-article-dropdown>
    </div>
    <div class="col-sm-2 col-lg-1">
-      <INPUT type=text maxLength=25 name=MatRemark_{{index+1}} (input)="onRemarkInputted($event.target.value)" style="width:100%;"><BR>
+      <INPUT type=text maxLength=25 name=MatRemark_{{index+1}} 
+      value={{itemMaterialYarn.remark}} 
+      (change)="onRemarkInputted($event.target.value)" 
+      style="width:100%;">
+      <BR>
       <FONT color=red size=1>*只顯示首14個字母</FONT>
    </div>
    <div class="col-sm-3 col-lg-2">
@@ -30,11 +41,16 @@
                      {{ currency.name }}
                   </option>
                </SELECT>
-               $<INPUT type="number" size=4 value=0 name=Wool_unitprice_{{index+1}} (input)="onSupplierPriceUpdate($event.target.value)" >
+               $<INPUT type="text" size=4 
+               value={{itemMaterialYarn.supplierUnitPrice}} 
+               name=Wool_unitprice_{{index+1}} 
+               (change)="onSupplierPriceUpdate($event.target.value)" >
             </TD>
             <TD>
-               /LBS<INPUT type=radio value=0 name=Wool_unit_{{index+1}} (input)="onSupplierWeightTypeUpdate($event.target.value)">
-               /KG<INPUT type=radio value=1 name=Wool_unit_{{index+1}} (input)="onSupplierWeightTypeUpdate($event.target.value)">
+               /LBS<INPUT type=radio value=0 name=Wool_unit_{{index+1}} 
+               (input)="onSupplierWeightTypeUpdate($event.target.value)">
+               /KG<INPUT type=radio value=1 name=Wool_unit_{{index+1}} 
+               (input)="onSupplierWeightTypeUpdate($event.target.value)">
             </TD>
          </TR>
          <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_{{index+1}}
@@ -47,7 +63,9 @@
             <td>
                <mat-form-field>
                   <mat-label>運輸方法</mat-label>
-                  <mat-select name="ShipmentMethod" (input)="onTransportMethodUpdate($event.target.value)">
+                  <mat-select name="ShipmentMethod" 
+                  [(ngModel)]="itemMaterialYarn.supplierTransportTypeId"
+                  (selectionChange)="onTransportMethodUpdate(itemMaterialYarn.supplierTransportTypeId)">
                   <mat-option *ngFor="let shipmentMethod of shipmentMethods" [value]="shipmentMethod.id">
                      {{ shipmentMethod.name }}
                   </mat-option>
@@ -61,7 +79,12 @@
          <TBODY>
             <TR>
                <TD></TD>
-               <TD><BUTTON class=sbttn name=CopyMat>另一單價</BUTTON></TD>
+               <TD>
+                  <BUTTON class=sbttn name=CopyMat_{{index+1}} 
+                  (click)="onCopyMatYarn(index)">
+                  另一單價
+                  </BUTTON>
+               </TD>
             </TR>
          </TBODY>
       </TABLE>
@@ -76,10 +99,17 @@
                      {{ currency.name }}
                   </option>
                </SELECT>
-                  $<INPUT size=4 value=0 name=Wool_buyer_unitprice_1>
+                  $<INPUT size=4 
+                  value={{itemMaterialYarn.buyerUnitPrice}} 
+                  name=Wool_buyer_unitprice_{{index+1}} 
+                  (input)="onBuyerPriceUpdate($event.target.value)">
                </TD>
-               <TD>/LBS<INPUT CHECKED type=radio value=C43224E2-96AA-4F80-AFE2-6FB6CF787E74 name=Wool_buyer_unit_{{index+1}}>/KG<INPUT type=radio value=5785DD5B-A61E-41A0-9E1B-C22FB4CF6803 name=Wool_buyer_unit_{{index+1}}></TD>
-               <TD><INPUT size=3 type=hidden value=3 name=Wool_buyer_condprice_1></TD>
+               <TD>/LBS<INPUT type=radio value=0 name=Wool_buyer_unit_{{index+1}} 
+                  (input)="onBuyerWeightTypeUpdate($event.target.value)">
+                   /KG<INPUT type=radio value=1 name=Wool_buyer_unit_{{index+1}} 
+                   (input)="onBuyerWeightTypeUpdate($event.target.value)">
+               </TD>
+               <TD><INPUT size=3 type=hidden value=3 name=Wool_buyer_condprice_{{index+1}}></TD>
             </TR>
          </TBODY>
       </TABLE>

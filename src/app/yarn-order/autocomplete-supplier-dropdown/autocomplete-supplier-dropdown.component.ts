@@ -12,7 +12,7 @@ import { SupplierService } from '../../services/supplier.service';
 })
 export class AutocompleteSupplierDropdownComponent implements OnInit {
   control = new FormControl();
-  @Input() supplier: Company;
+  @Input() supplierValue: Company;
   @Output() supplierSelected = new EventEmitter<Company>();
 
   //TODO: load the data from API
@@ -22,6 +22,7 @@ export class AutocompleteSupplierDropdownComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.control.setValue(this.supplierValue);
     this.filteredSuppliers$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
@@ -56,8 +57,17 @@ export class AutocompleteSupplierDropdownComponent implements OnInit {
     return value.toLowerCase().replace(/\s/g, '');
   }
 
-  public onSelectSupplier(supplierID : number)
+  public onSelectSupplier(event)
   {
-    console.log("Selected supplier ID: " + supplierID );
+    console.log(event.option.value);
+    this.supplierSelected.emit(event.option.value);
+  }
+
+  getOptionSupplierName(option: Company)
+  {
+    if(option !== undefined)
+    {
+      return option.englishName;
+    }
   }
 }

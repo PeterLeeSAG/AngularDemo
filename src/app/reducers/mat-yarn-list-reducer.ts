@@ -5,10 +5,14 @@ import { MatYarnListActionTypes, MatYarnListAction } from '../actions/mat-yarn-l
 export const initialState = []; //list of generic type
 
 export function MatYarnListReducer(state = initialState, action: MatYarnListAction){
+    const isDebug: boolean = true;  
     var index: number;
+    var matYarn: MaterialYarn;
+
     if (action.payload !== undefined && action.payload.index !== undefined)
     {
       index = action.payload.index;
+      matYarn = action.payload.matYarn;
       console.log(action.type + " @ " + index);
     }
     else
@@ -35,31 +39,38 @@ export function MatYarnListReducer(state = initialState, action: MatYarnListActi
           }
 
         case MatYarnListActionTypes.CopyMatYarn:
-          break;
+          if (isDebug)
+          {
+            console.log("CopyMatYarn @" + index);
+            console.log([
+              ...state.slice(0, index+1),
+              ...state.slice(index, index+1),
+              ...state.slice(index+1)
+            ]);
+          }
+          
+          return [
+            ...state.slice(0, index+1),
+            ...state.slice(index, index+1),
+            ...state.slice(index+1)
+          ];
 
         case MatYarnListActionTypes.RemoveMatYarn:
           return [
             ...state.slice(0, index),
             ...state.slice(index + 1)
           ];
-          break;
 
         case MatYarnListActionTypes.UpdateMatYarn:
+          if (isDebug==true)
+          {
+            console.log("UpdateMatYarn @" + action.payload.matYarn.article);
+          }
           return updateMatYarn(state, action.payload);
 
         default:
           return state;
     }
-}
-
-function immutablySwapItems(items, firstIndex, secondIndex) {
-  // Constant reference - we can still modify the array itself
-  const results= items.slice();
-  const firstItem = items[firstIndex];
-  results[firstIndex] = items[secondIndex];
-  results[secondIndex] = firstItem;
-
-  return results;
 }
 
 function updateMatYarn(array, payload)
