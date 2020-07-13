@@ -1,4 +1,8 @@
 <h5>Yarn Order</h5>
+
+<div class="alert-message">
+    <app-alert></app-alert>
+</div>
 <div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>一般資料</b>
     <app-style-head [(styleInfo)]="styleInfo"></app-style-head>
@@ -88,6 +92,15 @@
     order ID: {{this.currOrderID}}
 </div>
 
+<div class="shadow-sm p-2 mb-3 bg-white rounded">
+    <b>Alert Messaging</b> <br>
+    <button class="btn btn-success m-1" (click)="alertService.success('Success!!', alertOptions)">Success</button>
+    <button class="btn btn-danger m-1" (click)="alertService.error('Error :(', alertOptions)">Error</button>
+    <button class="btn btn-info m-1" (click)="alertService.info('Some info....', alertOptions)">Info</button>
+    <button class="btn btn-warning m-1" (click)="alertService.warn('Warning: ...', alertOptions)">Warn</button>
+    <button class="btn btn-outline-dark m-1" (click)="alertService.clear()">Clear</button>
+</div>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>Combo Information:</b>
     <ul>
@@ -126,3 +139,16 @@
         </li>
     </ul>
 </div>
+
+<script type="text/javascript"> 
+$(window).scroll(function(e){ 
+    var $el = $('.alert-message'); 
+    var isPositionFixed = ($el.css('position') == 'fixed');
+    if ($(this).scrollTop() > 200 && !isPositionFixed){ 
+      $el.css({'position': 'fixed', 'top': '65px'}); 
+    }
+    if ($(this).scrollTop() < 200 && isPositionFixed){
+      $el.css({'position': 'static', 'top': '65px'}); 
+    } 
+  });
+</script>

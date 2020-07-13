@@ -74,17 +74,4 @@ export class ComboOrderDetailsComponent implements OnInit {
       this.pendingButtonName = "待覆";
     }
   }
-
-  filterMaterialYarns()
-  {
-    return this.materialYarns$.pipe(
-      map(materialYarns => {
-        materialYarns.filter(
-          material =>
-            material.material != undefined
-            && material.supplier != undefined
-        )
-      })
-    )
-  }
 }

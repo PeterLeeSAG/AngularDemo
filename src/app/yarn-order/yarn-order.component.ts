@@ -4,6 +4,7 @@ import { Order } from "../models/order";
 import { ComboOrderDetail } from "../models/comboOrderDetail";
 import { StyleInfo } from "../models/styleInfo";
 import { retry } from 'rxjs/operators';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-yarn-order',
@@ -18,8 +19,12 @@ comboOrderDetails = [];
 styleInfo: StyleInfo;
 currOrderID = 0;
 currComboID = 0;
+alertOptions = {
+  autoClose: true,
+  keepAfterRouteChange: true
+};
 
-  constructor() { }
+  constructor(public alertService: AlertService) { }
 
   ngOnInit(): void {
     this.onInitCreateData();

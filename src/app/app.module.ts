@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AlertModule } from './_alert';
 
 import { StoreModule } from '@ngrx/store'; 
 import { SizeListReducer } from './reducers/size-list-reducer';
@@ -50,7 +51,6 @@ import { StyleHeadComponent } from './yarn-order/style-head/style-head.component
 import { AutocompleteMaterialDropdownComponent } from './yarn-order/autocomplete-material-dropdown/autocomplete-material-dropdown.component';
 import { AutocompleteSupplierDropdownComponent } from './yarn-order/autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
 import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-article-dropdown/autocomplete-article-dropdown.component';
-
 //Services
 import { MaterialService } from './services/material.service';
 import { SupplierService } from './services/supplier.service';
@@ -105,6 +105,7 @@ import { ArticleService } from './services/article.service';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    AlertModule,
     StoreModule.forRoot({
       sizeItems: SizeListReducer,
       matCalType: MatCalReducer, 
