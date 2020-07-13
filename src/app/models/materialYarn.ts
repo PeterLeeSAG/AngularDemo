@@ -28,5 +28,21 @@ export class MaterialYarn {
         this.remark = "";
         this.article = "";
     }
+
+    getMaterialYarnName()
+    {
+        if (this.material != undefined
+            && this.supplier != undefined
+            && this.buyerUnitPrice !== undefined
+            && this.material.name != undefined
+            && this.supplier.englishName != undefined)
+            {
+                return this.threadCount + " " 
+                + this.material.name  + " " 
+                + this.supplier.englishName + " "
+                + "(" + this.buyerUnitPrice.toString() + ")"
+            }
+        return "";
+    }
   }
   

@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComboOrderDetail } from '../../models/comboOrderDetail';
 import { MatCalType } from 'src/app/models/matCalType';
+import { MaterialYarn } from 'src/app/models/materialYarn';
 import { select, Store } from '@ngrx/store'; 
 import { Observable } from 'rxjs';
+import { map, materialize } from 'rxjs/operators';
+import { LoadMatYarnList } from 'src/app/actions/mat-yarn-list-action-types';
 
 @Component({
   selector: 'app-combo-order-details',
@@ -17,10 +20,12 @@ export class ComboOrderDetailsComponent implements OnInit {
   selectedMaterialName : string;
   pendingButtonName : string;
   //"待覆":"實數"
-  matCalType : Observable<MatCalType>;
+  matCalType$ : Observable<MatCalType>;
+  materialYarns$ : Observable<MaterialYarn[]>;
 
-  constructor(private store: Store<{ matCalType: MatCalType }>) { 
-    this.matCalType = store.pipe(select('matCalType'));
+  constructor(private store: Store<{ matCalType: MatCalType, materialYarns:MaterialYarn[] }>) { 
+    this.matCalType$ = store.pipe(select('matCalType'));
+    this.materialYarns$ = store.pipe(select('materialYarns'));
   }
 
   ngOnInit(): void {
@@ -68,5 +73,18 @@ export class ComboOrderDetailsComponent implements OnInit {
       this.comboOrderDetail.colorNo = "";
       this.pendingButtonName = "待覆";
     }
+  }
+
+  filterMaterialYarns()
+  {
+    return this.materialYarns$.pipe(
+      map(materialYarns => {
+        materialYarns.filter(
+          material =>
+            material.material != undefined
+            && material.supplier != undefined
+        )
+      })
+    )
   }
 }
