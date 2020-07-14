@@ -21,7 +21,9 @@ currOrderID = 0;
 currComboID = 0;
 alertOptions = {
   autoClose: true,
-  keepAfterRouteChange: true
+  keepAfterRouteChange: true,
+  showSeconds: 10,
+  topPadding: 65
 };
 
   constructor(public alertService: AlertService) { }

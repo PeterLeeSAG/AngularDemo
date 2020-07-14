@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Alert, AlertType } from './alert.model';
 import { AlertService } from './alert.service';
+import { style } from '@angular/animations';
 
 @Component({
     selector: 'app-alert',
@@ -13,15 +14,22 @@ import { AlertService } from './alert.service';
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
-
+    @Input() showSeconds : number = 10;
+    @Input() topPadding : number = 65;
+    
+    isDebug: boolean = false;
     alerts: Alert[] = [];
     alertSubscription: Subscription;
     routeSubscription: Subscription;
-    showSeconds: number = 10;
 
     constructor(private router: Router, private alertService: AlertService) { }
 
     ngOnInit() {
+        style["top"] = this.topPadding; // set top value for the css
+
+        //Listen to the scroll event if needed
+        window.addEventListener('scroll', this.scroll, true); //third parameter
+
         // subscribe to new alert notifications
         this.alertSubscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
@@ -56,6 +64,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         // unsubscribe to avoid memory leaks
         this.alertSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
+        window.removeEventListener('scroll', this.scroll, true);
     }
 
     removeAlert(alert: Alert) {
@@ -96,4 +105,43 @@ export class AlertComponent implements OnInit, OnDestroy {
 
         return classes.join(' ');
     }
+
+    //For controlling the floating effect to the alert messaging
+    scroll = (event): void => {
+        if (this.isDebug)
+        {
+            var alertOptions = {
+                autoClose: true,
+                keepAfterRouteChange: true,
+                showSeconds: 10,
+                topPadding: 65
+              };
+    
+            var scrollTop = event.srcElement.scrollTop;
+            var scrollMsg = "ScrollTop value: " + event.srcElement.scrollTop.toString();
+            console.log(scrollMsg);
+            this.alertService.info(scrollMsg, alertOptions);
+        }
+        
+        if (this.alerts != undefined && this.alerts.length >= 1)
+        {
+            var isPositionFixed = false;
+            if (style["position"] == 'fixed')
+            {
+                isPositionFixed = true;
+            }        
+    
+            if (!isPositionFixed && scrollTop > 200)
+            {
+                style["position"] = 'fixed';  
+                style["top"] = this.topPadding;          
+            }
+            
+            if (isPositionFixed && scrollTop < 200)
+            {
+                style["position"] = 'static';
+                style["top"] = this.topPadding;
+            }
+        }
+    };
 }

@@ -1,4 +1,22 @@
-<div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
-    <a class="close" (click)="removeAlert(alert)">&times;</a>
-    <span [innerHTML]="alert.message"></span>
+<div class="alert-message">
+    <div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+        <a class="close" (click)="removeAlert(alert)">&times;</a>
+        <span [innerHTML]="alert.message"></span>
+    </div>
 </div>
+
+<!--
+//Jquery version for the floating effect
+<script type="text/javascript"> 
+$(window).scroll(function(e){ 
+    var $el = $('.alert-message'); 
+    var isPositionFixed = ($el.css('position') == 'fixed');
+    if ($(this).scrollTop() > 200 && !isPositionFixed){ 
+      $el.css({'position': 'fixed', 'top': '65px'}); 
+    }
+    if ($(this).scrollTop() < 200 && isPositionFixed){
+      $el.css({'position': 'static', 'top': '65px'}); 
+    } 
+  });
+</script>
+-->
