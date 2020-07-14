@@ -1,3 +1,14 @@
+.web-app-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
 .sidenav-container {
   height: 100%;
 }
@@ -15,6 +26,22 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.app-title {
+  padding: 0 20px 0 20px;
+}
+
+.web-app-is-mobile .web-app-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.web-app-is-mobile .web-app-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
 }
 
 /* .hidden {

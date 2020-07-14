@@ -20,7 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatMenuModule } from '@angular/material/menu';
 import { AlertModule } from './_alert';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { StoreModule } from '@ngrx/store'; 
 import { SizeListReducer } from './reducers/size-list-reducer';
@@ -28,6 +30,7 @@ import { MatCalReducer } from './reducers/mat-cal-reducer';
 import { MatYarnListReducer } from './reducers/mat-yarn-list-reducer';
 import { WeightListReducer } from './reducers/weight-control-reducer';
 
+//import { MainNavComponent } from './main-nav/main-nav.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -55,6 +58,7 @@ import { AutocompleteArticleDropdownComponent } from './yarn-order/autocomplete-
 import { MaterialService } from './services/material.service';
 import { SupplierService } from './services/supplier.service';
 import { ArticleService } from './services/article.service';
+import { MenuService } from './services/menu.services';
 
 @NgModule({
   declarations: [
@@ -101,10 +105,12 @@ import { ArticleService } from './services/article.service';
     MatInputModule,
     MatRadioModule,
     MatAutocompleteModule,
+    MatMenuModule,
     LayoutModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     AlertModule,
     StoreModule.forRoot({
       sizeItems: SizeListReducer,
@@ -115,7 +121,8 @@ import { ArticleService } from './services/article.service';
   providers: [
     MaterialService,
     SupplierService,
-    ArticleService
+    ArticleService,
+    MenuService
   ],
   bootstrap: [AppComponent]
 })
