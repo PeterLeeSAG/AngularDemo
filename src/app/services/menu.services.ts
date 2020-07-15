@@ -16,16 +16,16 @@ export class MenuService {
   private fieldName = "departmentID"; //0 = root
  
   constructor(private http: HttpClient) { 
-    /*  <a mat-list-item href="home">HOME</a>
-        <a mat-list-item href="about">ABOUT</a>
-        <a mat-list-item href="yarnOrder">YARN ORDER</a>
-    */
     this.loadDefaultData();
   }
 
   //TODO: add about new module for managing the system menu
   private loadDefaultData()
   {
+    var nestMenu = new MenuItem("HOME", "/home");
+    nestMenu.subMenu = [];
+    nestMenu.subMenu.push(new MenuItem("SUB-HOME", "/home"));
+    this.menuItems.push(nestMenu);
     this.menuItems.push(new MenuItem("HOME", "/home"));
     this.menuItems.push(new MenuItem("ABOUT", "/about"));
     this.menuItems.push(new MenuItem("YARN ORDER", "/yarnOrder"));

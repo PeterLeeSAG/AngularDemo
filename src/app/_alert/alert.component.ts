@@ -21,6 +21,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     alerts: Alert[] = [];
     alertSubscription: Subscription;
     routeSubscription: Subscription;
+    iconName: string = "";
 
     constructor(private router: Router, private alertService: AlertService) { }
 
@@ -82,6 +83,25 @@ export class AlertComponent implements OnInit, OnDestroy {
         } else {
             // remove alert
             this.alerts = this.alerts.filter(x => x !== alert);
+        }
+    }
+
+    getIconName(alert: Alert)
+    {
+        switch(alert.type)
+        {
+            case AlertType.Success:{
+                return "done";
+            }
+            case AlertType.Info:{
+                return "info";
+            }
+            case AlertType.Warning:{
+                return "warning";
+            }
+            case AlertType.Error:{
+                return "error";
+            }
         }
     }
 
