@@ -36,21 +36,46 @@
          <TBODY>
          <TR>
             <TD>
+               <!--
                <SELECT (change)="onSupplierCurrIDUpdate($event.target.value)">
                   <option *ngFor="let currency of currencyList" [value]="currency.id" name="ShipmentCurrency">
                      {{ currency.name }}
                   </option>
                </SELECT>
+               -->
+
+               <select name="SupplierCurrID" 
+               class="curr-id-section"
+               [(ngModel)]="itemMaterialYarn.supplierCurrID"
+               (selectionChange)="onSupplierCurrIDUpdate(itemMaterialYarn.supplierCurrID)">
+               <option *ngFor="let currency of currencyList" [value]="currency.id">
+                  {{ currency.name }}
+               </option>
+               </select>
+
                $<INPUT type="text" size=4 
                value={{itemMaterialYarn.supplierUnitPrice}} 
                name=Wool_unitprice_{{index+1}} 
                (change)="onSupplierPriceUpdate($event.target.value)" >
             </TD>
+         </TR>
+         <TR>
             <TD>
-               /LBS<INPUT type=radio value=0 name=Wool_unit_{{index+1}} 
-               (input)="onSupplierWeightTypeUpdate($event.target.value)">
-               /KG<INPUT type=radio value=1 name=Wool_unit_{{index+1}} 
-               (input)="onSupplierWeightTypeUpdate($event.target.value)">
+               <!--
+               <label for="lbs">/LBS</label><INPUT type=radio [value]=0 name="itemMaterialYarn.supplierWeightType"
+               [(ngModel)]='itemMaterialYarn.supplierWeightType'
+               (click)="onSupplierWeightTypeUpdate(0)" 
+               (change)="onSupplierWeightTypeChange(0)">
+               <label for="kg">/KG</label><INPUT type=radio [value]=1 name="itemMaterialYarn.supplierWeightType"
+               [(ngModel)]='itemMaterialYarn.supplierWeightType'
+               (click)="onSupplierWeightTypeUpdate(1)" 
+               (change)="onSupplierWeightTypeChange(1)">
+               -->
+               
+               <mat-radio-group [(ngModel)]="itemMaterialYarn.supplierWeightType" aria-label="Select an option">
+                  <mat-radio-button value="1">/LBS</mat-radio-button>&nbsp;
+                  <mat-radio-button value="2">/KG</mat-radio-button>
+               </mat-radio-group>               
             </TD>
          </TR>
          <TR><TD><INPUT CHECKED type=checkbox value=1 name=Wool_final_price_{{index+1}}
@@ -93,23 +118,47 @@
       <TABLE>
          <TBODY>
             <TR>
-               <TD>
+               <TD style="display:block">
+               <!--
                <SELECT (change)="onBuyerCurrIDUpdate($event.target.value)">
                   <option *ngFor="let currency of currencyList" [value]="currency.id" name="ShipmentCurrency">
                      {{ currency.name }}
                   </option>
                </SELECT>
+               -->
+
+               <select name="BuyerCurrID" 
+               class="curr-id-section"
+               [(ngModel)]="itemMaterialYarn.buyerCurrID"
+               (selectionChange)="onBuyerCurrIDUpdate(itemMaterialYarn.buyerCurrID)">
+               <option *ngFor="let currency of currencyList" [value]="currency.id">
+                  {{ currency.name }}
+               </option>
+               </select>
                   $<INPUT size=4 
                   value={{itemMaterialYarn.buyerUnitPrice}} 
                   name=Wool_buyer_unitprice_{{index+1}} 
-                  (input)="onBuyerPriceUpdate($event.target.value)">
+                  (change)="onBuyerPriceUpdate($event.target.value)">
                </TD>
-               <TD>/LBS<INPUT type=radio value=0 name=Wool_buyer_unit_{{index+1}} 
-                  (input)="onBuyerWeightTypeUpdate($event.target.value)">
-                   /KG<INPUT type=radio value=1 name=Wool_buyer_unit_{{index+1}} 
-                   (input)="onBuyerWeightTypeUpdate($event.target.value)">
+            </TR>
+            <TR>
+               <TD>
+                  <!--
+                  <label for="lbs">/LBS</label><INPUT type=radio [value]=0 name="itemMaterialYarn.supplierWeightType"
+                  [(ngModel)]='itemMaterialYarn.buyerWeightType'
+                  (click)="onBuyerWeightTypeUpdate(0)" 
+                  (change)="onBuyerWeightTypeChange(0)">
+                  <label for="kg">/KG</label><INPUT type=radio [value]=1 name="itemMaterialYarn.supplierWeightType"
+                  [(ngModel)]='itemMaterialYarn.buyerWeightType'
+                   (click)="onBuyerWeightTypeUpdate(1)" 
+                   (change)="onBuyerWeightTypeChange(1)">
+                  -->
+                  
+                   <mat-radio-group [(ngModel)]="itemMaterialYarn.buyerWeightType" aria-label="Select an option">
+                     <mat-radio-button value="1">/LBS</mat-radio-button>&nbsp;
+                     <mat-radio-button value="2">/KG</mat-radio-button>
+                  </mat-radio-group>                  
                </TD>
-               <TD><INPUT size=3 type=hidden value=3 name=Wool_buyer_condprice_{{index+1}}></TD>
             </TR>
          </TBODY>
       </TABLE>

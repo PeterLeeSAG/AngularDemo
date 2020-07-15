@@ -11,7 +11,7 @@ export class MaterialYarn {
     public remark: string;
     public supplierCurrID: number;
     public supplierUnitPrice: number;
-    public supplierWeightTypeId: number;
+    public supplierWeightType: number;
     public supplierTransportTypeId: number;
     public isFinalPrice: boolean;
     public buyerCurrID: number;

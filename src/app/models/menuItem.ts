@@ -1,9 +1,10 @@
 export class MenuItem {
     public id: number; //Could be GUID in production server
     public displayName: string;
+    public iconName: string;
     public path: string;
     public level: number;
-    public subMenu: MenuItem[];
+    public subMenu?: MenuItem[];
 
     constructor(name: string, path: string)
     {

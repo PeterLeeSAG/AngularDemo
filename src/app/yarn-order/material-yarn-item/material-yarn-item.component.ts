@@ -126,7 +126,13 @@ export class MaterialItemComponent implements OnInit {
 
   onSupplierWeightTypeUpdate(id: number)
   {
-    this.itemMaterialYarn.supplierWeightTypeId = id;
+    this.itemMaterialYarn.supplierWeightType = id;
+    //this.updateMatYarnInfo();
+  }
+
+  onSupplierWeightTypeChange(id: number)
+  {
+    //this.itemMaterialYarn.supplierWeightType = id;
     this.updateMatYarnInfo();
   }
 
@@ -157,6 +163,12 @@ export class MaterialItemComponent implements OnInit {
   onBuyerWeightTypeUpdate(id: number)
   {
     this.itemMaterialYarn.buyerWeightType = id;
+    //this.updateMatYarnInfo();
+  }
+
+  onBuyerWeightTypeChange(id: number)
+  {
+    //this.itemMaterialYarn.buyerWeightType = id;
     this.updateMatYarnInfo();
   }
 }
