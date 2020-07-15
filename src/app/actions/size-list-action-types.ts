@@ -16,7 +16,7 @@ export class SizeListAction implements Action {
     type: string;
     payload: {
       index: number,
-      sizeId: number,
+      size: Size,
       error: string
     };
   }
@@ -41,7 +41,7 @@ export class SizeListAction implements Action {
 
   export class UpdateSizeItem implements Action {
     readonly type = SizeListActionTypes.UpdateSizeItem;  
-    constructor(readonly payload: {index: number, sizeID: number}) {
+    constructor(readonly payload: {index: number, size: Size}) {
     }
   }
 

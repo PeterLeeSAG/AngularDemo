@@ -13,12 +13,12 @@ export class Size {
 
 export class SizeItem {
   public listID: number;
-  public sizeID: number;
+  public size: Size;
 
-  constructor(listID: number, sizeID: number)
+  constructor(listID: number, size: Size)
   {
       this.listID = listID;
-      this.sizeID = sizeID;
+      this.size = size;
   }
 }
   

@@ -25,7 +25,7 @@
                 <TH width=40>安士/件</TH>
                 <TH width=40>損耗</TH></TR>
                 <tr *ngFor="let sizeItem of (sizeItems|async)" style="display: inline;">
-                <TD>{{(sizeItem.sizeID==0)?"NEW":sizeItem.sizeID}}</TD>
+                <TD>{{(sizeItem.size==undefined)?"NEW":sizeItem.size.name}}</TD>
                 <TD><INPUT size=5></TD>
                 <TD><INPUT size=5>%</TD>
                 </tr>

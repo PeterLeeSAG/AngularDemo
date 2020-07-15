@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Size } from '../models/size';
 
 export enum WeightControlActionTypes {
     Load = '[Weight List] LOAD',
@@ -12,7 +13,7 @@ export class WeightControlAction implements Action {
     payload: {
       comboIndex: number,
       orderIndex: number,
-      sizeId: number,
+      size: Size,
       matCalTypeId: number,
       weight: number,
       wastagePercent: number,
@@ -33,7 +34,7 @@ export class WeightControlAction implements Action {
     constructor(readonly payload: {
       comboIndex: number,
       orderIndex: number,
-      sizeId: number,
+      size: Size,
       weight: number,
       wastagePercent: number}) {  
     }
@@ -50,7 +51,7 @@ export class WeightControlAction implements Action {
     constructor(readonly payload: {
       comboIndex: number,
       orderIndex: number,
-      sizeId: number,
+      size: Size,
       weight: number,
       wastagePercent: number}) {
     }

@@ -9,10 +9,11 @@ import { Size } from '../../models/size';
 export class SizeItemComponent implements OnInit {
   sizes: Size[]; 
   @Input() index: number;
-  @Input() itemSize: {"listID":number, "sizeID":number};
+  @Input() itemSize: {"listID":number, "size" : Size};
   @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID, sizeID and action
-  @Output() sizeSelected = new EventEmitter<{'listID':number, 'sizeID': number}>();
+  @Output() sizeSelected = new EventEmitter<{'listID':number, 'size': Size}>();
   @ViewChild('sizeSelection') sizeSelection : ElementRef;
+  public selectedSize: Size;
 
   constructor() { }
 
@@ -31,19 +32,30 @@ export class SizeItemComponent implements OnInit {
     this.sizes.push(new Size(6,"XL"));
     this.sizes.push(new Size(7,"XXL"));
     
-    if (this.itemSize.sizeID !== 0)
+    if (this.itemSize.size !== null)
     {
-      console.log("init item size: " + this.itemSize.sizeID);
+      this.selectedSize = this.itemSize.size;
+      console.log(this.itemSize.size);
+      console.log("init item size: " + this.itemSize.size.name);
     }
   }
 
-  onSelectSize(sizeID: number)
+  onSelectSize(sizeID:number)
   {
-    console.log("selected size id " + sizeID + "@" + this.index);
-    this.sizeSelected.emit({
-      "listID": this.index,
-      "sizeID": this.sizeSelection.nativeElement.value
-    });
+    var selectedSize : Size = this.sizes.find(s=>s.id==sizeID);
+    if (selectedSize !== undefined)
+    {
+      console.log("selected size id " + sizeID + "@" + this.index);
+      this.sizeSelected.emit({
+        "listID": this.index,
+        "size": selectedSize
+      });  
+    }
+    else
+    {
+      console.log(event);
+      console.log("cannot read the selected size object");
+    }
   }
 
   onAddSize(id: number)

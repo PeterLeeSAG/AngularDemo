@@ -1,5 +1,5 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
-import { SizeItem } from '../models/size';
+import { SizeItem, Size } from '../models/size';
 import { ReducerHelper } from '../share/reducer-helper';
 import { SizeListActionTypes, SizeListAction } from '../actions/size-list-action-types';
   
@@ -17,6 +17,7 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
     {
       console.log("Action is not valid for the Sizing List");
     }
+    var selectSize : Size;
     
     switch (action.type) {
         case SizeListActionTypes.LoadSizeList:
@@ -25,13 +26,13 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
         case SizeListActionTypes.AddSizeItem:
           if (index == -1)
           {
-            return [...state, new SizeItem(index, 0)];
+            return [...state, new SizeItem(index, null)];
           }
           else
           {
             return [
               ...state.slice(0, index),
-              new SizeItem(index, 0),
+              new SizeItem(index, null),
               ...state.slice(index)
             ];
           }
@@ -68,7 +69,9 @@ export function SizeListReducer(state = initialState, action: SizeListAction){
           break;
 
         case SizeListActionTypes.UpdateSizeItem:
-          return updateSize(state, action.payload);
+          selectSize = action.payload.size;
+          console.log(selectSize);
+          return updateSize(state, action.payload.index, selectSize);
 
         default:
           return state;
@@ -94,11 +97,11 @@ function sizeAdded(state: SizeItem[], listID: number) : SizeItem[]
   //insert a item at the position id
   if (listID != -1)
   {
-    array.splice(listID, 0, new SizeItem(listID, 0));
+    array.splice(listID, 0, new SizeItem(listID, null));
   }
   else
   {
-    var newItem = new SizeItem(listID, 0);
+    var newItem = new SizeItem(listID, null);
     array.push(newItem);
     //state = [...state, newItem];
   }
@@ -118,10 +121,10 @@ function reorderListID(state : SizeItem[]) : SizeItem[]
   return state;
 }
 
-function updateSize(array, payload)
+function updateSize(array, itemIndex:number, size:Size)
 {
   return array.map((item, index) => {
-    if (index !== payload.index) {
+    if (index !== itemIndex) {
       // This isn't the item we care about - keep it as-is
       return item
     }
@@ -129,7 +132,7 @@ function updateSize(array, payload)
     // Otherwise, this is the one we want - return an updated value
     return {
       ...item,
-      ...new SizeItem(payload.index, payload.sizeID)
+      ...new SizeItem(itemIndex, size)
     }
   })
 }

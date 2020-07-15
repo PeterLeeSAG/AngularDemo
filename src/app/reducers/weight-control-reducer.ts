@@ -1,19 +1,19 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
 import { WeightControlActionTypes, WeightControlAction } from '../actions/weight-control-action-types';
-import { SizeItem } from '../models/size';
+import { SizeItem, Size } from '../models/size';
   
 export const initialState = []; //object for the Weight List
 
 export function WeightListReducer(state = initialState, action: WeightControlAction){
     var comboIndex: number;
     var orderIndex: number;
-    var sizeId: number;
+    var size: Size;
     var matCalTypeId: number;  
 
     matCalTypeId = action.payload.matCalTypeId;
     comboIndex = action.payload.comboIndex;
     orderIndex = action.payload.orderIndex;
-    sizeId = action.payload.sizeId;
+    size = action.payload.size;
 
     if (action.payload != undefined)
     {
@@ -21,7 +21,7 @@ export function WeightListReducer(state = initialState, action: WeightControlAct
       + " @ "
       + "combo ID: " + comboIndex
       + ", order ID: " + orderIndex
-      + ", size ID: " + sizeId
+      + ", size ID: " + size.id
       + ", mat type ID: " + matCalTypeId);
     }
 
@@ -43,6 +43,7 @@ export function WeightListReducer(state = initialState, action: WeightControlAct
     }
 }
 
+/*
 //Internal functions for size item list
 function sizeRemoved(state: SizeItem[], listID: number) : SizeItem[]
 {
@@ -73,6 +74,7 @@ function sizeAdded(state: SizeItem[], listID: number) : SizeItem[]
   
   return reorderListID(array);
 }
+*/
 
 function reorderListID(state : SizeItem[]) : SizeItem[]
 {
@@ -97,7 +99,7 @@ function updateSize(array, payload)
     // Otherwise, this is the one we want - return an updated value
     return {
       ...item,
-      ...new SizeItem(payload.index, payload.sizeID)
+      ...new SizeItem(payload.index, payload.size)
     }
   })
 }

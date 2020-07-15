@@ -19,10 +19,10 @@ export class SizeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sizeSelected(sizeInfo: {'listID':number, 'sizeID': number})
+  sizeSelected(sizeInfo: {'listID':number, 'size': Size})
   {
-    this.store.dispatch(new UpdateSizeItem({index: sizeInfo.listID, sizeID: sizeInfo.sizeID}))
-    console.log("selected size id " + sizeInfo.sizeID + " @ " + sizeInfo.listID)
+    this.store.dispatch(new UpdateSizeItem({index: sizeInfo.listID, size: sizeInfo.size}))
+    console.log("selected size id " + sizeInfo.size.id + "(" + sizeInfo.size.name + ")" + " @ " + sizeInfo.listID)
   }
 
   sizeUpdated(sizeAction: {"posID":number, "action":string})
