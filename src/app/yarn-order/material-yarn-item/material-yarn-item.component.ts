@@ -3,6 +3,8 @@ import { MaterialYarn } from 'src/app/models/materialYarn';
 import { Material } from 'src/app/models/material';
 import { Company } from 'src/app/models/company';
 import { ReducerHelper } from 'src/app/share/reducer-helper'
+import { CommonHelper } from 'src/app/share/common-helper'
+import { AlertService } from 'src/app/_alert';
 
 @Component({
   selector: 'app-material-yarn-item',
@@ -19,8 +21,14 @@ export class MaterialItemComponent implements OnInit {
   public currencyList: [{id:number, name:string}];
   public itemMaterialYarn: MaterialYarn; //self editable matYarn object
   public reducerHelper: ReducerHelper;
+  private alertOptions = {
+    autoClose: true,
+    keepAfterRouteChange: true,
+    showSeconds: 5,
+    topPadding: 65
+  };
 
-  constructor() { 
+  constructor(public alertService: AlertService) { 
     this.prepareShipmentMethods();
     this.prepareCurrencyList();
   }
@@ -118,9 +126,16 @@ export class MaterialItemComponent implements OnInit {
     this.updateMatYarnInfo();
   }
 
-  onSupplierPriceUpdate(price: number)
+  onSupplierPriceUpdate(price: string)
   {
-    this.itemMaterialYarn.supplierUnitPrice = price;
+    if (CommonHelper.CheckNumeric(price))
+    {
+      this.itemMaterialYarn.supplierUnitPrice = Number(price);
+    }
+    else
+    {
+      this.alertService.warn("毛商單價必須為數值.", this.alertOptions)
+    }
     this.updateMatYarnInfo();
   }
 
@@ -154,9 +169,17 @@ export class MaterialItemComponent implements OnInit {
     this.updateMatYarnInfo();
   }
 
-  onBuyerPriceUpdate(price: number)
+  onBuyerPriceUpdate(price: string)
   {
-    this.itemMaterialYarn.buyerUnitPrice = price;
+    if (CommonHelper.CheckNumeric(price))
+    {
+      this.itemMaterialYarn.buyerUnitPrice = Number(price);
+    }
+    else
+    {
+      this.alertService.warn("客人單價必須為數值.", this.alertOptions)
+    }
+
     this.updateMatYarnInfo();
   }
 

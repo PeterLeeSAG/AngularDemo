@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//Angular material modules
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -29,13 +30,13 @@ import { MatCalReducer } from './reducers/mat-cal-reducer';
 import { MatYarnListReducer } from './reducers/mat-yarn-list-reducer';
 import { WeightListReducer } from './reducers/weight-control-reducer';
 
-//import { MainNavComponent } from './main-nav/main-nav.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JobOrderComponent } from './job-order/job-order.component';
 
 //Featured Modules
+import { AppRoutingModule } from './app-routing.module';
 import { AlertModule } from './_alert';
 import { YarnOrderModule } from "./yarn-order/yarn-order.module"
 
@@ -71,8 +72,6 @@ import { MenuService } from './services/menu.services';
     MatMenuModule,
     LayoutModule,
     NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatNativeDateModule,
     AlertModule,
     YarnOrderModule,

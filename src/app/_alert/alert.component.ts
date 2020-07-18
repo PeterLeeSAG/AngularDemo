@@ -14,20 +14,17 @@ import { style } from '@angular/animations';
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
-    @Input() showSeconds : number = 10;
-    @Input() topPadding : number = 65;
     
     isDebug: boolean = false;
     alerts: Alert[] = [];
     alertSubscription: Subscription;
     routeSubscription: Subscription;
     iconName: string = "";
+    topPadding: number = 65;
 
     constructor(private router: Router, private alertService: AlertService) { }
 
     ngOnInit() {
-        style["top"] = this.topPadding; // set top value for the css
-
         //Listen to the scroll event if needed
         window.addEventListener('scroll', this.scroll, true); //third parameter
 
@@ -44,12 +41,14 @@ export class AlertComponent implements OnInit, OnDestroy {
                     return;
                 }
 
+                this.topPadding = alert.topPadding; // set top value for the css
+
                 // add alert to array
                 this.alerts.push(alert);
 
                 // auto close alert if required
                 if (alert.autoClose) {
-                    setTimeout(() => this.removeAlert(alert), this.showSeconds * 1000);
+                    setTimeout(() => this.removeAlert(alert), alert.showSeconds * 1000);
                 }
            });
 
@@ -69,6 +68,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     removeAlert(alert: Alert) {
+        console.log("Remove Alert.");
         // check if already removed to prevent error on auto close
         if (!this.alerts.includes(alert)) return;
 

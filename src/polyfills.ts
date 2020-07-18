@@ -65,3 +65,5 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+import 'core-js/es/object'; //solve security error issue on ie11 
+import 'core-js/es/array'; //support for contains method on array
