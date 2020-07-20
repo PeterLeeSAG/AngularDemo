@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Order } from '../../models/order';
+import { ColorOrder } from '../../models/colorOrder';
 import { MatCalType } from 'src/app/models/matCalType';
 import { select, Store } from '@ngrx/store'; 
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./order-table.component.css']
 })
 export class OrderTableComponent implements OnInit {
-  @Input() order : Order;
+  @Input() order : ColorOrder;
   @Input() nextRefID : number;
   @Output() changeFtyMixedMat = new EventEmitter<number>();
   @Output() addFtyMixedMat = new EventEmitter<number>();

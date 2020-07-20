@@ -1,4 +1,4 @@
-export interface Order {
+export interface ColorOrder {
     id: number;
     code: string;
     name: string;

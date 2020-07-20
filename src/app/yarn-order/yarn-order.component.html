@@ -14,72 +14,9 @@
 
 <div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>組合資料</b> <br>
-    <div class="container">
-    <div class="row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-2" *ngFor="let combo of combos; index as i">
-            <div class="container">
-                <div class="row">  
-                    <div class="col-md-12">
-                        <app-combo-head 
-                        [combo]="combo"
-                        [currIndex]=i
-                        [maxIndex]=combos.length-1
-                        (addCombo)="onAddCombo($event)"
-                        (removeCombo)="onRemoveCombo($event)"
-                        (moveComboLeft)="onComboMoveLeft($event)"
-                        (moveComboRight)="onComboMoveRight($event)"></app-combo-head>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <app-combo-table 
-                        [combo]="combo"
-                        (comboUpdate)="onComboUpdate($event)"></app-combo-table>
-                    </div>
-                </div>
-            </div> <!--Combo table end-->
-        </div>
-        <div class="col-md-2">
-            <button mat-raised-button (click)="onPushCombo()">新增色組</button>
-        </div>
-    </div> <!--Header Row End-->
-    <div class="row" *ngFor="let order of orders; index as j">
-    <!--Order Row-->
-        <div class="col-md-2">
-            <div class="container">
-                <div class="row">                    
-                    <app-order-head
-                        [order]="order"
-                        [currIndex]=j
-                        [maxIndex]=orders.length-1
-                        (addOrder)="onAddOrder($event)"
-                        (removeOrder)="onRemoveOrder($event)"
-                        (moveOrderUp)="onOrderMoveUp($event)"
-                        (moveOrderDown)="onOrderMoveDown($event)">
-                    </app-order-head>
-                </div>
-                <div class="row">
-                    <app-order-table
-                        [order]="order"
-                        [nextRefID]="checkNextRefID(order.id)"
-                        (changeFtyMixedMat)="onToggleMixedMat($event)"
-                        (addFtyMixedMat)="onAddMatFtyOrder($event)">
-                    </app-order-table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2"  *ngFor="let combo of combos; index as k">
-            <!--For Combo Order Mat objects-->
-            <app-combo-order-details [comboOrderDetail]="getComboOrderDetail(combo.id,order.id)"></app-combo-order-details>
-        </div>
-    </div>
-    <div class="row">
-        <button mat-raised-button (click)="onPushOrder()">新增間色</button>
-    </div>
-    </div> <!--Table End-->
+    <app-combo-order-matrix></app-combo-order-matrix>
 </div>
+
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <b>尺碼清單</b>
     <app-size-list></app-size-list>
@@ -116,8 +53,8 @@
 <div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>Order Information:</b>
     <ul>
-        <li *ngFor="let order of orders; index as i">
-            Order index: {{ i }}
+        <li *ngFor="let order of colorOrders; index as i">
+            Color Order index: {{ i }}
             id: {{order.id}}
             code: {{order.code}}
             name: {{order.name}}

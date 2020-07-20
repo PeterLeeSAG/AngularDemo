@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Order } from '../../models/order';
+import { ColorOrder } from '../../models/colorOrder';
 
 @Component({
   selector: 'app-order-head',
@@ -7,7 +7,7 @@ import { Order } from '../../models/order';
   styleUrls: ['./order-head.component.css']
 })
 export class OrderHeadComponent implements OnInit {
-  @Input() order : Order;
+  @Input() order : ColorOrder;
   @Input() currIndex: number;
   @Input() maxIndex: number;
   @Output() addOrder = new EventEmitter<number>();

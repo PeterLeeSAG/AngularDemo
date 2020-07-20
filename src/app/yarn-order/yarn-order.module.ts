@@ -44,6 +44,8 @@ import { StyleHeadComponent } from './style-head/style-head.component';
 import { AutocompleteMaterialDropdownComponent } from './autocomplete-material-dropdown/autocomplete-material-dropdown.component';
 import { AutocompleteSupplierDropdownComponent } from './autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
 import { AutocompleteArticleDropdownComponent } from './autocomplete-article-dropdown/autocomplete-article-dropdown.component';
+import { ComboOrderMatrixComponent } from './combo-order-matrix/combo-order-matrix.component';
+
 //Services
 import { MaterialService } from '../services/material.service';
 import { SupplierService } from '../services/supplier.service';
@@ -71,6 +73,7 @@ import { ArticleService } from '../services/article.service';
     AutocompleteMaterialDropdownComponent,
     AutocompleteSupplierDropdownComponent,
     AutocompleteArticleDropdownComponent,
+    ComboOrderMatrixComponent,
   ],
   imports: [
     CommonModule,
