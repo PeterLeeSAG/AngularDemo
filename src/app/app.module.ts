@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { StoreModule } from '@ngrx/store'; 
+import { StyleListReducer } from './reducers/style-list-reducer';
 import { SizeListReducer } from './reducers/size-list-reducer';
 import { MatCalReducer } from './reducers/mat-cal-reducer';
 import { MatYarnListReducer } from './reducers/mat-yarn-list-reducer';
@@ -76,8 +77,9 @@ import { MenuService } from './services/menu.services';
     AlertModule,
     YarnOrderModule,
     StoreModule.forRoot({
+      styleItems: StyleListReducer,
       sizeItems: SizeListReducer,
-      matCalType: MatCalReducer, 
+      matCalType: MatCalReducer,
       materialYarns: MatYarnListReducer,
       }),
     ],

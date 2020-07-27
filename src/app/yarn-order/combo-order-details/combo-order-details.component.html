@@ -3,9 +3,9 @@
         <td>        
             <mat-form-field>
                 <mat-label>[毛]</mat-label>
-                <mat-select [(ngModel)]="comboOrderDetail.materialID" name="material">
+                <mat-select [(ngModel)]="comboOrderDetail.materialID" name="material" (selectionChange)="setSelectedMaterial($event)">
                   <mat-option *ngFor="let material of this.materialYarns$ | async"
-                   [value]="material.id" >
+                   [value]="material.id">
                     {{ material.threadCount + " " 
                     + (material.material !== undefined ? material.material.name : "") + " " 
                     + (material.supplier !== undefined ? material.supplier.englishName : "") + " "
@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td>
-            <mat-label>[毛] {{ getSelectedMaterialName() }}</mat-label>
+            <mat-label>[毛] {{ selectedMaterialName }}</mat-label>
         </td>
     </tr>
     <tr>

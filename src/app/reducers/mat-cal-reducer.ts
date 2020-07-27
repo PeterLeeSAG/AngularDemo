@@ -1,10 +1,17 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
 import { MatCalAction, MatCalActionTypes } from '../actions/mat-cal-action-types';
+import { ReducerHelper } from '../share/reducer-helper';
   
 export const initialState = 0;
 
 export function MatCalReducer(state = initialState, action: MatCalAction){
   switch (action.type) {
+      case MatCalActionTypes.Preload:
+        console.log(action.type + ", preloading TypeId:" + action.payload.typeID);
+        var reducerHelper = new ReducerHelper();
+        state = reducerHelper.bestCopyEver(action.payload.typeID);
+        return state
+
       case MatCalActionTypes.Load:
         console.log(action.type);
         return state

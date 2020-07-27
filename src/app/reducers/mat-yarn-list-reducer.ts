@@ -1,6 +1,8 @@
 import { ActionReducer, Action, ActionReducerMap } from '@ngrx/store';
 import { MaterialYarn } from '../models/materialYarn';
 import { MatYarnListActionTypes, MatYarnListAction } from '../actions/mat-yarn-list-action-types';
+import { getuid } from 'process';
+import { CommonHelper } from '../share/common-helper';
   
 export const initialState = []; //list of generic type
 
@@ -8,6 +10,7 @@ export function MatYarnListReducer(state = initialState, action: MatYarnListActi
     const isDebug: boolean = true;  
     var index: number;
     var matYarn: MaterialYarn;
+    var id = CommonHelper.GenGuid(); //gen new id for the new item
 
     if (action.payload !== undefined && action.payload.index !== undefined)
     {
@@ -26,14 +29,14 @@ export function MatYarnListReducer(state = initialState, action: MatYarnListActi
 
         case MatYarnListActionTypes.AddMatYarn:
           if (index == -1)
-          {
-            return [...state, new MaterialYarn(index, 0)];
+          {            
+            return [...state, new MaterialYarn(id, 0)];
           }
           else
           {
             return [
               ...state.slice(0, index),
-              new MaterialYarn(index, 0),
+              new MaterialYarn(id, 0),
               ...state.slice(index)
             ];
           }

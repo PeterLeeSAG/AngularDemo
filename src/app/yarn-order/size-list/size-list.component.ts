@@ -3,6 +3,7 @@ import { Size, SizeItem } from 'src/app/models/size';
 import { select, Store } from '@ngrx/store'; 
 import { Observable } from 'rxjs';
 import { LoadSizeList, AddSizeItem, RemoveSizeItem, UpdateSizeItem, MoveSizeItemUp, MoveSizeItemDown } from 'src/app/actions/size-list-action-types'
+import { EventAction } from 'src/app/models/eventAction';
 
 @Component({
   selector: 'app-size-list',
@@ -25,21 +26,21 @@ export class SizeListComponent implements OnInit {
     console.log("selected size id " + sizeInfo.size.id + "(" + sizeInfo.size.name + ")" + " @ " + sizeInfo.listID)
   }
 
-  sizeUpdated(sizeAction: {"posID":number, "action":string})
+  sizeUpdated(sizeAction: EventAction)
   {
     switch (sizeAction.action)
     {
       case "add":
-        this.sizeAdded(sizeAction.posID);
+        this.sizeAdded(sizeAction.index);
         break;
       case "remove":
-        this.sizeRemoved(sizeAction.posID);
+        this.sizeRemoved(sizeAction.index);
         break;
       case "up":
-        this.sizeMoveUp(sizeAction.posID);
+        this.sizeMoveUp(sizeAction.index);
         break;
       case "down":
-        this.sizeMoveDown(sizeAction.posID);
+        this.sizeMoveDown(sizeAction.index);
         break;
     }
   }

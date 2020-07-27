@@ -8,6 +8,8 @@
 /bazel-out
 /bin
 /obj/debug
+/SAGWebApi/bin
+/SAGWebApi/obj/debug
 
 # dependencies
 /node_modules

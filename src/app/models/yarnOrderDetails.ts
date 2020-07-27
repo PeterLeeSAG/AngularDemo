@@ -6,7 +6,7 @@ import { ColorOrder } from './colorOrder';
 import { ComboOrderDetail } from './comboOrderDetail';
 
 export class YarnOrderModel {
-    public styleInfoList : StyleInfo[];
+    public styleList : StyleInfo[];
     public materialYarns : MaterialYarn[];
     public sizes : SizeItem[];
     public combos : Combo[];

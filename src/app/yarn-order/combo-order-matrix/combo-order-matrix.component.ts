@@ -15,7 +15,7 @@ export class ComboOrderMatrixComponent implements OnInit {
   combos = [];
   colorOrders = [];
   comboOrderDetails = [];
-  styleInfo: StyleInfo;
+  style: StyleInfo;
   currOrderID = 0;
   currComboID = 0;
 
@@ -35,8 +35,8 @@ export class ComboOrderMatrixComponent implements OnInit {
   onInitCreateData()
   {
     //Initial the testing data model
-    this.styleInfo = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
-    this.styleInfo.factoryStyleNumber = "Test";
+    this.style = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
+    this.style.factoryStyleNumber = "Test";
 
     this.combos = [
       {"id":1,"code":"A","chineseName":"紅色","englishName":"Red"},
@@ -115,9 +115,9 @@ export class ComboOrderMatrixComponent implements OnInit {
     console.log(combo.id);
   }
 
-  onStyleInfoUpdate(styleInfo: StyleInfo)
+  onStyleInfoUpdate(style: StyleInfo)
   {
-    console.log("Update to style name: " + styleInfo.factoryStyleNumber);
+    console.log("Update to style name: " + style.factoryStyleNumber);
   }
 
   onAddOrder(orderID: number)

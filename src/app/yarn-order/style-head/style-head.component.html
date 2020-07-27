@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row">
+    <div class="row"  *ngIf="this.style !== undefined && this.style.factoryStyleNumber !== undefined">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
               <div class="col-xs-2 col-sm-2"> &nbsp; </div>
-              <div class="col-xs-2 col-sm-2"> 廠款號: </div>
-              <div class="col-xs-6 col-sm-6"> &nbsp; <input type="text" size=30 [(ngModel)]="styleInfo.factoryStyleNumber" name="factoryStyleNumber" ngDefaultControl /></div>
+              <div class="col-xs-2 col-sm-2"> {{index+1}}) 廠款號: </div>
+              <div class="col-xs-6 col-sm-6"> &nbsp; <input type="text" size=30 [value]="style.factoryStyleNumber" (change)="onStyleInfoChange($event.target.value)" name="factoryStyleNumber" ngDefaultControl /></div>
               <div class="col-xs-2 col-sm-2"> &nbsp; </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 *ngFor="let matCalItem of matCalItems; let i=index"
                 (change)="onMaterialCalUpdate($event.value)"
                 [value]="matCalItem.typeID"
-                [checked]="(this.matCalType | async)==matCalItem.typeID">{{matCalItem.typeText}}&nbsp;&nbsp;</mat-radio-button>
+                [checked]="(this.matCalType$ | async)==matCalItem.typeID">{{matCalItem.typeText}}&nbsp;&nbsp;</mat-radio-button>
             </mat-radio-group>
         </div>
     </div>

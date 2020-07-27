@@ -11,6 +11,7 @@ export enum WeightControlActionTypes {
 export class WeightControlAction implements Action {
     type: string;
     payload: {
+      styleIndex: number,
       comboIndex: number,
       orderIndex: number,
       size: Size,
@@ -24,6 +25,7 @@ export class WeightControlAction implements Action {
   export class Load implements Action {
     readonly type = WeightControlActionTypes.Load;  
     constructor(readonly payload: {
+      styleIndex: number, 
       comboIndex: number,
       orderIndex: number}) {  
     }
@@ -32,6 +34,7 @@ export class WeightControlAction implements Action {
   export class UpdateWeightItem implements Action {
     readonly type = WeightControlActionTypes.UpdateWeightItem;  
     constructor(readonly payload: {
+      styleIndex: number, 
       comboIndex: number,
       orderIndex: number,
       size: Size,
@@ -49,6 +52,7 @@ export class WeightControlAction implements Action {
   export class UpdateWeightSize implements Action {
     readonly type = WeightControlActionTypes.UpdateWeightSize;  
     constructor(readonly payload: {
+      styleIndex: number, 
       comboIndex: number,
       orderIndex: number,
       size: Size,

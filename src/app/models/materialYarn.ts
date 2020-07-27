@@ -2,7 +2,7 @@ import { Material } from './material';
 import { Company } from './company';
 
 export class MaterialYarn {
-    public id: number; //Could be GUID in production server
+    public id: string; //Could be GUID in production server
     public threadCount: number;
     public material: Material;
     public matType: number; 
@@ -20,7 +20,7 @@ export class MaterialYarn {
 
     // javasrcipt key value pair object
     // {"id":number,"name":string, type: number}
-    constructor(id: number, matType: number)
+    constructor(id: string, matType: number)
     {
         this.id = id;
         this.threadCount = 0;

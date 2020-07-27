@@ -14,29 +14,20 @@ import { LoadMatYarnList } from 'src/app/actions/mat-yarn-list-action-types';
 })
 export class ComboOrderDetailsComponent implements OnInit {
   @Input() comboOrderDetail : ComboOrderDetail;
-  @Input() materials;
   
   selectedMaterialID : number;
-  selectedMaterialName : string;
+  selectedMaterialName : String = "";
   pendingButtonName : string;
   //"待覆":"實數"
   matCalType$ : Observable<MatCalType>;
   materialYarns$ : Observable<MaterialYarn[]>;
-
+  
   constructor(private store: Store<{ matCalType: MatCalType, materialYarns:MaterialYarn[] }>) { 
     this.matCalType$ = store.pipe(select('matCalType'));
     this.materialYarns$ = store.pipe(select('materialYarns'));
   }
 
   ngOnInit(): void {
-    //TODO: select materials by MaterialService via WebApi
-    this.materials = [
-      {"id":1,"name":"2/10 100% cotton"},
-      {"id":2,"name":"2/10 90% cotton 10% Lycra"},
-      {"id":3,"name":"2/10 80% cotton 20% Lycra"},
-      {"id":4,"name":"2/10 70% cotton 30% Lycra"}
-    ];
-    this.selectedMaterialName = "";
     if (this.comboOrderDetail.colorNo.trim() == "待覆")
     {
       this.pendingButtonName = "實數";
@@ -47,18 +38,12 @@ export class ComboOrderDetailsComponent implements OnInit {
     }
   }
 
-  setSelectedMaterial(matID: number)
+  setSelectedMaterial(event)
   {
-    this.selectedMaterialName = this.materials.find(
-      function(value){
-        value.id === matID
-      }
-      )[0].name;
-  }
-
-  getSelectedMaterialName()
-  {
-    return this.selectedMaterialName;
+    console.log("material ID selected...");    
+    console.log(event.source.value);
+    console.log(event);
+    this.selectedMaterialName = event.source.selected.viewValue;
   }
 
   onToggleColorNo()

@@ -26,6 +26,7 @@ import { YarnOrderRoutingModule } from './yarn-order-routing.module'
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { YarnOrderComponent } from './yarn-order.component';
+import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { ComboHeadComponent } from './combo-head/combo-head.component';
 import { ComboOrderDetailsComponent } from './combo-order-details/combo-order-details.component';
 import { ComboTableComponent } from './combo-table/combo-table.component';
@@ -50,6 +51,8 @@ import { ComboOrderMatrixComponent } from './combo-order-matrix/combo-order-matr
 import { MaterialService } from '../services/material.service';
 import { SupplierService } from '../services/supplier.service';
 import { ArticleService } from '../services/article.service';
+import { StyleItemComponent } from './style-item/style-item.component';
+import { StyleListComponent } from './style-list/style-list.component';
 
 //Angular module Decorator
 @NgModule({
@@ -74,6 +77,9 @@ import { ArticleService } from '../services/article.service';
     AutocompleteSupplierDropdownComponent,
     AutocompleteArticleDropdownComponent,
     ComboOrderMatrixComponent,
+    StyleItemComponent,
+    BasicInfoComponent,
+    StyleListComponent,
   ],
   imports: [
     CommonModule,

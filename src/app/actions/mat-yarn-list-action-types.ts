@@ -2,11 +2,12 @@ import { Action } from '@ngrx/store';
 import { MaterialYarn } from '../models/materialYarn';
 
 export enum MatYarnListActionTypes {
-    LoadList = '[Mat Yarn List] LOAD',
-    AddMatYarn = '[Mat Yarn List] ADD ITEM',
-    CopyMatYarn = '[Mat Yarn List] COPY ITEM',
-    RemoveMatYarn = '[Mat Yarn List] REMOVE ITEM',
-    UpdateMatYarn = '[Mat Yarn List] UPDATE ITEM',
+  LoadList = '[Mat Yarn List] LOAD',
+  AddMatYarn = '[Mat Yarn List] ADD ITEM',
+  CopyMatYarn = '[Mat Yarn List] COPY ITEM',
+  RemoveMatYarn = '[Mat Yarn List] REMOVE ITEM',
+  UpdateMatYarn = '[Mat Yarn List] UPDATE ITEM',
+
 }
 
 export class MatYarnListAction implements Action {

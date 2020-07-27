@@ -13,10 +13,11 @@ import { AlertService } from '../_alert';
 })
 export class YarnOrderComponent implements OnInit {
 info = ['1','2','3','4'];
+
 combos = [];
 colorOrders = [];
 comboOrderDetails = [];
-styleInfo: StyleInfo;
+//style: StyleInfo;
 currOrderID = 0;
 currComboID = 0;
 alertOptions = {
@@ -34,9 +35,8 @@ alertOptions = {
 
   onInitCreateData()
   {
-    //Initial the testing data model
-    this.styleInfo = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
-    this.styleInfo.factoryStyleNumber = "Test";
+    // //Initial the testing data model
+    // this.style = new StyleInfo("Test", 0); //{"factoryStyleNo":"TEST", "calculationTypeId":0};
+    // this.style.factoryStyleNumber = "Test";
   }
-
 }

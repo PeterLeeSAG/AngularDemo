@@ -2,8 +2,9 @@ import { Action } from '@ngrx/store';
 import { MatCalType } from '../models/matCalType';
 
 export enum MatCalActionTypes {
-    Load = '[Mat Cal] LOAD',
-    Update = '[Mat Cal] UPDATE'
+  Preload = "[Mat Cal] PRELOAD",
+  Load = '[Mat Cal] LOAD',
+  Update = '[Mat Cal] UPDATE',
 }
 
 export class MatCalAction implements Action {
@@ -12,6 +13,12 @@ export class MatCalAction implements Action {
     typeID: number,
     error: string
   };
+}
+
+export class PreloadMatCal implements Action {
+  readonly type = MatCalActionTypes.Preload;  
+  constructor(readonly payload: {typeID: number}) {
+  }
 }
 
 export class LoadMatCal implements Action {

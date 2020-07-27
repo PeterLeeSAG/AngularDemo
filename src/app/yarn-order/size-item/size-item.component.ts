@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { Size } from '../../models/size';
+import { EventAction } from 'src/app/models/eventAction';
 
 @Component({
   selector: 'app-size-item',
@@ -10,14 +11,17 @@ export class SizeItemComponent implements OnInit {
   sizes: Size[]; 
   @Input() index: number;
   @Input() itemSize: {"listID":number, "size" : Size};
-  @Output() result = new EventEmitter<{"posID":number, "action":string}>(); //Send posID, sizeID and action
+  @Output() result = new EventEmitter<EventAction>(); //Send posID, sizeID and action
   @Output() sizeSelected = new EventEmitter<{'listID':number, 'size': Size}>();
   @ViewChild('sizeSelection') sizeSelection : ElementRef;
   public selectedSize: Size;
+  event: EventAction;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.event = new EventAction();
+    this.event.index = this.index;
     this.initSize();
   }
 
@@ -60,23 +64,27 @@ export class SizeItemComponent implements OnInit {
 
   onAddSize(id: number)
   {
-    this.result.emit({"posID":this.index, "action":"add"})
+    this.event.action = "add";
+    this.result.emit(this.event);
   }
 
   onRemoveSize(id: number)
   {
-    this.result.emit({"posID":this.index, "action":"remove"})
+    this.event.action = "remove";
+    this.result.emit(this.event);
   }
 
   onMoveSizeUp(id: number)
   {
     console.log("click up @ " + this.index);
-    this.result.emit({"posID":this.index, "action":"up"})
+    this.event.action = "up";
+    this.result.emit(this.event);
   }
 
   onMoveSizeDown(id: number)
   {
     console.log("click down @ " + this.index);
-    this.result.emit({"posID":this.index, "action":"down"})
+    this.event.action = "down";
+    this.result.emit(this.event);
   }
 }

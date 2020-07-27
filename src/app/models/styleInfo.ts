@@ -1,6 +1,12 @@
 export class StyleInfo {
     public factoryStyleNumber: string; //could be GUID in production server
-    public calculationTypeId: number;
+    public calculationTypeId: number; //calculation method
+
+    //store the state of the related components
+    public combos = [];
+    public colorOrders = [];
+    public comboOrderDetails = [];
+    public sizeItems = [];
     
     // javasrcipt key value pair object
     // {"factoryStyleNumber":string, "calculationTypeId":number}
@@ -10,4 +16,3 @@ export class StyleInfo {
         this.calculationTypeId = calculationTypeId;
     }
   }
-  
