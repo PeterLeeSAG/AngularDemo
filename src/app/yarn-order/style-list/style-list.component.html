@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">編輯色組/用毛比例/尺碼:</div>
+    </div>
+    <div class="row">
+        <app-style-item     
+        *ngFor="let style of (styleItems$ | async); let i=index"
+            [index]="i"
+            [style]="style"
+            (styleAtion)="onStyleAction($event)"
+        ></app-style-item>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <BUTTON (click)="onAddStyle(-1)" class=sbttn>加入新款號</BUTTON>
+        </div>
+    </div>
+</div>
+
+<app-style-head 
+[index]="styleIndex" 
+[style]="style"
+(updatedStyle)="onStyleUpdate($event)"></app-style-head>

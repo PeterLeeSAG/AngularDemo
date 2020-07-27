@@ -22,12 +22,12 @@
     <app-combo-order-matrix></app-combo-order-matrix>
 </div>
 
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
+<div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>尺碼清單</b>
     <app-size-list></app-size-list>
 </div>
 
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
+<div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>Max combo & order ID:</b><br>
     combo ID: {{this.currComboID}} <br>
     order ID: {{this.currOrderID}}
@@ -42,7 +42,7 @@
     <button class="btn btn-outline-dark m-1" (click)="alertService.clear()">Clear</button>
 </div>
 
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
+<div class="shadow-sm p-2 mb-3 bg-white rounded">
     <b>Combo Information:</b>
     <ul>
         <li *ngFor="let combo of combos; index as i">

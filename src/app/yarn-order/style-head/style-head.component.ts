@@ -58,7 +58,7 @@ export class StyleHeadComponent implements OnInit {
     this.myStyle.calculationTypeId = mTypeID;    
     this.store.dispatch(new UpdateMatCal({typeID: mTypeID}));
 
-    console.log("selected style calculation type id: " + mTypeID);
+    console.log("Selected style calculation type id: " + mTypeID);
     console.log(this.myStyle);
 
     this.updatedStyle.emit({

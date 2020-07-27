@@ -1,0 +1,43 @@
+<div class="container-fluid" cellSpacing=1 cellPadding=0 border=0>
+    <div class="row">
+        <div class="col-md-1">訂單總件數 : </div>
+        <div class="col-md-10">10273件</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">預告單總件數 : </div>
+        <div class="col-md-10"><input type="text" name="mg_qty" value="10273" size="6" style="text-align:right" readonly="">件&nbsp;<font color="red">(確認後，由尺碼件數總和帶入，有機會與訂單件數不同)</font></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">訂毛總磅數 : </div>
+        <div class="col-md-10"><input type="text" name="mg_weight" value="7079" size="6" style="text-align:right" readonly="">磅&nbsp;<font color="red">(確認後，由預告單總磅數帶入)</font></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">首天訂毛 : </div>
+        <div class="col-md-10"><input type="text" name="WoolOrderDate_day" value="27" size="2" style="text-align:right" onchange="CalPlanWoolDate()">日<input type="text" name="WoolOrderDate_month" value="11" size="2" style="text-align:right" onchange="CalPlanWoolDate()">月<input type="text" name="WoolOrderDate_year" value="2019" size="4" style="text-align:right" onchange="CalPlanWoolDate()">年&nbsp;+&nbsp;毛料需時<input type="text" name="WoodNeedDay" value="45" size="2" style="text-align:right" onchange="CalPlanWoolDate()">天&nbsp;+&nbsp;運輸需時<input type="text" name="WoodTransportDay" value="10" size="2" style="text-align:right" onchange="CalPlanWoolDate()">天&nbsp;+&nbsp;農歷年假<input type="text" name="WoodLunarDay" value="0" size="2" style="text-align:right" onchange="CalPlanWoolDate()">天&nbsp;&nbsp;<font color="red">(毛料需時 及 運輸需時 必須輸入，若全批用存毛，則各輸入一天)</font></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">預最早到廠期 : </div>
+        <div class="col-md-10"><input type="text" name="PlanWoolDate_day" value="21" size="2" style="text-align:right" readonly="">日<input type="text" name="PlanWoolDate_month" value="1" size="2" style="text-align:right" readonly="">月<input type="text" name="PlanWoolDate_year" value="2020" size="4" style="text-align:right" readonly="">年</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">預算開織日期 : </div>
+        <div class="col-md-10"><input type="text" name="StartKnitDate_day" value="3" size="2" style="text-align:right">日<input type="text" name="StartKnitDate_month" value="2" size="2" style="text-align:right">月<input type="text" name="StartKnitDate_year" value="2020" size="4" style="text-align:right">年<font color="red">(儲存後，會覆蓋所有版本的成本表內的預算開織日期)</font></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">毛期備註 : </div>
+        <div class="col-md-10"><textarea name="remark_83" rows="5" cols="80"></textarea></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">備註 : </div>
+        <div class="col-md-10"><textarea name="remark_82" rows="5" cols="80">11月27日確定訂毛
+            11月28日補回AA5色號
+            12月2日: 此單訂毛時先要扣回上季2019C05004, 005, 006之大貨餘毛 SA91992(197深花灰-130磅); SA91997(160淺花灰-130磅); SA91998(176寶藍色-220磅)
+            2月21日: 修改數量, 不用改毛單!
+            6月5日:修正英文色名!</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">記錄修正摘要 :  </div>
+        <div class="col-md-10"><input type="text" name="remark_88" value="" size="150" maxlength="120"><br><font color="red" size="1">*只顯示首約50個字母, 對上一次修正摘要: 6月5日:修正英文色名!</font></div>
+    </div>
+</div>

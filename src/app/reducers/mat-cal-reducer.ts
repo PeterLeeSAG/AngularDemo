@@ -7,9 +7,10 @@ export const initialState = 0;
 export function MatCalReducer(state = initialState, action: MatCalAction){
   switch (action.type) {
       case MatCalActionTypes.Preload:
-        console.log(action.type + ", preloading TypeId:" + action.payload.typeID);
+        console.log(action.type + ", for preloading TypeId: " + action.payload.typeID);
         var reducerHelper = new ReducerHelper();
-        state = reducerHelper.bestCopyEver(action.payload.typeID);
+        //state = reducerHelper.bestCopyEver(action.payload.typeID);
+        state = action.payload.typeID;
         return state
 
       case MatCalActionTypes.Load:
