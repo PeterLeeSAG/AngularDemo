@@ -7,6 +7,7 @@ export enum StyleListActionTypes {
     EditStyleItem = '[Style List] EDIT ITEM', //For start the edit mode for the style item
     RemoveStyleItem = '[Style List] REMOVE ITEM',
     UpdateStyleItem = '[Style List] UPDATE ITEM',
+    UpdateStyleDetails = '[Style List] UPDATE DETAILS',
 }
 
 export class StyleListAction implements Action {
@@ -37,8 +38,16 @@ export class StyleListAction implements Action {
     }
   }
 
+  //Update the style header data
   export class UpdateStyleItem implements Action {
     readonly type = StyleListActionTypes.UpdateStyleItem;  
+    constructor(readonly payload: {index: number, style: StyleInfo}) {
+    }
+  }
+
+  //Update the matrix information
+  export class UpdateStyleDetails implements Action {
+    readonly type = StyleListActionTypes.UpdateStyleDetails;  
     constructor(readonly payload: {index: number, style: StyleInfo}) {
     }
   }

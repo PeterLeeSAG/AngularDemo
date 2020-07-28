@@ -38,8 +38,6 @@ import { JobOrderComponent } from './job-order/job-order.component';
 
 //Featured Modules
 import { AppRoutingModule } from './app-routing.module';
-import { AlertModule } from './_alert';
-import { YarnOrderModule } from "./yarn-order/yarn-order.module"
 
 //Services
 import { MenuService } from './services/menu.services';
@@ -74,8 +72,6 @@ import { MenuService } from './services/menu.services';
     LayoutModule,
     NgbModule,
     MatNativeDateModule,
-    AlertModule,
-    YarnOrderModule,
     StoreModule.forRoot({
       styleItems: StyleListReducer,
       sizeItems: SizeListReducer,

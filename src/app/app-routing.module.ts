@@ -8,7 +8,12 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'jobOrder', component: JobOrderComponent }
+  { path: 'jobOrder', component: JobOrderComponent },
+  { 
+    path: 'yarnOrder', 
+    loadChildren: () => 
+      import('./yarn-order/yarn-order.module').then(m => m.YarnOrderModule) 
+  }
 ];
 
 @NgModule({

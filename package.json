@@ -11,7 +11,7 @@
     "generate": "node ./server/generate.js > ./server/database.json",
     "generate_extra": "node ./server/generate_extra.js > ./server/database.json",
     "server": "json-server --watch ./server/database.json ",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc --properties es5 browser module main --first-only"
   },
   "private": true,
   "dependencies": {

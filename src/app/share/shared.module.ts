@@ -6,7 +6,6 @@ import { ScrollTrackerDirective } from './scroll-tracker.directive';
 
 @NgModule({
     declarations:[
-        AlertModule,
         ScrollTrackerDirective
     ],
     imports:[

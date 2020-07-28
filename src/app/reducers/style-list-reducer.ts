@@ -26,7 +26,8 @@ export function StyleListReducer(state = initialState, action: StyleListAction){
         case StyleListActionTypes.AddStyleItem:
           if (index == -1)
           {
-            return [...state, new StyleInfo(state.length + ') factory number...', 0)];
+            //return [...state, new StyleInfo(state.length + ') factory number...', 0)];
+            return [...state, new StyleInfo('', 0)];
           }
           else
           {

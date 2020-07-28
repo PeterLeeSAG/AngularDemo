@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -20,8 +17,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
 
 //Featured modules
-import { AlertModule } from '../_alert';
 import { YarnOrderRoutingModule } from './yarn-order-routing.module'
+import { SharedModule } from '../share/shared.module'
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -82,9 +79,6 @@ import { StyleListComponent } from './style-list/style-list.component';
     StyleListComponent,
   ],
   imports: [
-    CommonModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatTooltipModule,
     MatCardModule,
@@ -104,8 +98,8 @@ import { StyleListComponent } from './style-list/style-list.component';
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    AlertModule,
     YarnOrderRoutingModule,
+    SharedModule
     ],
   providers: [
     MaterialService,

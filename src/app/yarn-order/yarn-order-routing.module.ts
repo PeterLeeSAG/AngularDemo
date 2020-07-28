@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { YarnOrderComponent } from './yarn-order.component';
 
 const routes: Routes = [
-  { path: 'yarnOrder', 
+  { path: '', 
     component: YarnOrderComponent,
     /*
     children:[
