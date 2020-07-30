@@ -1,22 +1,34 @@
 import { Action } from '@ngrx/store';
 import { Size } from '../models/size';
+import { Combo } from '../models/combo';
+import { ColorOrder } from '../models/colorOrder';
+import { ComboOrderDetail } from '../models/comboOrderDetail';
 
 export enum ComboOrderMatrixActionTypes {
-    LoadSizeList = '[Combo Order Matrix] LOAD',
+    //COMBO
+    LoadComboList = '[Combo Order Matrix] LOAD COMBO',
     AddCombo = '[Combo Order Matrix] ADD COMBO',
     RemoveCombo = '[Combo Order Matrix] REMOVE COMBO',
     UpdateCombo = '[Combo Order Matrix] UPDATE COMBO',
     MoveComboUp = '[Combo Order Matrix] MOVE COMBO UP',
     MoveComboDown = '[Combo Order Matrix] MOVE COMBO DOWN',
 
+    //COLOR ORDER
+    LoadColorOrderList = '[Combo Order Matrix] LOAD COLOR ORDER',
     AddColorOrder = '[Combo Order Matrix] ADD COLOR ORDER',
     RemoveColorOrder = '[Combo Order Matrix] REMOVE COLOR ORDER',
     UpdateColorOrder = '[Combo Order Matrix] UPDATE COLOR ORDER',
     MoveColorOrderUp = '[Combo Order Matrix] MOVE COLOR ORDER UP',
     MoveColorOrderDown = '[Combo Order Matrix] MOVE COLOR ORDER DOWN',
 
-    CompleteSizeList = '[Combo Order Matrix] COMPLETE',
-    ResetSizeList = '[Combo Order Matrix] RESET'
+    //COLOR ORDER DETAILS
+    LoadColorOrderDetail = '[Combo Order Matrix] Load Color Order details',
+    UpdateColorOrderDetail = '[Combo Order Matrix] UPDATE COLOR ORDER DETAILS',
+
+    //WHOLE MATRIX
+    PreloadMatrix = '[Combo Order Matrix] RELOAD',
+    CompleteMatrix = '[Combo Order Matrix] COMPLETE',
+    ResetMatrix = '[Combo Order Matrix] RESET'
 }
 
 export class SizeListAction implements Action {
@@ -28,9 +40,45 @@ export class SizeListAction implements Action {
     };
   }
 
-  export class LoadSizeList implements Action {
-    readonly type = ComboOrderMatrixActionTypes.LoadSizeList;  
-    constructor(readonly payload: {sizeList: Size[]}) {  
+  export class LoadColorOrderList implements Action {
+    readonly type = ComboOrderMatrixActionTypes.LoadColorOrderList;  
+    constructor(readonly payload: {colorOrderList: ColorOrder[]}) {  
+    }
+  }
+
+  export class AddColorOrder implements Action {
+    readonly type = ComboOrderMatrixActionTypes.AddColorOrder;  
+    constructor(readonly payload: {index: number}) {
+    }
+  }
+
+  export class RemoveColorOrder implements Action {
+    readonly type = ComboOrderMatrixActionTypes.RemoveColorOrder;  
+    constructor(readonly payload: {index: number}) {
+    }
+  }
+
+  export class UpdateColorOrder implements Action {
+    readonly type = ComboOrderMatrixActionTypes.UpdateColorOrder;  
+    constructor(readonly payload: {index: number, colorOrder: ColorOrder}) {
+    }
+  }
+
+  export class MoveColorOrderUp implements Action {
+    readonly type = ComboOrderMatrixActionTypes.MoveColorOrderUp;  
+    constructor(readonly payload: {index: number}) {
+    }
+  }
+
+  export class MoveColorOrderDown implements Action {
+    readonly type = ComboOrderMatrixActionTypes.MoveColorOrderDown;  
+    constructor(readonly payload: {index: number}) {
+    }
+  }
+
+  export class LoadComboList implements Action {
+    readonly type = ComboOrderMatrixActionTypes.LoadComboList;  
+    constructor(readonly payload: {comboList: Combo[]}) {  
     }
   }
 
@@ -48,7 +96,7 @@ export class SizeListAction implements Action {
 
   export class UpdateCombo implements Action {
     readonly type = ComboOrderMatrixActionTypes.UpdateCombo;  
-    constructor(readonly payload: {index: number, size: Size}) {
+    constructor(readonly payload: {index: number, combo: Combo}) {
     }
   }
 
@@ -64,4 +112,5 @@ export class SizeListAction implements Action {
     }
   }
     
-  export type SizeListActions = LoadSizeList;
+  export type ComboListActions = LoadComboList;
+

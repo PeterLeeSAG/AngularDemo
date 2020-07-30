@@ -33,6 +33,8 @@ import { JobOrderComponent } from './job-order/job-order.component';
 //Reducers
 import { StoreModule } from '@ngrx/store'; 
 import { AppRoutingModule } from './app-routing.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
 
 //Services
 import { MenuService } from './services/menu.services';
@@ -68,6 +70,11 @@ import { MenuService } from './services/menu.services';
     NgbModule,
     MatNativeDateModule,
     StoreModule.forRoot({}), 
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
     ],
   providers: [
     MenuService
