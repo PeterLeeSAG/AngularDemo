@@ -14,7 +14,7 @@ export class ReducerHelper{
         return results;
     }
 
-    bestCopyEver(src) {
+    deepCopy(src) {
         return Object.assign({}, src);
     }
 }

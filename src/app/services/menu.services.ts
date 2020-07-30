@@ -26,7 +26,7 @@ export class MenuService {
     nestMenu.subMenu = [];
     nestMenu.subMenu.push(new MenuItem("SUB-HOME", "/home"));
     this.menuItems.push(nestMenu);
-    this.menuItems.push(new MenuItem("HOME", "/home"));
+    this.menuItems.push(new MenuItem("AUTH", "/auth"));
     this.menuItems.push(new MenuItem("ABOUT", "/about"));
     this.menuItems.push(new MenuItem("YARN ORDER", "/yarnOrder"));
   }

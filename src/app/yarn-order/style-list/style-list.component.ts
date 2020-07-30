@@ -21,7 +21,7 @@ export class StyleListComponent implements OnInit {
   constructor(private store: Store<{ styleItems: StyleInfo[], matCalType: number }>) {
     this.styleItems$ = store.pipe(select('styleItems')); 
     this.matCalType$ = store.pipe(select('matCalType'));
-    if(this.styleItems$ != undefined)
+    if(this.styleItems$ != undefined && this.styleIndex != undefined)
     {
       this.styleItems$.subscribe(styleItems =>
         this.style = styleItems[this.styleIndex]

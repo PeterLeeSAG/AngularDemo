@@ -43,13 +43,21 @@ import { AutocompleteMaterialDropdownComponent } from './autocomplete-material-d
 import { AutocompleteSupplierDropdownComponent } from './autocomplete-supplier-dropdown/autocomplete-supplier-dropdown.component';
 import { AutocompleteArticleDropdownComponent } from './autocomplete-article-dropdown/autocomplete-article-dropdown.component';
 import { ComboOrderMatrixComponent } from './combo-order-matrix/combo-order-matrix.component';
+import { StyleItemComponent } from './style-item/style-item.component';
+import { StyleListComponent } from './style-list/style-list.component';
+
+//Reducers
+import { StoreModule } from '@ngrx/store'; 
+import { StyleListReducer } from '../reducers/style-list-reducer';
+import { SizeListReducer } from '../reducers/size-list-reducer';
+import { MatCalReducer } from '../reducers/mat-cal-reducer';
+import { MatYarnListReducer } from '../reducers/mat-yarn-list-reducer';
+import { WeightListReducer } from '../reducers/weight-control-reducer';
 
 //Services
 import { MaterialService } from '../services/material.service';
 import { SupplierService } from '../services/supplier.service';
 import { ArticleService } from '../services/article.service';
-import { StyleItemComponent } from './style-item/style-item.component';
-import { StyleListComponent } from './style-list/style-list.component';
 
 //Angular module Decorator
 @NgModule({
@@ -99,7 +107,11 @@ import { StyleListComponent } from './style-list/style-list.component';
     ReactiveFormsModule,
     MatNativeDateModule,
     YarnOrderRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('styleItems', StyleListReducer),
+    StoreModule.forFeature('sizeItems', SizeListReducer),
+    StoreModule.forFeature('matCalType', MatCalReducer),
+    StoreModule.forFeature('materialYarns', MatYarnListReducer),
     ],
   providers: [
     MaterialService,

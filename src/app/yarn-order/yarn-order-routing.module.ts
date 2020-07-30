@@ -5,12 +5,6 @@ import { YarnOrderComponent } from './yarn-order.component';
 const routes: Routes = [
   { path: '', 
     component: YarnOrderComponent,
-    /*
-    children:[
-      {path: 'new', component: YarnOrderEditComponent}
-      {path: ':id', component: YarnOrderDetailComponent}
-    ]
-    */
    },
   
 ];

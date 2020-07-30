@@ -23,7 +23,7 @@ export class StyleHeadComponent implements OnInit {
   constructor(private store: Store<{ matCalType: MatCalType }>) { 
     console.log("constructor style head...")
     console.log(this.style);
-    this.myStyle = this.reducerHelper.bestCopyEver(this.style); //store style value instead of refenence
+    this.myStyle = this.reducerHelper.deepCopy(this.style); //store style value instead of refenence
     this.matCalItems = []; 
     this.matCalType$ = store.pipe(select('matCalType'));
     this.matCalItems.push({'typeID':0,'typeText':"不分色組/碼數計毛"});
@@ -35,7 +35,7 @@ export class StyleHeadComponent implements OnInit {
   ngOnInit(): void {
     console.log("Initializing style head...")
     console.log(this.style);
-    this.myStyle = this.reducerHelper.bestCopyEver(this.style); //store style value instead of refenence
+    this.myStyle = this.reducerHelper.deepCopy(this.style); //store style value instead of refenence
   }
 
   onStyleInfoChange(text : string)

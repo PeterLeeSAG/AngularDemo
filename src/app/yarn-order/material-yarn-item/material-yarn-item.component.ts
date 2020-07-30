@@ -35,7 +35,7 @@ export class MaterialItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.reducerHelper = new ReducerHelper();
-    this.itemMaterialYarn = this.reducerHelper.bestCopyEver(this.materialYarn);
+    this.itemMaterialYarn = this.reducerHelper.deepCopy(this.materialYarn);
   }
 
   //TODO: add the new services class for the following data

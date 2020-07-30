@@ -9,10 +9,16 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'jobOrder', component: JobOrderComponent },
+  /*Lazy Loading for the following modules*/
   { 
     path: 'yarnOrder', 
     loadChildren: () => 
       import('./yarn-order/yarn-order.module').then(m => m.YarnOrderModule) 
+  },
+  { 
+    path: 'auth', 
+    loadChildren: () => 
+      import('./auth/auth.module').then(m => m.AuthModule) 
   }
 ];
 

@@ -24,19 +24,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
 
-import { StoreModule } from '@ngrx/store'; 
-import { StyleListReducer } from './reducers/style-list-reducer';
-import { SizeListReducer } from './reducers/size-list-reducer';
-import { MatCalReducer } from './reducers/mat-cal-reducer';
-import { MatYarnListReducer } from './reducers/mat-yarn-list-reducer';
-import { WeightListReducer } from './reducers/weight-control-reducer';
-
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JobOrderComponent } from './job-order/job-order.component';
 
 //Featured Modules
+//Reducers
+import { StoreModule } from '@ngrx/store'; 
 import { AppRoutingModule } from './app-routing.module';
 
 //Services
@@ -72,12 +67,7 @@ import { MenuService } from './services/menu.services';
     LayoutModule,
     NgbModule,
     MatNativeDateModule,
-    StoreModule.forRoot({
-      styleItems: StyleListReducer,
-      sizeItems: SizeListReducer,
-      matCalType: MatCalReducer,
-      materialYarns: MatYarnListReducer,
-      }),
+    StoreModule.forRoot({}), 
     ],
   providers: [
     MenuService

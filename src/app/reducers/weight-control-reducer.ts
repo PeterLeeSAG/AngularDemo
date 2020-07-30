@@ -10,13 +10,13 @@ export function WeightListReducer(state = initialState, action: WeightControlAct
     var size: Size;
     var matCalTypeId: number;  
 
-    matCalTypeId = action.payload.matCalTypeId;
-    comboIndex = action.payload.comboIndex;
-    orderIndex = action.payload.orderIndex;
-    size = action.payload.size;
-
     if (action.payload != undefined)
     {
+      matCalTypeId = action.payload.matCalTypeId;
+      comboIndex = action.payload.comboIndex;
+      orderIndex = action.payload.orderIndex;
+      size = action.payload.size;
+      
       console.log(action.type
       + " @ "
       + "combo ID: " + comboIndex
