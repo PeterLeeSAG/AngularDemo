@@ -1,10 +1,10 @@
-<button (click)="onMoveSizeUp(itemSize.listID)">^</button>
-<button (click)="onAddSize(itemSize.listID)">+</button>
+<button (click)="onMoveSizeUp(index)">^</button>
+<button (click)="onAddSize(index)">+</button>
     <!-- <select [(ngModel)]="itemSize.sizeID" name="sizeItem"> -->
     <select name="sizeItem" (change)="onSelectSize($event.target.value)" #sizeSelection>
         <option *ngFor="let size of sizes" [selected]="(this.itemSize.size==undefined?0:this.itemSize.size.id)==size.id" [value]="size.id">
         {{size.name}}
         </option>
     </select>
-<button (click)="onRemoveSize(itemSize.listID)">-</button>
-<button (click)="onMoveSizeDown(itemSize.listID)">V</button>
+<button (click)="onRemoveSize(index)">-</button>
+<button (click)="onMoveSizeDown(index)">V</button>

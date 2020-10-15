@@ -65,12 +65,14 @@ export class SizeItemComponent implements OnInit {
   onAddSize(id: number)
   {
     this.event.action = "add";
+    this.event.index = this.index;
     this.result.emit(this.event);
   }
 
   onRemoveSize(id: number)
   {
     this.event.action = "remove";
+    this.event.index = this.index;
     this.result.emit(this.event);
   }
 
@@ -78,6 +80,7 @@ export class SizeItemComponent implements OnInit {
   {
     console.log("click up @ " + this.index);
     this.event.action = "up";
+    this.event.index = this.index;
     this.result.emit(this.event);
   }
 
@@ -85,6 +88,7 @@ export class SizeItemComponent implements OnInit {
   {
     console.log("click down @ " + this.index);
     this.event.action = "down";
+    this.event.index = this.index;
     this.result.emit(this.event);
   }
 }
